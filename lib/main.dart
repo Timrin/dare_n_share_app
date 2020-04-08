@@ -1,18 +1,24 @@
+import 'package:dare_n_share_app/screens/authenticate.dart';
+import 'package:dare_n_share_app/services/dareService.dart';
 import 'package:flutter/material.dart';
 import 'package:dare_n_share_app/screens/home.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  DareService dareService = new DareService();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Home(),
+    return Provider<DareService>.value(
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Home(),
+      ), value: dareService,
     );
   }
 }

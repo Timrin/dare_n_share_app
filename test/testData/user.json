@@ -1,7 +1,6 @@
 {
   "uid": 1,
   "name": "Timothy",
-  "profile_img": "/profile-picture/1",
   "dares": [
     {
       "id": "d1"
@@ -16,13 +15,11 @@
   "friends": [
     {
       "uid": 2,
-      "name": "Steven",
-      "profile_img": "/profile-picture/1"
+      "name": "Steven"
     },
     {
       "uid": 3,
-      "name": "Tor",
-      "profile_img": "/profile-picture/1"
+      "name": "Tor"
     }
   ]
 }
