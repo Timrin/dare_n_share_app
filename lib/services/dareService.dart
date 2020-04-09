@@ -8,15 +8,19 @@ import 'package:http/http.dart';
 
 import '../config.dart';
 
+///Service class for dares
+///handles server communication
 class DareService {
   Client client = Client();
 
-  Future<String> fetchUsersDares(int uid) async {
+  ///Fetches a dare from the server
+  ///[did] is the id of the dare
+  Future<String> fetchUsersDares(int did) async {
     //Construct URL
-    final path = "http://" + Config.IP + "/dare/" + uid.toString();
+    final url = "http://" + Config.IP + "/dare/" + did.toString();
 
     //Send request
-    final response = await client.get(path);
+    final response = await client.get(url);
 
     //Check response
     if (response.statusCode == 200) {
@@ -68,14 +72,13 @@ class DareService {
       print("Error: parseDareFromJSON, unknown scope type");
     }
 
-    return Dare(start: start,
+    return Dare(
+        start: start,
         end: end,
         objectiveName: objectiveName,
         objectiveType: objectiveType,
         participant1: participants[0],
         participant2: participants[1]);
-
-
   }
 
   //TODO: Remove in the future, this is just for testing
