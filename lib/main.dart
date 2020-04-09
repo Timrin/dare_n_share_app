@@ -1,4 +1,6 @@
 import 'package:dare_n_share_app/screens/authenticate.dart';
+import 'package:dare_n_share_app/screens/selectedare.dart';
+import 'package:dare_n_share_app/screens/setupdare.dart';
 import 'package:dare_n_share_app/services/dareService.dart';
 import 'package:flutter/material.dart';
 import 'package:dare_n_share_app/screens/home.dart';
@@ -17,7 +19,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Home(),
+        home:
+        SetUpDare(),
       ), value: dareService,
     );
   }
