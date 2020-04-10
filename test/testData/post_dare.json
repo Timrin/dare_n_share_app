@@ -1,0 +1,20 @@
+{
+  "objective": {
+    "type": "BOOLEAN",
+    "goal": "NO_MEAT"
+  },
+  "scope": {
+    "type": "TIMED",
+    "length": 3
+  },
+  "participants": [
+    {
+      "uid": 1,
+      "name": "Timothy"
+    },
+    {
+      "uid": 2,
+      "name": "Steven"
+    }
+  ]
+}
