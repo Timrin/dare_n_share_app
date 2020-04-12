@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:dare_n_share_app/enums/objective_goals.dart';
+import 'package:dare_n_share_app/enums/objective_types.dart';
+import 'package:dare_n_share_app/enums/scope_types.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/services/authService.dart';
 import 'package:dare_n_share_app/services/dareService.dart';
@@ -31,8 +34,37 @@ class DareLogic {
     return dareMap;
   }
 
-  createDare() {
+  createDare(ObjectiveTypes objectiveType, ObjectiveGoals objectiveGoal, ScopeTypes scopeType, int scopeLength, int opponentId) {
+    Map dareMap = Map();
 
+    //build the objective map
+    var objective = {};
+    objective["type"] = objectiveType.toString();
+    objective["goal"] = objectiveGoal.toString();
+    dareMap["objective"] = objective;
+
+    //build the scope map
+    var scope = {};
+    scope["type"] = scopeType.toString();
+    scope["length"] = scopeLength;
+    dareMap["scope"] = scope;
+
+    //build the participants list
+    List participantsList = List();
+    //Instigator
+    var instigator = {};
+    instigator["uid"] = uid; //TODO: Change, temporary hardcoded uid for the logged in user
+    participantsList.add(instigator);
+
+    //Opponent
+    var opponent = {};
+    opponent["uid"] = opponentId;
+    participantsList.add(opponent);
+
+    dareMap["participants"] = participantsList;
+
+    //TODO: Send the dare to the server
+    print(jsonEncode(dareMap));
   }
 
 }
