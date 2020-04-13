@@ -12,38 +12,49 @@ import 'package:provider/provider.dart';
  * First class and screen that eventually will display all options of dare objectives.
  */
 
-class SelectDare extends StatelessWidget{
+class SelectDare extends StatelessWidget {
   SetUpDare setUpDare;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dare n Share"),
+        title: Text("Select a Dare"),
         backgroundColor: Colors.teal,
       ),
-      body: Center(
-        child: Column (
-          children: <Widget>[SizedBox(height: 20,), selectDareCard(context, VeganDare())],
-        ),
-      ),
+      body:
+          ListView(
+            children: <Widget>[selectDareCard(context, VeganDare())],
+          )
     );
   }
 
-  Widget selectDareCard(BuildContext context, IDare iDare){ //Ca
+  Widget selectDareCard(BuildContext context, IDare dare) {
+    //Ca
     return Card(
       margin: EdgeInsets.all(10.0),
       child: InkWell(
-        child: Padding(padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
-          child: Text(iDare.getTitle(), //Could insert typeOfdare instead, so that this could be reused
-            style: TextStyle(fontSize: 12,
-                color: Colors.grey[700]),),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 24, 0, 24),
+          child: Center(
+            child: Text(
+              dare.getTitle(),
+              //Could insert typeOfdare instead, so that this could be reused
+              style: TextStyle(fontSize: 16, color: Colors.black),
+            ),
+          ),
         ),
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SetUpDare(dare : iDare,)));
-        },),
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SetUpDare(
+                        dare: dare,
+                      )));
+        },
+      ),
     );
   }
 }
 
 //Second screen that will show the selected dare, and will provide the user to select length of dare, to select friend as an opponent, and to start the dare.
-

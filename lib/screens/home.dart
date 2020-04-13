@@ -1,3 +1,4 @@
+import 'package:dare_n_share_app/screens/selectedare.dart';
 import 'package:dare_n_share_app/services/dareService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -34,7 +35,11 @@ class Home extends StatelessWidget {
             Center(child: Text("Profile")),
           ]),
           floatingActionButton: FloatingActionButton(
-            onPressed: () => print("Add Dare pressed, do something"),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SelectDare()));
+              },
             tooltip: 'Add Dare',
             child: Icon(Icons.add),
           )),

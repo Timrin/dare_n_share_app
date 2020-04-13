@@ -15,12 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Provider<DareService>.value(
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Dare n Share',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home:
-        SelectDare(),
+        home: Home(),
       ), value: dareService,
     );
   }
