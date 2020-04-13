@@ -11,7 +11,7 @@ class SetUpDare extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dara n Share"),
+        title: Text("Dare n Share"),
         backgroundColor: Colors.teal,
       ),
       body: Center(

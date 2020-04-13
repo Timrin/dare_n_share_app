@@ -13,7 +13,6 @@
     {
       "uid": 1,
       "name": "Timothy",
-      "profile_img": "/profile-picture/1",
       "score": [
         true,
         false
@@ -22,7 +21,6 @@
     {
       "uid": 2,
       "name": "Steven",
-      "profile_img": "/profile-picture/2",
       "score": [
         false,
         false

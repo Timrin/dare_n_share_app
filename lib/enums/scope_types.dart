@@ -1,0 +1,4 @@
+enum ScopeTypes {
+  timed,
+  goal
+}
