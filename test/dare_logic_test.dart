@@ -15,4 +15,7 @@ Future<void> main() async {
   //Test create dare
   dareLogic.createDare(ObjectiveTypes.yes_no, ObjectiveGoals.vegan, ScopeTypes.timed, 3, 2);
 
+  //Test scoring
+  dareLogic.reportScore("d1", true);
+
 }

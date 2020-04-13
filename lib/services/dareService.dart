@@ -36,12 +36,29 @@ class DareService {
   ///Attempt to post a new dare to the server
   ///[dareAsJson] a json representation of a post request for a dare, this will
   /// be the body of the post request.
-  Future<bool> postDare(Map<dynamic, String> dareAsJson) async {
+  Future<bool> postDare(String dareAsJson) async {
     //Construct URL
     final url = "http://" + Config.IP + "/dare/";
 
     //Send request
     final response = await client.post(url, body: dareAsJson);
+
+    //Check response TODO: handle more status codes than 200
+    if (response.statusCode == 200) {
+      //If the request was successful, return response
+      return true;
+    } else {
+      //If the request was not successful, generate exception
+      throw Exception("Could not reach the server");
+    }
+  }
+
+  Future<bool> postScore(String scoreAsJson) async {
+    //Construct URL
+    final url = "http://" + Config.IP + "/score/";
+
+    //Send request
+    final response = await client.post(url, body: scoreAsJson);
 
     //Check response TODO: handle more status codes than 200
     if (response.statusCode == 200) {

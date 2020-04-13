@@ -8,8 +8,9 @@ import 'package:dare_n_share_app/services/authService.dart';
 import 'package:dare_n_share_app/services/dareService.dart';
 
 class DareLogic {
-
   int uid = 1; //TODO: Change, temporary hardcoded uid for the logged in user
+  DareService dareService = DareService();
+  Map loadedDares = Map();
 
   ///Get dares of the logged in user as a map
   /// where the key is the id of the dare, and the value is the dare as a dare object
@@ -26,15 +27,20 @@ class DareLogic {
 
     //Fetch all the dares from the server
     //Build the return map
-    for(int i = 0; i < dareIdList.length; i++) {
-      int id = int.parse(dareIdList[i].substring(1)); //Id in the JSON payload is a number with a leading "d", remove the d and parse to int
-      dareMap[dareIdList[i]] = await DareService().fetchDare(id);
+    for (int i = 0; i < dareIdList.length; i++) {
+      int id = int.parse(dareIdList[i].substring(
+          1)); //Id in the JSON payload is a number with a leading "d", remove the d and parse to int
+      dareMap[dareIdList[i]] = await dareService.fetchDare(id);
     }
+
+    //Set loaded dares to the retrieved dares
+    loadedDares = dareMap;
 
     return dareMap;
   }
 
-  createDare(ObjectiveTypes objectiveType, ObjectiveGoals objectiveGoal, ScopeTypes scopeType, int scopeLength, int opponentId) {
+  createDare(ObjectiveTypes objectiveType, ObjectiveGoals objectiveGoal,
+      ScopeTypes scopeType, int scopeLength, int opponentId) {
     Map dareMap = Map();
 
     //build the objective map
@@ -53,7 +59,8 @@ class DareLogic {
     List participantsList = List();
     //Instigator
     var instigator = {};
-    instigator["uid"] = uid; //TODO: Change, temporary hardcoded uid for the logged in user
+    instigator["uid"] =
+        uid; //TODO: Change, temporary hardcoded uid for the logged in user
     participantsList.add(instigator);
 
     //Opponent
@@ -64,7 +71,27 @@ class DareLogic {
     dareMap["participants"] = participantsList;
 
     //TODO: Send the dare to the server
+    //dareService.postDare(jsonEncode(dareMap));
     print(jsonEncode(dareMap));
   }
 
+  reportScore(String dareId, dynamic scorePoint) {
+    //TODO: check if the user should be able to score, should this validation be here?
+
+    //Build meta data
+    var body = {};
+    body["uid"] = uid;
+    body["dare_id"] = dareId;
+
+    //Build score object
+    var score = {};
+    score["type"] = loadedDares["d1"].objectiveType; //Server needs to know what type of score it is
+    score["point"] = scorePoint;
+
+    body["score"] = score; //add score object to the body
+
+    //TODO: Send the score to the server
+    //dareService.postScore(jsonEncode(body));
+    print(jsonEncode(body));
+  }
 }
