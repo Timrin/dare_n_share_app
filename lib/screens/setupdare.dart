@@ -1,3 +1,5 @@
+import 'package:dare_n_share_app/controllers/dare_logic.dart';
+import 'package:dare_n_share_app/dares/i_dare.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +7,11 @@ import 'package:flutter/widgets.dart';
 
 
 class SetUpDare extends StatelessWidget{
-  Dare dare;
+  final IDare dare;
+  DareLogic dareLogic;
+
+  SetUpDare({Key key, this.dare}) : super(key : key);
+
   //Builds the backscreen and the screen itself as a hole
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,15 @@ class SetUpDare extends StatelessWidget{
             ,dontEatMeat(), SizedBox(height: 60,),
             Text('Select length of dare'),
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, //Row starts
-            children: <Widget>[boxSelectDays1(), boxSelectDays2(), boxSelectDays3()
+            children: <Widget>[ Expanded(
+              child: ListView.builder(itemCount: dare.getScopeLength().length,
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                return boxSelectDays1();
+                  }
+              ),
+            )
              ],),
             SizedBox (height: 60,),
             writeFriendToChallenge(),
@@ -36,11 +50,13 @@ class SetUpDare extends StatelessWidget{
       margin: EdgeInsets.all(10.0),
       child: InkWell(
         child: Padding(padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
-          child: Text('Dont eat meat', //Could insert typeOfdare instead, so that this could be reused
+          child: Text(dare.getTitle(), //Could insert typeOfdare instead, so that this could be reused
             style: TextStyle(fontSize: 12,
                 color: Colors.grey[700]),),
         ),
-      ),
+      onTap: () {
+          // TODO add navigation
+      },),
     );
   }
 
@@ -110,7 +126,9 @@ class SetUpDare extends StatelessWidget{
             style: TextStyle(fontSize: 12,
                 color: Colors.grey[700]),),
         ),
-      ),
+      onTap: () {
+          //dareLogic.createDare(objectiveType, objectiveGoal, scopeType, scopeLength, opponentId)
+           },),
     );
   }
 

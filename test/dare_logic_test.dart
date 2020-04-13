@@ -1,7 +1,8 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
-import 'package:dare_n_share_app/enums/objective_goals.dart';
-import 'package:dare_n_share_app/enums/objective_types.dart';
-import 'package:dare_n_share_app/enums/scope_types.dart';
+import 'package:dare_n_share_app/dares/enums/objective_goals.dart';
+import 'package:dare_n_share_app/dares/enums/objective_types.dart';
+import 'package:dare_n_share_app/dares/enums/scope_types.dart';
+
 
 Future<void> main() async {
 
