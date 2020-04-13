@@ -15,7 +15,7 @@ class DareService {
 
   ///Fetches a dare from the server
   ///[did] is the id of the dare
-  Future<String> fetchUsersDares(int did) async {
+  Future<Dare> fetchDare(int did) async {
     //Construct URL
     final url = "http://" + Config.IP + "/dare/" + did.toString();
 
@@ -25,69 +25,58 @@ class DareService {
     //Check response
     if (response.statusCode == 200) {
       //If the request was successful, return response
-      return response.body;
+      return Dare.fromJson(response.body);
     } else {
       //If the request was not successful, generate exception
       throw Exception("Could not reach the server");
     }
   }
 
-  //TODO: This might not belong here but in the Dare class as a constructor instead
-  Dare parseDareFromJSON(String jsonData) {
-    Map<String, dynamic> dare = jsonDecode(jsonData);
-    var participants = new List();
+  ///TODO: determine return type, TEST ME!
+  ///Attempt to post a new dare to the server
+  ///[dareAsJson] a json representation of a post request for a dare, this will
+  /// be the body of the post request.
+  Future<bool> postDare(String dareAsJson) async {
+    //Construct URL
+    final url = "http://" + Config.IP + "/dare/";
 
-    //Read config data
-    String objectiveType = dare["objective"]["type"];
-    String objectiveName = dare["objective"]["goal"];
+    //Send request
+    final response = await client.post(url, body: dareAsJson);
 
-    //Create the participant objects
-    //TODO: refactor, objectiveType should be an enum type, if case should be a switch case
-    for (int i = 0; i < dare["participants"].length; i++) {
-      String userName = dare["participants"][i]["name"];
-      int uid = dare["participants"][i]["uid"];
-
-      if (objectiveType == "BOOLEAN") {
-        List score = dare["participants"][i]["score"];
-        participants.add(
-            Participant(user: User(uid: uid, name: userName), score: score));
-      } else {
-        //TODO: Error occurred, abort
-        print("Error: parseDareFromJSON, unknown objective type");
-      }
-
-      print("Created: ${participants[i].toString()}");
-    }
-
-    //Configure scope
-    String scopeType = dare["scope"]["type"];
-    DateTime start;
-    DateTime end;
-
-    if (scopeType == "TIMED") {
-      start = DateTime.tryParse(dare["start"]);
-      end = DateTime.tryParse(dare["end"]);
+    //Check response TODO: handle more status codes than 200
+    if (response.statusCode == 200) {
+      //If the request was successful, return response
+      return true;
     } else {
-      //TODO: Error occurred, abort
-      print("Error: parseDareFromJSON, unknown scope type");
+      //If the request was not successful, generate exception
+      throw Exception("Could not reach the server");
     }
+  }
 
-    return Dare(
-        start: start,
-        end: end,
-        objectiveName: objectiveName,
-        objectiveType: objectiveType,
-        participant1: participants[0],
-        participant2: participants[1]);
+  Future<bool> postScore(String scoreAsJson) async {
+    //Construct URL
+    final url = "http://" + Config.IP + "/score/";
+
+    //Send request
+    final response = await client.post(url, body: scoreAsJson);
+
+    //Check response TODO: handle more status codes than 200
+    if (response.statusCode == 200) {
+      //If the request was successful, return response
+      return true;
+    } else {
+      //If the request was not successful, generate exception
+      throw Exception("Could not reach the server");
+    }
   }
 
   //TODO: Remove in the future, this is just for testing
   List<Dare> getDaresOfUser(int uid) {
     List<Dare> dares = new List();
-    dares.add(parseDareFromJSON(DB.Dares[0]));
-    dares.add(parseDareFromJSON(DB.Dares[1]));
-    dares.add(parseDareFromJSON(DB.Dares[0]));
-    dares.add(parseDareFromJSON(DB.Dares[1]));
+    dares.add(Dare.fromJson(DB.Dares[0]));
+    dares.add(Dare.fromJson(DB.Dares[1]));
+    dares.add(Dare.fromJson(DB.Dares[0]));
+    dares.add(Dare.fromJson(DB.Dares[1]));
     return dares;
   }
 }
