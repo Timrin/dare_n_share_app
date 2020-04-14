@@ -40,7 +40,7 @@ class DareLogic {
     return dareMap;
   }
 
-  createDare(ObjectiveTypes objectiveType, ObjectiveGoals objectiveGoal,
+  bool createDare(ObjectiveTypes objectiveType, ObjectiveGoals objectiveGoal,
       ScopeTypes scopeType, int scopeLength, int opponentId) {
     Map dareMap = Map();
 
@@ -74,6 +74,7 @@ class DareLogic {
     //TODO: Send the dare to the server
     //dareService.postDare(jsonEncode(dareMap));
     print(jsonEncode(dareMap));
+    return true; //Temporary
   }
 
   reportScore(String dareId, dynamic scorePoint) {

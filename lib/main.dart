@@ -17,9 +17,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Dare n Share',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.teal,
+
         ),
-        home: Home(),
+        home: Home(), //TODO: if the user is not logged in show the authenticate screen
       ), value: dareService,
     );
   }
