@@ -26,30 +26,42 @@ class _CreateDareFormState extends State<CreateDareForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 20,
-          ),
-          formHeader(),
-          SizedBox(
-            height: 20,
-          ),
-          Text('Select length of dare'),
-          ListView(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            children: scopeLengthRadioList(),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          friendDropdown(),
-          SizedBox(
-            height: 20,
-          ),
-          okButton(),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
+            formHeader(),
+            SizedBox(
+              height: 20,
+            ),
+            Text('Select length of dare'),
+            Column(
+              children: scopeLengthRadioList(),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            FutureBuilder(
+                //FIXME: this gets rebuit everytime state changes and the friends are retrieved from the server every time
+                future: widget.userLogic.getFriends(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    //when the data is ready build the dropdown
+                    return friendDropdown(snapshot.data);
+                  } else {
+                    //return loading indicator
+                    return CircularProgressIndicator();
+                  }
+                }),
+            SizedBox(
+              height: 20,
+            ),
+            okButton(),
+          ],
+        ),
       ),
     );
   }
@@ -110,10 +122,10 @@ class _CreateDareFormState extends State<CreateDareForm> {
   }
 
   ///Build the drop down list for selecting opponent
-  Widget friendDropdown() {
+  Widget friendDropdown(friendListData) {
     return DropdownButton(
       hint: new Text('Select Friend'),
-      items: dropdownFriendList(),
+      items: dropdownFriendList(friendListData),
       value: _selectedFriend,
       onChanged: (value) {
         setState(() {
@@ -125,17 +137,16 @@ class _CreateDareFormState extends State<CreateDareForm> {
   }
 
   ///Create the drop down list entries for the logged in users friends list
-  List<DropdownMenuItem<int>> dropdownFriendList() {
+  List<DropdownMenuItem<int>> dropdownFriendList(friendListData) {
     List<DropdownMenuItem<int>> friendListDropdownItems = [];
 
-    friendListDropdownItems.add(new DropdownMenuItem(
-      child: new Text('Tor'),
-      value: 3,
-    ));
-    friendListDropdownItems.add(new DropdownMenuItem(
-      child: new Text('Tim'),
-      value: 1,
-    ));
+    friendListData.forEach((friend) {
+      friendListDropdownItems.add(DropdownMenuItem(
+        child: new Text(friend["name"]),
+        value: friend["uid"],
+      ));
+    });
+
     return friendListDropdownItems;
   }
 
@@ -144,19 +155,18 @@ class _CreateDareFormState extends State<CreateDareForm> {
     List<Widget> formWidget = new List();
 
     formWidget.add(new Column(
-      children:
-        widget.dare.getScopeLength().map<Widget>((scope) {
-           return RadioListTile<int>(
-            title: Text(scope["readable"]),
-            value: scope["value"],
-            groupValue: _selectedDareLength,
-            onChanged: (value) {
-              setState(() {
-                _selectedDareLength = value;
-              });
-            },
-          );
-        }).toList(),
+      children: widget.dare.getScopeLength().map<Widget>((scope) {
+        return RadioListTile<int>(
+          title: Text(scope["readable"]),
+          value: scope["value"],
+          groupValue: _selectedDareLength,
+          onChanged: (value) {
+            setState(() {
+              _selectedDareLength = value;
+            });
+          },
+        );
+      }).toList(),
     ));
     return formWidget;
   }

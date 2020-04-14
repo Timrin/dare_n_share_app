@@ -4,8 +4,8 @@ Future<void> main() async {
 
   UserLogic userLogic = new UserLogic();
 
-  Map friendsList = await userLogic.getFriends();
+  List friendsList = await userLogic.getFriends();
 
-  friendsList.forEach((k, v) => print("${k}:${v}"));
+  friendsList.forEach((friend) => print(friend));
 
 }
