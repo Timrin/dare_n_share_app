@@ -50,7 +50,7 @@ class _CreateDareFormState extends State<CreateDareForm> {
           ),
           okButton(),
         ],
-      ), //Form widgets goes here
+      ),
     );
   }
 

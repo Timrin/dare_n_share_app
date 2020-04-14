@@ -3,35 +3,35 @@ import 'package:dare_n_share_app/dares/enums/objective_types.dart';
 import 'package:dare_n_share_app/dares/enums/scope_types.dart';
 import 'package:dare_n_share_app/dares/i_dare.dart';
 
-class VeganDare implements IDare {
+class ExerciseDare implements IDare{
   @override
   getDescription() {
-    return "This is a vegan Dare";
+    return "This is an exercise dare";
   }
 
   @override
   getObjectiveGoal() {
-    return ObjectiveGoals.vegan;
+    return ObjectiveGoals.exercise;
   }
 
   @override
   getObjectiveType() {
-    return ObjectiveTypes.yes_no;
+    return ObjectiveTypes.count;
   }
 
   @override
   getScopeLength() {
-    return [{"value": 3, "readable": "3 days"}, {"value": 5, "readable": "5 days"}, {"value": 7, "readable": "7 days"}];
+    return [{"value": 5000, "readable": "5000 steps"}, {"value": 10000, "readable": "10 000 steps"}, {"value": 15000, "readable": "15 000 steps"}];
   }
 
   @override
   getScopeType() {
-    return ScopeTypes.timed;
+    return ScopeTypes.goal;
   }
 
   @override
   getTitle() {
-    return "Vegan dare";
+    return "Exercise dare: Steps";
   }
 
 }
