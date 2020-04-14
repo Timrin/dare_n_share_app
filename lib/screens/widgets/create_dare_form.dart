@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 
 class CreateDareForm extends StatefulWidget {
   final IDare dare;
-  DareLogic dareLogic = DareLogic(); //TODO: this should be created further up the widget tree
-  UserLogic userLogic = UserLogic(); //TODO: this should be created further up the widget tree
+  DareLogic dareLogic =
+      DareLogic(); //TODO: this should be created further up the widget tree
+  UserLogic userLogic =
+      UserLogic(); //TODO: this should be created further up the widget tree
 
   CreateDareForm({Key key, this.dare}) : super(key: key);
 
@@ -142,38 +144,19 @@ class _CreateDareFormState extends State<CreateDareForm> {
     List<Widget> formWidget = new List();
 
     formWidget.add(new Column(
-      children: <Widget>[
-        RadioListTile<int>(
-          title: const Text('3 days'),
-          value: 3,
-          groupValue: _selectedDareLength,
-          onChanged: (value) {
-            setState(() {
-              _selectedDareLength = value;
-            });
-          },
-        ),
-        RadioListTile<int>(
-          title: const Text('5 days'),
-          value: 5,
-          groupValue: _selectedDareLength,
-          onChanged: (value) {
-            setState(() {
-              _selectedDareLength = value;
-            });
-          },
-        ),
-        RadioListTile<int>(
-          title: const Text('7 days'),
-          value: 7,
-          groupValue: _selectedDareLength,
-          onChanged: (value) {
-            setState(() {
-              _selectedDareLength = value;
-            });
-          },
-        ),
-      ],
+      children:
+        widget.dare.getScopeLength().map<Widget>((scope) {
+           return RadioListTile<int>(
+            title: Text(scope["readable"]),
+            value: scope["value"],
+            groupValue: _selectedDareLength,
+            onChanged: (value) {
+              setState(() {
+                _selectedDareLength = value;
+              });
+            },
+          );
+        }).toList(),
     ));
     return formWidget;
   }

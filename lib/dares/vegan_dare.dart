@@ -25,7 +25,7 @@ class VeganDare implements IDare {
   @override
   getScopeLength() {
     // TODO: implement getScopeLength
-    return [{3:"3 days"}, {5:"5 days"}, {7:"7 days"}];
+    return [{"value": 3, "readable": "3 days"}, {"value": 5, "readable": "5 days"}, {"value": 7, "readable": "7 days"}];
   }
 
   @override
