@@ -48,13 +48,13 @@ class DareLogic {
 
     //build the objective map
     var objective = {};
-    objective["type"] = objectiveType.toString();
-    objective["goal"] = objectiveGoal.toString();
+    objective["type"] = objectiveType.toString().split('.').last;
+    objective["goal"] = objectiveGoal.toString().split('.').last;
     dareMap["objective"] = objective;
 
     //build the scope map
     var scope = {};
-    scope["type"] = scopeType.toString();
+    scope["type"] = scopeType.toString().split('.').last;;
     scope["length"] = scopeLength;
     dareMap["scope"] = scope;
 
