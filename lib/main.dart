@@ -1,4 +1,5 @@
 import 'package:dare_n_share_app/screens/authenticate.dart';
+import 'package:dare_n_share_app/screens/detailsofdare.dart';
 import 'package:dare_n_share_app/screens/selectedare.dart';
 import 'package:dare_n_share_app/screens/setupdare.dart';
 import 'package:dare_n_share_app/services/dareService.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.teal,
 
         ),
-        home: Home(), //TODO: if the user is not logged in show the authenticate screen
+        home: DetailsOfDare(), //TODO: if the user is not logged in show the authenticate screen
       ), value: dareService,
     );
   }
