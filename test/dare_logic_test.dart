@@ -9,7 +9,7 @@ Future<void> main() async {
   DareLogic dareLogic = new DareLogic();
 
   //Test getting a list of a user's dares
-  Map dareList = await dareLogic.getDares();
+  List dareList = await dareLogic.getDares();
 
   print(dareList);
 

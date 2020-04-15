@@ -10,13 +10,17 @@ class UserLogic {
   /// where the key is the uid of that user and the value is the name of the user
   Future<List> getFriends() async {
     //Get user from server (user contains the friends list)
-    final response = await AuthService().fetchUser(uid);
-    final userData = jsonDecode(response);
+    try {
+      final response = await AuthService().fetchUser(uid);
+      final userData = jsonDecode(response);
 
-    //Extract the friends list from the json response
-    final List friendsList = userData["friends"];
+      //Extract the friends list from the json response
+      final List friendsList = userData["friends"];
 
-    return friendsList;
+      return friendsList;
+    } catch (e) {
+      throw Exception("Could not load friends");
+    }
   }
 
   ///Method for adding a friend
@@ -24,5 +28,4 @@ class UserLogic {
   addFriend(String identifier) {
     //TODO Implement
   }
-
 }

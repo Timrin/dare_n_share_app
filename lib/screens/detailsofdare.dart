@@ -67,7 +67,7 @@ class DetailsOfDare extends StatelessWidget {
           child: Center(child: Text("Yes")),
         ),
         onTap: (){
-          //TODO add navigation or right output
+          //TODO add navigation or right output score
         },
       ),
     );
@@ -89,28 +89,7 @@ class DetailsOfDare extends StatelessWidget {
     );
   }
 
-/*
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text("Details of dare")),
-        backgroundColor: Colors.teal,
-      ),
-      body: Center(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 40,),
-              Text("Vegan dare"), Text("vs"), Text("Anders Tegnell"),
-              //TODO make participants 2 return String
-              Text("3 days left"),
-              //TODO return days left of challenge
-              SizedBox(height: 40,),
-            ],
-          ),
-        ),
-      ),
-    );
-     */
+
 
 
 

@@ -1,3 +1,4 @@
+import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/screens/selectedare.dart';
 import 'package:dare_n_share_app/services/dareService.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,8 @@ import 'package:provider/provider.dart';
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final DareService dareService = Provider.of<DareService>(
-        context); //TODO Not supposed to be a DareService, this is just for testing
+    final DareLogic dareLogic = Provider.of<DareLogic>(
+        context); //TODO Not supposed to be a DareLogic, this is just for testing
 
     return DefaultTabController(
       length: 2,
@@ -21,25 +22,51 @@ class Home extends StatelessWidget {
             title: Center(child: Text("Dare n Share")),
             bottom: TabBar(
               tabs: [
-                Tab(icon: Icon(Icons.home), text: "home",),
-                Tab(icon: Icon(Icons.face), text: "profile",),
+                Tab(
+                  icon: Icon(Icons.home),
+                  text: "home",
+                ),
+                Tab(
+                  icon: Icon(Icons.face),
+                  text: "profile",
+                ),
               ],
             ),
           ),
           body: TabBarView(children: [
-            ListView.builder(
-                itemCount: dareService.getDaresOfUser(1).length,
-                itemBuilder: (context, index) {
-                  return dareTemplate(dareService.getDaresOfUser(1)[index]);
-                }),
+            FutureBuilder(
+              //FIXME: This doesn't really work when there is an exception(No internet).
+              future: dareLogic.getDares(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData) {
+                    //Build the dare list
+                    return Column(
+                      children:
+                      snapshot.data.map<Widget>((dare) {
+                        return dareTemplate(dare);
+                      }).toList(),
+                    );
+                  } else {
+                    //if there was an error loading the friends list tell the user
+                    return Text(
+                      snapshot.error.toString(),
+                      style: TextStyle(color: Colors.red),
+                    );
+                  }
+                } else {
+                  //return loading indicator
+                  return Center(child: CircularProgressIndicator());
+                }
+              },
+            ),
             Center(child: Text("Profile")),
           ]),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Navigator.push(
-                  context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SelectDare()));
-              },
+            },
             tooltip: 'Add Dare',
             child: Icon(Icons.add),
           )),
