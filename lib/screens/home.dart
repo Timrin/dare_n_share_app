@@ -48,10 +48,24 @@ class Home extends StatelessWidget {
                       }).toList(),
                     );
                   } else {
-                    //if there was an error loading the friends list tell the user
-                    return Text(
-                      snapshot.error.toString(),
-                      style: TextStyle(color: Colors.red),
+                    //if there was an error loading the the dares, tell the user
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Center(
+                          child: Icon(Icons.signal_wifi_off, color: Colors.grey, size: 48,),
+                        ),
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(32, 8, 32, 8),
+                            child: Text(
+                              "${snapshot.error.toString()}",
+                              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
+                        ),
+                      ],
                     );
                   }
                 } else {
