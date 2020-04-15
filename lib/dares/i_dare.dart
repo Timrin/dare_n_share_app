@@ -12,7 +12,9 @@ class IDare{
 
   getTitle() {}
 
-  getDescription() {}
+  getDescription() {
+    //TODO this may not be placed in this
+  }
 
 
 
