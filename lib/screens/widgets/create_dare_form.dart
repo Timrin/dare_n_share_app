@@ -18,6 +18,12 @@ class CreateDareForm extends StatefulWidget {
 
 class _CreateDareFormState extends State<CreateDareForm> {
   final _formKey = GlobalKey<FormState>();
+  dynamic _future;
+
+  initState() {
+    super.initState();
+    _future = widget.userLogic.getFriends();
+  }
 
   int _selectedFriend;
   int _selectedDareLength;
@@ -46,7 +52,7 @@ class _CreateDareFormState extends State<CreateDareForm> {
             ),
             FutureBuilder(
                 //FIXME: this gets rebuilt every time state changes and the friends are retrieved from the server every time
-                future: widget.userLogic.getFriends(),
+                future: _future,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasData) {
