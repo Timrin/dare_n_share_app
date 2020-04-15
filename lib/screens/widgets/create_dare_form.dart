@@ -45,12 +45,20 @@ class _CreateDareFormState extends State<CreateDareForm> {
               height: 20,
             ),
             FutureBuilder(
-                //FIXME: this gets rebuit everytime state changes and the friends are retrieved from the server every time
+                //FIXME: this gets rebuilt every time state changes and the friends are retrieved from the server every time
                 future: widget.userLogic.getFriends(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    //when the data is ready build the dropdown
-                    return friendDropdown(snapshot.data);
+                    if (snapshot.hasData) {
+                      //when the data is ready build the dropdown
+                      return friendDropdown(snapshot.data);
+                    } else {
+                      //if there was an error loading the friends list tell the user
+                      return Text(
+                        snapshot.error.toString(),
+                        style: TextStyle(color: Colors.red),
+                      );
+                    }
                   } else {
                     //return loading indicator
                     return CircularProgressIndicator();
@@ -124,7 +132,7 @@ class _CreateDareFormState extends State<CreateDareForm> {
   ///Build the drop down list for selecting opponent
   Widget friendDropdown(friendListData) {
     return DropdownButton(
-      hint: new Text('Select Friend'),
+      hint: new Text('Select the friend you want to dare'),
       items: dropdownFriendList(friendListData),
       value: _selectedFriend,
       onChanged: (value) {

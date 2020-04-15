@@ -1,3 +1,4 @@
+import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/screens/authenticate.dart';
 import 'package:dare_n_share_app/screens/selectedare.dart';
 import 'package:dare_n_share_app/screens/setupdare.dart';
@@ -9,11 +10,10 @@ import 'package:provider/provider.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  DareService dareService = new DareService();
 
   @override
   Widget build(BuildContext context) {
-    return Provider<DareService>.value(
+    return Provider<DareLogic>.value(
       child: MaterialApp(
         title: 'Dare n Share',
         theme: ThemeData(
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 
         ),
         home: Home(), //TODO: if the user is not logged in show the authenticate screen
-      ), value: dareService,
+      ), value: DareLogic(),
     );
   }
 }

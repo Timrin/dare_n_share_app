@@ -7,16 +7,16 @@ import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/services/authService.dart';
 import 'package:dare_n_share_app/services/dareService.dart';
 
-
 class DareLogic {
   int uid = 1; //TODO: Change, temporary hardcoded uid for the logged in user
   DareService dareService = DareService();
-  Map loadedDares = Map();
+  Map loadedDares = Map(); //TODO: refactor, remove
 
   ///Get dares of the logged in user as a map
   /// where the key is the id of the dare, and the value is the dare as a dare object
-  Future<Map<String, Dare>> getDares() async {
-    Map<String, Dare> dareMap = Map();
+  Future<List> getDares() async {
+    Map<String, Dare> dareMap = Map(); //TODO: refactor, remove
+    List dareList = List();
 
     //Get all dare ids of the active user
     final response = await AuthService().fetchUser(uid);
@@ -32,12 +32,14 @@ class DareLogic {
       int id = int.parse(dareIdList[i].substring(
           1)); //Id in the JSON payload is a number with a leading "d", remove the d and parse to int
       dareMap[dareIdList[i]] = await dareService.fetchDare(id);
+      dareList.add(await dareService.fetchDare(id));
     }
 
     //Set loaded dares to the retrieved dares
-    loadedDares = dareMap;
+    loadedDares = dareMap; //TODO: refactor, remove
 
-    return dareMap;
+    //return dareMap;
+    return dareList;
   }
 
   bool createDare(ObjectiveTypes objectiveType, ObjectiveGoals objectiveGoal,
@@ -87,7 +89,8 @@ class DareLogic {
 
     //Build score object
     var score = {};
-    score["type"] = loadedDares["d1"].objectiveType; //Server needs to know what type of score it is
+    score["type"] = loadedDares["d1"]
+        .objectiveType; //Server needs to know what type of score it is
     score["point"] = scorePoint;
 
     body["score"] = score; //add score object to the body
