@@ -18,15 +18,19 @@ class CreateDareForm extends StatefulWidget {
 
 class _CreateDareFormState extends State<CreateDareForm> {
   final _formKey = GlobalKey<FormState>();
-  dynamic _future;
+
+  //State variables
+  int _selectedFriend;
+  int _selectedDareLength;
+
+  //Future holder
+  Future _futureFriendList;
 
   initState() {
     super.initState();
-    _future = widget.userLogic.getFriends();
-  }
 
-  int _selectedFriend;
-  int _selectedDareLength;
+    _futureFriendList = widget.userLogic.getFriends(); //Load the friends list on init
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +56,7 @@ class _CreateDareFormState extends State<CreateDareForm> {
             ),
             FutureBuilder(
                 //FIXME: this gets rebuilt every time state changes and the friends are retrieved from the server every time
-                future: _future,
+                future: _futureFriendList,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasData) {
@@ -122,6 +126,8 @@ class _CreateDareFormState extends State<CreateDareForm> {
             _selectedFriend);
         if (success) {
           //Navigate to home
+          // TODO: This seems like a bad way to do this
+          // TODO: Dare list should be re-fetched
           Navigator.pop(context);
           Navigator.pop(context);
         } else {

@@ -1,5 +1,7 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
+import 'package:dare_n_share_app/screens/detailsofdare.dart';
 import 'package:dare_n_share_app/screens/selectedare.dart';
+import 'package:dare_n_share_app/screens/widgets/dare_view_list.dart';
 import 'package:dare_n_share_app/services/dareService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -34,46 +36,7 @@ class Home extends StatelessWidget {
             ),
           ),
           body: TabBarView(children: [
-            FutureBuilder(
-              //FIXME: This doesn't really work when there is an exception(No internet).
-              future: dareLogic.getDares(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasData) {
-                    //Build the dare list
-                    return Column(
-                      children:
-                      snapshot.data.map<Widget>((dare) {
-                        return dareTemplate(dare);
-                      }).toList(),
-                    );
-                  } else {
-                    //if there was an error loading the the dares, tell the user
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Center(
-                          child: Icon(Icons.signal_wifi_off, color: Colors.grey, size: 48,),
-                        ),
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(32, 8, 32, 8),
-                            child: Text(
-                              "${snapshot.error.toString()}",
-                              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
-                              textAlign: TextAlign.justify,
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  }
-                } else {
-                  //return loading indicator
-                  return Center(child: CircularProgressIndicator());
-                }
-              },
-            ),
+            DareViewList(),
             Center(child: Text("Profile")),
           ]),
           floatingActionButton: FloatingActionButton(
@@ -84,89 +47,6 @@ class Home extends StatelessWidget {
             tooltip: 'Add Dare',
             child: Icon(Icons.add),
           )),
-    );
-  }
-
-  ///
-  /// This method takes a dare object and builds a card widget presenting the
-  /// information about the dare.
-  ///
-  Widget dareTemplate(dare) {
-    return Card(
-      margin: EdgeInsets.all(10.0),
-      child: InkWell(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
-          child: Column(
-            children: <Widget>[
-              Text(
-                dare.objectiveName,
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.black,
-                ),
-              ),
-              SizedBox(
-                height: 6.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Text(
-                        "You: ${dare.participant1.user.name}",
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                      Text(
-                        "Score: ${dare.participant1.score}",
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Text(
-                        "Opponent: ${dare.participant2.user.name}",
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                      Text(
-                        "Score: ${dare.participant2.score}",
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 6.0,
-              ),
-              Text(
-                "End: ${dare.end.toString()}",
-                style: TextStyle(
-                  fontSize: 12.0,
-                  color: Colors.grey[700],
-                ),
-              )
-            ],
-          ),
-        ),
-        onTap: () {
-          print('Card taped, do something');
-        },
-      ),
     );
   }
 }
