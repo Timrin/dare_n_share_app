@@ -40,14 +40,17 @@ class _DareViewListState extends State<DareViewList> {
               );
             } else {
               //if there was an error loading the the dares, tell the user
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              return ListView(
+
                 children: <Widget>[
-                  Center(
-                    child: Icon(
-                      Icons.signal_wifi_off,
-                      color: Colors.grey,
-                      size: 48,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Icon(
+                        Icons.signal_wifi_off,
+                        color: Colors.grey,
+                        size: 48,
+                      ),
                     ),
                   ),
                   Center(
