@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart';
 
@@ -10,6 +9,7 @@ import '../config.dart';
 class AuthService {
   Client client = Client();
 
+  //Temporary helper function
   void parseJSON(String data) {
     Map<String, dynamic> user = jsonDecode(data);
     print("Name: ${user["name"]}");
@@ -20,10 +20,10 @@ class AuthService {
   }
 
   ///Fetches a user from the server
-  ///[uid] is the id of the user
-  Future<String> fetchUser(int uid) async {
+  ///[userId] is the id of the user in the database
+  Future<String> fetchUser(int userId) async {
     //Construct URL
-    final url = "http://" + Config.IP + "/user/" + uid.toString();
+    final url = "http://" + Config.IP + "/user/" + userId.toString();
 
     //Send request
     final response = await client.get(url);
@@ -39,14 +39,14 @@ class AuthService {
   }
 
   ///Registers a user in the system with a post request.
-  ///[user] is a json formatted user that will be send to the server.
-  Future<String> registerUser(String user) async {
+  ///[userAsJson] is a json formatted user that will be sent to the server.
+  ///For an example of a valid post request body check look in test->testData folder
+  Future<String> registerUser(String userAsJson) async {
     //Construct URL
     final url = "http://" + Config.IP + "/user";
 
     //Send request
-    final response = await client
-        .post(url, body: user, headers: {'Content-type': 'application/json'});
+    final response = await client.post(url, body: userAsJson, headers: {'Content-type': 'application/json'});
 
     //Check response
     if (response.statusCode == 200) {

@@ -1,9 +1,5 @@
-import 'dart:convert';
-
 import 'package:dare_n_share_app/mockdata/db.dart';
 import 'package:dare_n_share_app/models/dare.dart';
-import 'package:dare_n_share_app/models/participant.dart';
-import 'package:dare_n_share_app/models/user.dart';
 import 'package:http/http.dart';
 
 import '../config.dart';
@@ -14,15 +10,15 @@ class DareService {
   Client client = Client();
 
   ///Fetches a dare from the server
-  ///[did] is the id of the dare
-  Future<Dare> fetchDare(int did) async {
+  ///[dareId] is the id of the dare in the database
+  Future<Dare> fetchDare(int dareId) async {
     //Construct URL
-    final url = "http://" + Config.IP + "/dare/" + did.toString();
+    final url = "http://" + Config.IP + "/dare/" + dareId.toString();
 
     //Send request
     final response = await client.get(url);
 
-    //Check response
+    //Check response TODO: handle more status codes than 200
     if (response.statusCode == 200) {
       //If the request was successful, return response
       return Dare.fromJson(response.body);
@@ -32,16 +28,17 @@ class DareService {
     }
   }
 
-  ///TODO: determine return type, TEST ME!
+  ///TODO: determine return type, also TEST ME!
   ///Attempt to post a new dare to the server
-  ///[dareAsJson] a json representation of a post request for a dare, this will
-  /// be the body of the post request.
+  ///[dareAsJson] is a json representation of a post request for a dare, this 
+  ///will be the body of the post request. For an example of a valid post request 
+  ///body check look in test->testData folder
   Future<bool> postDare(String dareAsJson) async {
     //Construct URL
     final url = "http://" + Config.IP + "/dare/";
 
     //Send request
-    final response = await client.post(url, body: dareAsJson);
+    final response = await client.post(url, body: dareAsJson, headers: {'Content-type': 'application/json'});
 
     //Check response TODO: handle more status codes than 200
     if (response.statusCode == 200) {
@@ -53,12 +50,16 @@ class DareService {
     }
   }
 
+  ///Attempt to post a score on a dare to the server
+  ///[scoreAsJson] is a json representation of a post request for a dare, this
+  ///will be the body of the post request. For an example of a valid post request 
+  ///body check look in test->testData folder
   Future<bool> postScore(String scoreAsJson) async {
     //Construct URL
     final url = "http://" + Config.IP + "/score/";
 
     //Send request
-    final response = await client.post(url, body: scoreAsJson);
+    final response = await client.post(url, body: scoreAsJson, headers: {'Content-type': 'application/json'});
 
     //Check response TODO: handle more status codes than 200
     if (response.statusCode == 200) {
@@ -70,7 +71,7 @@ class DareService {
     }
   }
 
-  //TODO: Remove in the future, this is just for testing
+  //Temporary helper function for testing
   List<Dare> getDaresOfUser(int uid) {
     List<Dare> dares = new List();
     dares.add(Dare.fromJson(DB.Dares[0]));

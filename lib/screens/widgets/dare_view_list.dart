@@ -41,7 +41,6 @@ class _DareViewListState extends State<DareViewList> {
             } else {
               //if there was an error loading the the dares, tell the user
               return ListView(
-
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),

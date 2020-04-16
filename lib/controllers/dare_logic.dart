@@ -22,15 +22,16 @@ class DareLogic {
     final response = await AuthService().fetchUser(uid);
     final Map userData = jsonDecode(response);
 
-    //Create a list of all the ids
+    //Create a list of all the dare ids
     final List dareIdList = List();
     userData["dares"].forEach((v) => dareIdList.add(v["id"]));
 
     //Fetch all the dares from the server
-    //Build the return map
+    //Build the return list
     for (int i = 0; i < dareIdList.length; i++) {
-      int id = int.parse(dareIdList[i].substring(
-          1)); //Id in the JSON payload is a number with a leading "d", remove the d and parse to int
+      //Id in the JSON payload is a number with a leading "d", remove the d and parse to int
+      int id = int.parse(dareIdList[i].substring(1));
+
       dareMap[dareIdList[i]] = await dareService.fetchDare(id);
       dareList.add(await dareService.fetchDare(id));
     }
@@ -42,19 +43,22 @@ class DareLogic {
     return dareList;
   }
 
+  ///Create a dare and send it to the server
+  ///Take in all the required data to create a new dare as parameters.
+  ///Builds the create request payload and sends the request via DareService
   bool createDare(ObjectiveTypes objectiveType, ObjectiveGoals objectiveGoal,
       ScopeTypes scopeType, int scopeLength, int opponentId) {
     Map dareMap = Map();
 
     //build the objective map
     var objective = {};
-    objective["type"] = objectiveType.toString().split('.').last;
+    objective["type"] = objectiveType.toString().split('.').last; //calling split since enums are prefixed with their class
     objective["goal"] = objectiveGoal.toString().split('.').last;
     dareMap["objective"] = objective;
 
     //build the scope map
     var scope = {};
-    scope["type"] = scopeType.toString().split('.').last;;
+    scope["type"] = scopeType.toString().split('.').last;
     scope["length"] = scopeLength;
     dareMap["scope"] = scope;
 
@@ -62,8 +66,7 @@ class DareLogic {
     List participantsList = List();
     //Instigator
     var instigator = {};
-    instigator["uid"] =
-        uid; //TODO: Change, temporary hardcoded uid for the logged in user
+    instigator["uid"] = uid; //TODO: Change, temporary hardcoded uid for the logged in user
     participantsList.add(instigator);
 
     //Opponent
@@ -79,7 +82,9 @@ class DareLogic {
     return true; //Temporary
   }
 
-  reportScore(String dareId, dynamic scorePoint) {
+  ///Report score to the server
+  ///Given the appropriate parameters compiles a score request body and sends it to the server
+  bool reportScore(String dareId, dynamic scorePoint) {
     //TODO: check if the user should be able to score, should this validation be here?
 
     //Build meta data
@@ -91,12 +96,13 @@ class DareLogic {
     var score = {};
     score["type"] = loadedDares["d1"]
         .objectiveType; //Server needs to know what type of score it is
-    score["point"] = scorePoint;
+    score["point"] = scorePoint; //TODO: validate that the score is of the correct type
 
     body["score"] = score; //add score object to the body
 
     //TODO: Send the score to the server
     //dareService.postScore(jsonEncode(body));
     print(jsonEncode(body));
+    return true;
   }
 }

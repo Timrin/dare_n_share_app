@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:dare_n_share_app/models/user.dart';
 import 'package:dare_n_share_app/services/authService.dart';
 
 class UserLogic {
