@@ -21,14 +21,14 @@ class DetailsOfDare extends StatelessWidget {
             height: 60,
           ),
           Center(
-            child: Text("Vegan dare"),
+            child: Text(dare.dareConfig.getTitle()),
           ),
           Center(
             child: Text("vs"),
           ),
           Center(
             child: Text(dare.participant2.user
-                .name), //TODO refactor, participant2 might not be the opponent, perform statement during init
+                .name), //TODO refactor, participant2 might not be the opponent, perform during init
           ),
           SizedBox(
             height: 60,
@@ -65,9 +65,11 @@ class DetailsOfDare extends StatelessWidget {
   Widget scopeProgressIndicator(Participant participant) {
     return StepProgressIndicator(
         size: 36,
-        totalSteps: participant.score.length, //TODO Should be scope length
+        totalSteps: dare.scopeLength, //TODO Should be scope length
         customColor: (index) {
-          if (participant.score[index] == true) {
+          if (index >= participant.score.length) {
+            return Colors.grey;
+          } else if (participant.score[index] == true) {
             return Colors.green;
           } else if (participant.score[index] == false) {
             return Colors.red;

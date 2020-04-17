@@ -1,5 +1,6 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/controllers/user_logic.dart';
+import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/screens/detailsofdare.dart';
 import 'package:flutter/material.dart';
 
@@ -84,7 +85,7 @@ class _DareViewListState extends State<DareViewList> {
 
   /// This method takes a dare object and builds a card widget presenting the
   /// information about the dare.
-  Widget dareTemplate(dare, context) {
+  Widget dareTemplate(Dare dare, BuildContext context) {
     return Card(
       margin: EdgeInsets.all(10.0),
       child: InkWell(
@@ -93,7 +94,7 @@ class _DareViewListState extends State<DareViewList> {
           child: Column(
             children: <Widget>[
               Text(
-                dare.objectiveName,
+                dare.dareConfig.getTitle(),
                 style: TextStyle(
                   fontSize: 16.0,
                   color: Colors.black,

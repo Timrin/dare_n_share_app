@@ -31,9 +31,10 @@ class DareLogic {
     for (int i = 0; i < dareIdList.length; i++) {
       //Id in the JSON payload is a number with a leading "d", remove the d and parse to int
       int id = int.parse(dareIdList[i].substring(1));
+      Dare fetchedDare = await dareService.fetchDare(id);
 
-      dareMap[dareIdList[i]] = await dareService.fetchDare(id);
-      dareList.add(await dareService.fetchDare(id));
+      dareMap[dareIdList[i]] = fetchedDare;
+      dareList.add(fetchedDare);
     }
 
     //Set loaded dares to the retrieved dares
