@@ -74,7 +74,9 @@ class _DareViewListState extends State<DareViewList> {
       ),
       onRefresh: () {
         //When the user refreshes the page the user's dares are fetched from the server again
-        _futureDareList =  widget.dareLogic.getDares();
+        setState((){
+          _futureDareList =  widget.dareLogic.getDares();
+        });
         return _futureDareList;
       },
     );
