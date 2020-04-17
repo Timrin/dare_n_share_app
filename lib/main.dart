@@ -1,8 +1,4 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
-import 'package:dare_n_share_app/screens/authenticate.dart';
-import 'package:dare_n_share_app/screens/selectedare.dart';
-import 'package:dare_n_share_app/screens/setupdare.dart';
-import 'package:dare_n_share_app/services/dareService.dart';
 import 'package:flutter/material.dart';
 import 'package:dare_n_share_app/screens/home.dart';
 import 'package:provider/provider.dart';

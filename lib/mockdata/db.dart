@@ -1,7 +1,7 @@
 
 ///Temporary helper class, TODO: remove
 class DB {
-  static List Dares = [
+  static List dares = [
     """{
   "objective": {
     "type": "BOOLEAN",
@@ -68,7 +68,7 @@ class DB {
   }"""
   ];
 
-  static List Users = ["""
+  static List users = ["""
   {
   "uid": 1,
   "name": "Timothy",

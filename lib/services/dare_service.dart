@@ -74,8 +74,8 @@ class DareService {
   //Temporary helper function for testing
   List<Dare> getDaresOfUser(int uid) {
     List<Dare> dares = new List();
-    dares.add(Dare.fromJson(DB.Dares[0]));
-    dares.add(Dare.fromJson(DB.Dares[1]));
+    dares.add(Dare.fromJson(DB.dares[0]));
+    dares.add(Dare.fromJson(DB.dares[1]));
     print("=================================");
     return dares;
   }

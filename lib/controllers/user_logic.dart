@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dare_n_share_app/services/authService.dart';
+import 'package:dare_n_share_app/services/auth_service.dart';
 
 class UserLogic {
   int uid = 1; //TODO: Change, temporary hardcoded uid for the logged in user

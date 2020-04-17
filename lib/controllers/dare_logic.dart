@@ -4,8 +4,8 @@ import 'package:dare_n_share_app/dare_configurations/enums/objective_goals.dart'
 import 'package:dare_n_share_app/dare_configurations/enums/objective_types.dart';
 import 'package:dare_n_share_app/dare_configurations/enums/scope_types.dart';
 import 'package:dare_n_share_app/models/dare.dart';
-import 'package:dare_n_share_app/services/authService.dart';
-import 'package:dare_n_share_app/services/dareService.dart';
+import 'package:dare_n_share_app/services/auth_service.dart';
+import 'package:dare_n_share_app/services/dare_service.dart';
 
 class DareLogic {
   int uid = 1; //TODO: Change, temporary hardcoded uid for the logged in user

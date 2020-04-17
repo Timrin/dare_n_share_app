@@ -6,10 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-/**
- * First class and screen that eventually will display all options of dare objectives.
- */
-
+///First class and screen that eventually will display all options of dare objectives.
 class SelectDare extends StatelessWidget {
   SetUpDare setUpDare;
 
