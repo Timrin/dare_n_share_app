@@ -18,7 +18,7 @@ Setup the server
 https://github.com/Timrin/dare-n-share
 
 Clone or download the files  
-Import the root map as a project in Intellij (or Android studio)  
+Import the project root folder as a project in Intellij (or Android studio)  
 >_When selecting sources for the project, only select the lib folder_
 
 ## Run the app
