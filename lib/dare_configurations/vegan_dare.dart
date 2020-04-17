@@ -1,7 +1,7 @@
-import 'package:dare_n_share_app/dares/enums/objective_goals.dart';
-import 'package:dare_n_share_app/dares/enums/objective_types.dart';
-import 'package:dare_n_share_app/dares/enums/scope_types.dart';
-import 'package:dare_n_share_app/dares/i_dare.dart';
+import 'enums/objective_goals.dart';
+import 'enums/objective_types.dart';
+import 'enums/scope_types.dart';
+import 'i_dare.dart';
 
 class VeganDare implements IDare {
   @override

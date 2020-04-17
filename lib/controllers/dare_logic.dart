@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:dare_n_share_app/dares/enums/objective_goals.dart';
-import 'package:dare_n_share_app/dares/enums/objective_types.dart';
-import 'package:dare_n_share_app/dares/enums/scope_types.dart';
+import 'package:dare_n_share_app/dare_configurations/enums/objective_goals.dart';
+import 'package:dare_n_share_app/dare_configurations/enums/objective_types.dart';
+import 'package:dare_n_share_app/dare_configurations/enums/scope_types.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/services/authService.dart';
 import 'package:dare_n_share_app/services/dareService.dart';

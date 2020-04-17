@@ -1,13 +1,10 @@
-import 'package:dare_n_share_app/dares/enums/objective_goals.dart';
-import 'package:dare_n_share_app/dares/exercise_dare.dart';
-import 'package:dare_n_share_app/dares/i_dare.dart';
-import 'package:dare_n_share_app/dares/vegan_dare.dart';
-import 'package:dare_n_share_app/models/dare.dart';
+import 'package:dare_n_share_app/dare_configurations/exercise_dare.dart';
+import 'package:dare_n_share_app/dare_configurations/i_dare.dart';
+import 'package:dare_n_share_app/dare_configurations/vegan_dare.dart';
 import 'package:dare_n_share_app/screens/setupdare.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
 
 /**
  * First class and screen that eventually will display all options of dare objectives.

@@ -4,6 +4,7 @@ import 'package:dare_n_share_app/models/participant.dart';
 import 'package:dare_n_share_app/models/user.dart';
 
 class Dare {
+  //TODO: refactor, utilize the dare configuration classes
   //Scope
   final DateTime start;
   final DateTime end;

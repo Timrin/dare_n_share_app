@@ -1,5 +1,5 @@
 
-
+///Temporary helper class, TODO: remove
 class DB {
   static List Dares = [
     """{

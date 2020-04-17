@@ -1,12 +1,6 @@
-
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
-
-
-
-
-
 
 class DetailsOfDare extends StatelessWidget {
   Dare dare;
@@ -15,22 +9,30 @@ class DetailsOfDare extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text("Dare n share")),
+        title: Center(child: Text("Dare n share")),
         backgroundColor: Colors.teal,
       ),
       body: ListView(
         children: <Widget>[
-          SizedBox(height: 60,),
-          Center(child: Text("Vegan challenge"),
+          SizedBox(
+            height: 60,
           ),
-          Center(child: Text("vs"),
+          Center(
+            child: Text("Vegan challenge"),
           ),
-          Center(child: Text("Anders Tegnell"),
+          Center(
+            child: Text("vs"),
           ),
-          SizedBox(height: 60,),
+          Center(
+            child: Text("Anders Tegnell"),
+          ),
+          SizedBox(
+            height: 60,
+          ),
           Text("You"),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           StepProgressIndicator(
             totalSteps: 5,
             //TODO get real length of challenge,
@@ -38,24 +40,32 @@ class DetailsOfDare extends StatelessWidget {
             selectedColor: Colors.lightGreen,
             unselectedColor: Colors.grey,
           ),
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           Text("Anders Tegnell"),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           StepProgressIndicator(
             totalSteps: 5,
             currentStep: 3,
             selectedColor: Colors.lightGreen,
             unselectedColor: Colors.grey,
           ),
-          SizedBox(height: 100,),
-          Center(child: Text("Have you succeded today?"),),
-          Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[boxCheckYes(), boxCheckNo()],)
+          SizedBox(
+            height: 100,
+          ),
+          Center(
+            child: Text("Have you succeded today?"),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[boxCheckYes(), boxCheckNo()],
+          )
         ],
-
       ),
     );
-
   }
 
   Widget boxCheckYes() {
@@ -66,13 +76,12 @@ class DetailsOfDare extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
           child: Center(child: Text("Yes")),
         ),
-        onTap: (){
+        onTap: () {
           //TODO add navigation or right output score
         },
       ),
     );
   }
-
 
   Widget boxCheckNo() {
     return Card(
@@ -82,18 +91,10 @@ class DetailsOfDare extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
           child: Center(child: Text("No")),
         ),
-        onTap: (){
+        onTap: () {
           //TODO add navigation or right output
         },
       ),
     );
   }
-
-
-
-
-
-
-
-
 }
