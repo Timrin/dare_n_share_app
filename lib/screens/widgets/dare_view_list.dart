@@ -158,7 +158,7 @@ class _DareViewListState extends State<DareViewList> {
         ),
         onTap: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => DetailsOfDare()));
+              MaterialPageRoute(builder: (context) => DetailsOfDare(dare: dare)));
         },
       ),
     );
