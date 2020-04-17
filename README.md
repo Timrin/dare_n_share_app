@@ -1,5 +1,13 @@
-# dare_n_share_app
-Dare n Share flutter app repository
+        ____                              _____ __
+       / __ \____ _________     ____     / ___// /_  ____ _________  
+      / / / / __ `/ ___/ _ \   / __ \    \__ \/ __ \/ __ `/ ___/ _ \  
+     / /_/ / /_/ / /  /  __/  / / / /   ___/ / / / / /_/ / /  /  __/
+    /_____/\__,_/_/   \___/  /_/ /_/   /____/_/ /_/\__,_/_/   \___/ 
+
+## Description
+Repository for the Dare n Share mobile app.  
+Dare n Share is an app developed as part of a software projects course.  
+For the Backend see: https://github.com/Timrin/dare-n-share.  
 
 ## Install and setup
 Setup development environment for flutter app development  
