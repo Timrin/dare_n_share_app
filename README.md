@@ -25,3 +25,5 @@ Import the root map as a project in Intellij (or Android studio)
 Follow this short guide, starting at the **Run the App** section  
 https://flutter.dev/docs/get-started/test-drive?tab=androidstudio
 >_Make sure the config selector is set to run the main.dart file_
+
+Start the tomcat server
