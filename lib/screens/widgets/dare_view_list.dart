@@ -4,6 +4,8 @@ import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/screens/detailsofdare.dart';
 import 'package:flutter/material.dart';
 
+///DareViewList is the list of card widgets of the user's dares.
+/// The list is displayed on the home screen.
 class DareViewList extends StatefulWidget {
   DareLogic dareLogic =
       DareLogic(); //TODO: this should be created further up the widget tree
@@ -21,9 +23,11 @@ class _DareViewListState extends State<DareViewList> {
   initState() {
     super.initState();
 
-    _futureDareList = widget.dareLogic.getDares(); //Load the friends list on init
+    _futureDareList =
+        widget.dareLogic.getDares(); //Load the friends list on init
   }
 
+  ///Build the DareViewList
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -75,16 +79,18 @@ class _DareViewListState extends State<DareViewList> {
       ),
       onRefresh: () {
         //When the user refreshes the page the user's dares are fetched from the server again
-        setState((){
-          _futureDareList =  widget.dareLogic.getDares();
+        setState(() {
+          _futureDareList = widget.dareLogic.getDares();
         });
         return _futureDareList;
       },
     );
   }
 
-  /// This method takes a dare object and builds a card widget presenting the
-  /// information about the dare.
+  /// This method takes a dare object and builds a card widget presenting
+  /// basic information about that dare, for example score, time left, participants.
+  /// The card is meant to be a quick and simple overview of the dare.
+  /// TODO: restructure widgets. style!
   Widget dareTemplate(Dare dare, BuildContext context) {
     return Card(
       margin: EdgeInsets.all(10.0),
@@ -158,8 +164,10 @@ class _DareViewListState extends State<DareViewList> {
           ),
         ),
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => DetailsOfDare(dare: dare)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DetailsOfDare(dare: dare)));
         },
       ),
     );

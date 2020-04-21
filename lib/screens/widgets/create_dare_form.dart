@@ -1,8 +1,12 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/controllers/user_logic.dart';
 import 'package:dare_n_share_app/dare_configurations/i_dare.dart';
+import 'package:dare_n_share_app/screens/widgets/dare_info_card.dart';
 import 'package:flutter/material.dart';
 
+///CreateDareForm is the widget class for the dare creation form on the
+/// creation screen. This is where a user can configure the settings of
+/// a dare, and pick opponent.
 class CreateDareForm extends StatefulWidget {
   final IDare dare;
   DareLogic dareLogic =
@@ -23,7 +27,9 @@ class _CreateDareFormState extends State<CreateDareForm> {
   int _selectedFriend;
   int _selectedDareLength;
 
-  //Future holder
+  //This variable holds the future of the friends list
+  //It is initialized in initState(). This way the friend list api call is
+  // only done on init and not every time the widgets gets rebuilt
   Future _futureFriendList;
 
   initState() {
@@ -32,6 +38,7 @@ class _CreateDareFormState extends State<CreateDareForm> {
     _futureFriendList = widget.userLogic.getFriends(); //Load the friends list on init
   }
 
+  ///This is the widget of the class
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -40,10 +47,7 @@ class _CreateDareFormState extends State<CreateDareForm> {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            formHeader(),
+            DareInfoCard(dare: widget.dare,),
             SizedBox(
               height: 20,
             ),
@@ -55,9 +59,9 @@ class _CreateDareFormState extends State<CreateDareForm> {
               height: 20,
             ),
             FutureBuilder(
-                //FIXME: this gets rebuilt every time state changes and the friends are retrieved from the server every time
                 future: _futureFriendList,
                 builder: (context, snapshot) {
+                  //TODO: refactor these if statements
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasData) {
                       //when the data is ready build the dropdown
@@ -80,28 +84,6 @@ class _CreateDareFormState extends State<CreateDareForm> {
             okButton(),
           ],
         ),
-      ),
-    );
-  }
-
-  ///Build a header for the form
-  ///Presents information about the dare in a type of header of the form
-  ///Information such as title and description of the dare
-  Widget formHeader() {
-    return Card(
-      margin: EdgeInsets.all(10.0),
-      child: InkWell(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-          child: Text(
-            widget.dare.getTitle(),
-            //Could insert typeOfdare instead, so that this could be reused
-            style: TextStyle(fontSize: 16, color: Colors.grey[700]),
-          ),
-        ),
-        onTap: () {
-          // TODO add navigation
-        },
       ),
     );
   }
