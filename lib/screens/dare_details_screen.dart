@@ -27,8 +27,7 @@ class DetailsOfDare extends StatelessWidget {
             child: Text("vs"),
           ),
           Center(
-            child: Text(dare.participant2.user
-                .name), //TODO refactor, participant2 might not be the opponent, perform during init
+            child: Text(dare.participant2.user.name), //TODO refactor, participant2 might not be the opponent, check during init
           ),
           SizedBox(
             height: 60,

@@ -26,7 +26,6 @@ class SelectDare extends StatelessWidget {
   }
 
   Widget selectDareCard(BuildContext context, IDare dare) {
-    //Ca
     return Card(
       margin: EdgeInsets.all(10.0),
       child: InkWell(
@@ -52,5 +51,3 @@ class SelectDare extends StatelessWidget {
     );
   }
 }
-
-//Second screen that will show the selected dare, and will provide the user to select length of dare, to select friend as an opponent, and to start the dare.

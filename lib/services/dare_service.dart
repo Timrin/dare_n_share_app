@@ -32,7 +32,7 @@ class DareService {
   ///Attempt to post a new dare to the server
   ///[dareAsJson] is a json representation of a post request for a dare, this 
   ///will be the body of the post request. For an example of a valid post request 
-  ///body check look in test->testData folder
+  ///body look in test->testData folder
   Future<bool> postDare(String dareAsJson) async {
     //Construct URL
     final url = "http://" + Config.IP + "/dare/";
@@ -51,9 +51,9 @@ class DareService {
   }
 
   ///Attempt to post a score on a dare to the server
-  ///[scoreAsJson] is a json representation of a post request for a dare, this
+  ///[scoreAsJson] is a json representation of a post request for a score, this
   ///will be the body of the post request. For an example of a valid post request 
-  ///body check look in test->testData folder
+  ///body look in test->testData folder
   Future<bool> postScore(String scoreAsJson) async {
     //Construct URL
     final url = "http://" + Config.IP + "/score/";

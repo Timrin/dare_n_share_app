@@ -1,5 +1,5 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
-import 'package:dare_n_share_app/screens/selectedare.dart';
+import 'package:dare_n_share_app/screens/select_dare_config_screen.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_view_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

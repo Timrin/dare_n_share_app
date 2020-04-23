@@ -1,7 +1,7 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/controllers/user_logic.dart';
 import 'package:dare_n_share_app/models/dare.dart';
-import 'package:dare_n_share_app/screens/detailsofdare.dart';
+import 'package:dare_n_share_app/screens/dare_details_screen.dart';
 import 'package:flutter/material.dart';
 
 ///DareViewList is the list of card widgets of the user's dares.
@@ -27,7 +27,7 @@ class _DareViewListState extends State<DareViewList> {
         widget.dareLogic.getDares(); //Load the friends list on init
   }
 
-  ///Build the DareViewList
+  ///Build the DareViewList widget
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
