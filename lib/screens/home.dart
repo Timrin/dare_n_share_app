@@ -1,6 +1,7 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/screens/select_dare_config_screen.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_view_list.dart';
+import 'package:dare_n_share_app/screens/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,20 @@ class Home extends StatelessWidget {
           ),
           body: TabBarView(children: [
             DareViewList(),
-            Center(child: Text("Profile")),
+            //TODO: implement profile page
+            //The profile page has temporarily become an avatar showcase page
+            Column(
+              children: <Widget>[
+                UserAvatar(0),
+                UserAvatar(1),
+                UserAvatar(2),
+                UserAvatar(3),
+                UserAvatar(4),
+                UserAvatar(5),
+                UserAvatar(6),
+                UserAvatar(7),
+              ],
+            )
           ]),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
