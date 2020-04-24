@@ -45,4 +45,11 @@ class ColorDesign {
   ///Color unfinished days of challenge
   static const MaterialColor colorProgressUncompleted =
   MaterialColor(0xffDADAD2, color);
+
+  ///List will probably not be of use, but will be kept for the time being
+
+ /* static const List<MaterialColor> designColors =  [
+    colorProfile, colorAppbar, colorHomeButton, colorProgressSucceeded,
+    colorProgressFail, colorProgressFail];
+  */
 }
