@@ -1,7 +1,7 @@
 import 'package:dare_n_share_app/dare_configurations/exercise_dare.dart';
 import 'package:dare_n_share_app/dare_configurations/i_dare.dart';
 import 'package:dare_n_share_app/dare_configurations/vegan_dare.dart';
-import 'package:dare_n_share_app/screens/setupdare.dart';
+import 'package:dare_n_share_app/screens/set_up_dare.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
