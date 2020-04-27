@@ -25,13 +25,13 @@ class LoginUser extends StatelessWidget{
           tabs: [
             Tab(
               icon: Icon(Icons.home
-              , color: Color(0xffBAF1E4),
+              , color: ColorDesign.colorProfile,
               ),
               text: "home",
             ),
             Tab(
               icon: Icon(Icons.face,
-              color: Color(0xffBAF1E4),),
+              color: ColorDesign.colorProfile,),
               text: "profile",
             ),
           ],

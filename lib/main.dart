@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.teal,
 
         ),
-        home: LoginUser(), //TODO: if the user is not logged in show the authenticate screen
+        home: Home(), //TODO: if the user is not logged in show the authenticate screen
       ), value: DareLogic(),
     );
   }
