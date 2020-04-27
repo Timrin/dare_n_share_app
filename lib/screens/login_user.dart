@@ -1,6 +1,7 @@
 
 
 import 'package:dare_n_share_app/models/colors.dart';
+import 'package:dare_n_share_app/screens/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class LoginUser extends StatelessWidget{
           SizedBox(height: 10,),
           enterExistingPassword(),
           SizedBox(height: 50,),
-          buttonLogin()
+          buttonLogin(context)
         ],
       ),
     );
@@ -48,7 +49,7 @@ class LoginUser extends StatelessWidget{
     );
   }
 
-  Widget buttonLogin() {
+  Widget buttonLogin(BuildContext context) {
     return Card(
       margin: EdgeInsets.all(10),
       child: InkWell(
@@ -59,6 +60,9 @@ class LoginUser extends StatelessWidget{
           ),
         ),
         onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(
+                builder: (context) => Home()));
           //TODO add navigation to homescreen
         },
       ),

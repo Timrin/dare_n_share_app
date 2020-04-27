@@ -1,4 +1,5 @@
 import 'package:dare_n_share_app/models/colors.dart';
+import 'package:dare_n_share_app/screens/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,9 +21,7 @@ class RegisterUser extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          SizedBox(
-            height: 50,
-          ),
+          SizedBox(height: 50,),
           Text("Enter username"),
           SizedBox(height: 10,),
           enterUsername(),
@@ -30,8 +29,7 @@ class RegisterUser extends StatelessWidget {
           Text("Enter e-mail"),
           SizedBox(height: 10,),
           enterEmail(),
-          SizedBox(
-            height: 30,),
+          SizedBox(height: 30,),
           Text("Enter password"),
           SizedBox(height: 10,),
           enterPassword(),
@@ -40,9 +38,7 @@ class RegisterUser extends StatelessWidget {
           SizedBox(height: 10,),
           confirmPassword(),
           SizedBox(height: 50,),
-          Center(
-            child: buttonCreateUser(),
-          )
+          Center( child: buttonCreateUser(context),)
         ],
       ),
     );
@@ -79,7 +75,7 @@ class RegisterUser extends StatelessWidget {
     );
   }
 
-  Widget buttonCreateUser() {
+  Widget buttonCreateUser(BuildContext context) {
     return Card(
       margin: EdgeInsets.all(10),
       child: InkWell(
@@ -91,7 +87,9 @@ class RegisterUser extends StatelessWidget {
           ),
         ),
         onTap: () {
-          //Todo add navigation to homepage
+          Navigator.push(context,
+          MaterialPageRoute(
+            builder: (context) => Home()));
         },
       ),
     );
