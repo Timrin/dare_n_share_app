@@ -4,6 +4,7 @@ import 'package:dare_n_share_app/dare_configurations/i_dare.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_info_card.dart';
 import 'package:flutter/material.dart';
 
+///@Authors Timothy Timrin & Karolina Hammar
 ///CreateDareForm is the widget class for the dare creation form on the
 /// creation screen. This is where a user can configure the settings of
 /// a dare, and pick opponent.

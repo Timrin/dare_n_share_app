@@ -8,15 +8,36 @@ import 'package:flutter/material.dart';
 ///Author Karolina Hammar
 ///Class to login existing user
 
+//todo add logic to check username and password
+
 class LoginUser extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
       appBar: AppBar(
         title: Center(
           child: Text("Dare n share"),
         ),
-        backgroundColor: ColorDesign.colorAppbar,),
+        backgroundColor: ColorDesign.colorAppbar,
+        bottom: TabBar(
+          tabs: [
+            Tab(
+              icon: Icon(Icons.home
+              , color: Color(0xffBAF1E4),
+              ),
+              text: "home",
+            ),
+            Tab(
+              icon: Icon(Icons.face,
+              color: Color(0xffBAF1E4),),
+              text: "profile",
+            ),
+          ],
+        ),
+      )
+      ,
       body: ListView(
         children: <Widget>[
           SizedBox(height: 50,),
@@ -36,7 +57,7 @@ class LoginUser extends StatelessWidget{
           buttonLogin(context)
         ],
       ),
-    );
+      ));
   }
 
   Widget enterExistingUsername() {
@@ -63,7 +84,6 @@ class LoginUser extends StatelessWidget{
           Navigator.push(context,
               MaterialPageRoute(
                 builder: (context) => Home()));
-          //TODO add navigation to homescreen
         },
       ),
     );

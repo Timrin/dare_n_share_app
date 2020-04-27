@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-///Author Karolina Hammar
+///@Author Karolina Hammar
 ///This class will provide all colors that will be implemented to the design of the product.
 ///
 
@@ -9,6 +9,7 @@ class ColorDesign {
   ///Will prevent instance variable from this class
   ColorDesign._();
 
+  ///To create map of color with different illuminate levels
   static const Map<int, Color> color = {
     50: Color.fromRGBO(136, 14, 79, .1),
     100: Color.fromRGBO(136, 14, 79, .2),

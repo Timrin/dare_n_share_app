@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
+///Author Timothy Timrin
 ///This class is the home screen widget for the application
 ///After login users are directed here
 class Home extends StatelessWidget {

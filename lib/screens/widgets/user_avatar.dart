@@ -1,11 +1,11 @@
 import 'package:dare_n_share_app/models/avatar_images.dart';
 import 'package:flutter/material.dart';
 
+///@Author Timothy Timrin
 /// A user avatar is a container with an avatar image and a background.
 /// A user's avatar image and background color is determined by their
 /// user id (uid).
-///
-///
+
 class UserAvatar extends StatelessWidget {
   final int uid;
 

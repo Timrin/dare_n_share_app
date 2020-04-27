@@ -6,18 +6,37 @@ import 'package:flutter/services.dart';
 
 ///Author Karolina Hammar
 ///Class to register user with all new information of username, password, and
-///e-mail
+///email
+
+//todo add logic to check password and email
 
 class RegisterUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
       appBar: AppBar(
         title: Center(
           child: Text("Dare n share"
           ),
         ),
         backgroundColor: ColorDesign.colorAppbar,
+        bottom: TabBar(
+          tabs: [
+            Tab(
+              icon: Icon(Icons.home
+                , color: Color(0xffBAF1E4),
+              ),
+              text: "home",
+            ),
+            Tab(
+              icon: Icon(Icons.face,
+                color: Color(0xffBAF1E4),),
+              text: "profile",
+            ),
+          ],
+        ),
       ),
       body: ListView(
         children: <Widget>[
@@ -26,7 +45,7 @@ class RegisterUser extends StatelessWidget {
           SizedBox(height: 10,),
           enterUsername(),
           SizedBox(height: 30,),
-          Text("Enter e-mail"),
+          Text("Enter email"),
           SizedBox(height: 10,),
           enterEmail(),
           SizedBox(height: 30,),
@@ -41,7 +60,7 @@ class RegisterUser extends StatelessWidget {
           Center( child: buttonCreateUser(context),)
         ],
       ),
-    );
+      ));
   }
 
   Widget enterUsername() {
@@ -54,7 +73,7 @@ class RegisterUser extends StatelessWidget {
   Widget enterEmail() {
     return TextFormField(
       decoration: InputDecoration(
-          labelText: "Enter e-mail"
+          labelText: "Enter email"
       ),
     );
   }
