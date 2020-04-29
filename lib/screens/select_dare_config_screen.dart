@@ -16,17 +16,36 @@ class SelectDare extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+    return DefaultTabController(
+      length: 2,
+        child: Scaffold(
         appBar: AppBar(
-          title: Text("Select a Dare"),
+          title: Center(child: Text("Select a Dare")),
           backgroundColor: ColorDesign.colorAppbar,
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                icon: Icon(Icons.home,
+                  color: ColorDesign.colorProfile,),
+                text: "home",
+              ),
+              Tab(
+                icon: Icon(Icons.face,
+                  color: ColorDesign.colorProfile,),
+                text: "profile",
+              ),
+            ],
+          ),
         ),
         body: ListView(
           children: <Widget>[
             selectDareCard(context, VeganDare()),
             selectDareCard(context, ExerciseDare())
           ],
-        ));
+        )
+        )
+    );
   }
 
   Widget selectDareCard(BuildContext context, IDare dare) {

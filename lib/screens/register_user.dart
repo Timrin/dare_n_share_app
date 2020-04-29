@@ -10,7 +10,19 @@ import 'package:flutter/services.dart';
 
 //todo add logic to check password and email
 
-class RegisterUser extends StatelessWidget {
+class RegisterUser extends StatefulWidget {
+  @override
+  _RegisterUserState createState() => _RegisterUserState();
+}
+
+class _RegisterUserState extends State<RegisterUser> {
+
+  String _userName;
+  String _email;
+  String _password;
+  String _confirmPassword;
+  bool _isValid = false;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -67,6 +79,12 @@ class RegisterUser extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
           labelText: "Enter username"),
+      onChanged: (value) {
+        setState(() {
+          _userName = value;
+        });
+      _validate();
+      },
     );
   }
 
@@ -75,6 +93,12 @@ class RegisterUser extends StatelessWidget {
       decoration: InputDecoration(
           labelText: "Enter email"
       ),
+      onChanged: (value) {
+        setState(() {
+          _email = value;
+        });
+        _validate();
+      },
     );
   }
 
@@ -83,6 +107,13 @@ class RegisterUser extends StatelessWidget {
       decoration: InputDecoration(
           labelText: "Enter password"
       ),
+      onChanged: (value) {
+        setState(() {
+          _password = value;
+        });
+        _validate();
+      },
+      obscureText: true,
     );
   }
 
@@ -91,13 +122,18 @@ class RegisterUser extends StatelessWidget {
       decoration: InputDecoration(
           labelText: "Confirm password"
       ),
+      onChanged: (value) {
+        setState(() {
+          _confirmPassword = value;
+        });
+        _validate();
+      },
+      obscureText: true,
     );
   }
 
   Widget buttonCreateUser(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(10),
-      child: InkWell(
+    return RaisedButton(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
           child: Center(
@@ -105,13 +141,37 @@ class RegisterUser extends StatelessWidget {
             ),
           ),
         ),
-        onTap: () {
-          Navigator.push(context,
-          MaterialPageRoute(
-            builder: (context) => Home()));
+        onPressed: () {
+          if(_isValid) {
+            print(_userName);
+            print(_email);
+            print(_password);
+            print(_confirmPassword);
+          } else {
+            return null;
+          }
         },
-      ),
     );
+  }
+
+
+  ///Method to validate that:
+  ///1. Password is 8 characters or more
+  ///2. Password and confirm password match
+
+  void _validate(){
+    //Validate that password and confirm password match
+    //Validate that email is an email
+    //
+    bool isValid = true;
+    if(_password.length < 8) {
+      isValid = false;
+      print("Enter 8 characters");
+      if (_password.compareTo(_confirmPassword) != 0) {
+        isValid = false;
+      }
+    }
+    this._isValid = isValid;
   }
 
 

@@ -25,14 +25,14 @@ class ColorDesign {
   ///Colors for every page
 
   ///Right now colorBlue for home and profilePicture
-  static const MaterialColor colorProfile = MaterialColor(0xffBAF1E4, color);
+  static const MaterialColor colorProfile = MaterialColor(0xFF7EFFDB,  color); //0xffBAF1E4
 
   ///Color for appbar
-  static const MaterialColor colorAppbar = MaterialColor(0xff92B473, color);
+  static const MaterialColor colorAppbar = MaterialColor( 0xFFFF9DB2, color); //0xff92B473
 
   ///Color for big plus button
-  static const MaterialColor colorHomeButton = MaterialColor(0xffD576E3, color);
-
+  static const MaterialColor colorHomeButton = MaterialColor(0xFFFF9DB2, color); //0xffD576E3
+//Purple  0xFFFF9DB2  0xffB693FE
   /// Colors for progressbar
 
   ///Color succeeded

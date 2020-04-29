@@ -10,7 +10,12 @@ import 'package:flutter/material.dart';
 
 //todo add logic to check username and password
 
-class LoginUser extends StatelessWidget{
+class LoginUser extends StatefulWidget{
+  @override
+  _LoginUserState createState() => _LoginUserState();
+}
+
+class _LoginUserState extends State<LoginUser> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -88,5 +93,4 @@ class LoginUser extends StatelessWidget{
       ),
     );
   }
-
 }
