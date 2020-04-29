@@ -6,17 +6,22 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 ///Author Karolina Hammar, Timothy?
 ///Class to se details and progress of active dare
 
-
-class DetailsOfDare extends StatelessWidget {
+class DetailsOfDare extends StatefulWidget {
   final Dare dare;
 
   DetailsOfDare({Key key, this.dare}) : super(key: key);
 
   @override
+  _DetailsOfDareState createState() => _DetailsOfDareState();
+}
+
+class _DetailsOfDareState extends State<DetailsOfDare> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Vegan dare with ${dare.participant2.user.name}"),
+        title: Text(
+            "Vegan dare with ${widget.dare.participantOpponent.user.name}"),
         backgroundColor: Colors.teal,
       ),
       body: ListView(
@@ -25,13 +30,14 @@ class DetailsOfDare extends StatelessWidget {
             height: 60,
           ),
           Center(
-            child: Text(dare.dareConfig.getTitle()),
+            child: Text(widget.dare.dareConfig.getTitle()),
           ),
           Center(
             child: Text("vs"),
           ),
           Center(
-            child: Text(dare.participant2.user.name), //TODO refactor, participant2 might not be the opponent, check during init
+            child: Text(widget.dare.participantOpponent.user
+                .name), //TODO refactor, participant2 might not be the opponent, check during init
           ),
           SizedBox(
             height: 60,
@@ -40,15 +46,15 @@ class DetailsOfDare extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          scopeProgressIndicator(dare.participant1),
+          scopeProgressIndicator(widget.dare.participantUser),
           SizedBox(
             height: 30,
           ),
-          Text(dare.participant2.user.name),
+          Text(widget.dare.participantOpponent.user.name),
           SizedBox(
             height: 20,
           ),
-          scopeProgressIndicator(dare.participant2),
+          scopeProgressIndicator(widget.dare.participantOpponent),
           SizedBox(
             height: 100,
           ),
@@ -64,11 +70,10 @@ class DetailsOfDare extends StatelessWidget {
     );
   }
 
-  //Build the yes_no ObjectiveType progress indicator
   Widget scopeProgressIndicator(Participant participant) {
     return StepProgressIndicator(
         size: 36,
-        totalSteps: dare.scopeLength, //TODO Should be scope length
+        totalSteps: widget.dare.scopeLength, //TODO Should be scope length
         customColor: (index) {
           if (index >= participant.score.length) {
             return Colors.grey;
@@ -101,6 +106,7 @@ class DetailsOfDare extends StatelessWidget {
   }
 
   Widget boxCheckYes() {
+    //Should only be editable once a day
     return Card(
       margin: EdgeInsets.all(10.0),
       child: InkWell(
@@ -116,6 +122,8 @@ class DetailsOfDare extends StatelessWidget {
   }
 
   Widget boxCheckNo() {
+    //Should only be editable once a day
+
     return Card(
       margin: EdgeInsets.all(10.0),
       child: InkWell(
@@ -128,5 +136,18 @@ class DetailsOfDare extends StatelessWidget {
         },
       ),
     );
+  }
+
+  ///Method will either be active and allow a user to add score, or reject
+  bool isScoringAvailable() {
+    bool isScoringAvailable = false;
+    List scoreArray = widget.dare.participantUser.score;
+    int daysPassed = widget.dare.getDaysPassed();
+
+    if ((scoreArray.length < daysPassed) &&
+        (scoreArray.length < widget.dare.scopeLength)) {
+
+      isScoringAvailable = true;
+    }
   }
 }

@@ -179,7 +179,6 @@ class _RegisterUserState extends State<RegisterUser> {
   void _validate() {
     //Validate that password and confirm password match
     //Validate that email is an email
-    //
     bool isValid = true;
     if (_password.length < 8) {
       isValid = false;

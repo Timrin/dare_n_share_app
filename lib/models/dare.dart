@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dare_n_share_app/dare_configurations/enums/objective_types.dart';
 import 'package:dare_n_share_app/dare_configurations/i_dare.dart';
 import 'package:dare_n_share_app/dare_configurations/vegan_dare.dart';
+import 'package:dare_n_share_app/models/active_user.dart';
 import 'package:dare_n_share_app/models/participant.dart';
 import 'package:dare_n_share_app/models/user.dart';
 
@@ -18,16 +19,16 @@ class Dare {
   final int scopeLength;
 
   //Users and score
-  final Participant participant1;
-  final Participant participant2;
+  final Participant participantUser;
+  final Participant participantOpponent;
 
   Dare(
       {this.start,
       this.end,
       this.dareConfig,
       this.scopeLength,
-      this.participant1,
-      this.participant2});
+      this.participantUser,
+      this.participantOpponent});
 
   factory Dare.fromJson(jsonData) {
     Map<String, dynamic> dare = jsonDecode(jsonData);
@@ -53,12 +54,18 @@ class Dare {
 
       if (dareConfig.getObjectiveType() == ObjectiveTypes.yes_no) {
         List score = dare["participants"][i]["score"];
-        participants.add(
-            Participant(user: User(uid: uid, name: userName), score: score));
-      } else {
-        //TODO: Error occurred, abort
-        print("Error: parseDareFromJSON, unknown objective type");
-      }
+        if (ActiveUser.loggedInUserId == uid) {
+          participants.insert(0,
+              Participant(user: User(uid: uid, name: userName), score: score));
+        } else {
+          participants.add(
+              Participant(user: User(uid: uid, name: userName), score: score));
+        }
+        } else {
+          //TODO: Error occurred, abort
+          print("Error: parseDareFromJSON, unknown objective type");
+        }
+
 
       print("Created: ${participants[i].toString()}");
     }
@@ -82,12 +89,26 @@ class Dare {
         end: end,
         dareConfig: dareConfig,
         scopeLength: scopeLength,
-        participant1: participants[0],
-        participant2: participants[1]);
+        participantUser: participants[0],
+        participantOpponent: participants[1]);
+  }
+  ///This method returns the ceiling of number of days that have passed
+  ///since the dares start date. If 25 hours have passed since the start of a
+  ///dare, two days will be returned by this method.
+  int getDaysPassed() {
+      int hoursPassed = DateTime.now().difference(start).inHours;
+      int nbrOfDaysPassed = (hoursPassed/ 24).ceil();
+      return nbrOfDaysPassed;
+  }
+
+  ///This method checks if the the current time is before or passed the end
+  ///of a dare. It will return a true or false answer.
+  bool isDareActive() {
+    return DateTime.now().isBefore(end);
   }
 
   @override
   String toString() {
-    return 'Dare{start: $start, end: $end, dareConfig: ${dareConfig.getTitle()}, participant1: $participant1, participant2: $participant2}';
+    return 'Dare{start: $start, end: $end, dareConfig: ${dareConfig.getTitle()}, participant1: $participantUser, participant2: $participantOpponent}';
   }
 }

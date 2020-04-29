@@ -116,14 +116,14 @@ class _DareViewListState extends State<DareViewList> {
                   Column(
                     children: <Widget>[
                       Text(
-                        "You: ${dare.participant1.user.name}",
+                        "You: ${dare.participantUser.user.name}",
                         style: TextStyle(
                           fontSize: 12.0,
                           color: Colors.grey[700],
                         ),
                       ),
                       Text(
-                        "Score: ${dare.participant1.score}",
+                        "Score: ${dare.participantUser.score}",
                         style: TextStyle(
                           fontSize: 12.0,
                           color: Colors.grey[700],
@@ -134,14 +134,14 @@ class _DareViewListState extends State<DareViewList> {
                   Column(
                     children: <Widget>[
                       Text(
-                        "Opponent: ${dare.participant2.user.name}",
+                        "Opponent: ${dare.participantOpponent.user.name}",
                         style: TextStyle(
                           fontSize: 12.0,
                           color: Colors.grey[700],
                         ),
                       ),
                       Text(
-                        "Score: ${dare.participant2.score}",
+                        "Score: ${dare.participantOpponent.score}",
                         style: TextStyle(
                           fontSize: 12.0,
                           color: Colors.grey[700],
