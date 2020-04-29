@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "730949897135",
+    "firebase_url": "https://dare-41781.firebaseio.com",
+    "project_id": "dare-41781",
+    "storage_bucket": "dare-41781.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730949897135:android:88d86e78fa92224c247d5a",
+        "android_client_info": {
+          "package_name": "se.mau.dare20.dare_n_share_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730949897135-69iv3j0m3l76108kc91hgknbnk3h01ju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZA6stmFDTY6Q4H9ASYWSTeERcnLVIe1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730949897135-69iv3j0m3l76108kc91hgknbnk3h01ju.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

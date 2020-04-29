@@ -31,7 +31,7 @@ class UserAvatar extends StatelessWidget {
   /// based on their user id
   Color calcAvatarColor() {
     Color calculatedColor;
-    int colorId = uid % 11; //TODO: set to 1 for testing, revert when done
+    int colorId = uid % 11;
     switch (colorId) {
       case 0:
         calculatedColor = Colors.amberAccent;
@@ -75,7 +75,7 @@ class UserAvatar extends StatelessWidget {
 
   ///Get the avatar image path based on a users id
   String getAvatarImage() {
-    int imageId = uid % AvatarImages.image.length; 
+    int imageId = uid % AvatarImages.image.length;
 
     return AvatarImages.image[imageId];
   }
