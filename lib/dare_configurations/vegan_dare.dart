@@ -3,7 +3,7 @@ import 'enums/objective_types.dart';
 import 'enums/scope_types.dart';
 import 'i_dare.dart';
 
-///Author Karolina Hammar and Timothy Timrin
+///@Author Karolina Hammar & Timothy Timrin
 
 class VeganDare implements IDare {
   @override

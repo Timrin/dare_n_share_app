@@ -1,4 +1,4 @@
-///Authors Timothy Timrin and Karolina Hammar
+///Authors Timothy Timrin & Karolina Hammar
 
 ///An interface that should be implemented by all dare configuration classes
 ///The interface details the method api the configuration classes should have.

@@ -1,4 +1,5 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
+import 'package:dare_n_share_app/models/colors.dart';
 import 'package:dare_n_share_app/screens/select_dare_config_screen.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_view_list.dart';
 import 'package:dare_n_share_app/screens/widgets/user_avatar.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
+///Author Timothy Timrin
 ///This class is the home screen widget for the application
 ///After login users are directed here
 class Home extends StatelessWidget {
@@ -18,15 +20,19 @@ class Home extends StatelessWidget {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-            title: Center(child: Text("Dare n Share")),
+            title: Center(child: Text("Dare n Share",)
+            ),
+            backgroundColor: ColorDesign.colorAppbar,
             bottom: TabBar(
               tabs: [
                 Tab(
-                  icon: Icon(Icons.home),
+                  icon: Icon(Icons.home,
+                  color: ColorDesign.colorProfile,),
                   text: "home",
                 ),
                 Tab(
-                  icon: Icon(Icons.face),
+                  icon: Icon(Icons.face,
+                    color: ColorDesign.colorProfile,),
                   text: "profile",
                 ),
               ],
@@ -50,6 +56,7 @@ class Home extends StatelessWidget {
             )
           ]),
           floatingActionButton: FloatingActionButton(
+            backgroundColor: ColorDesign.colorHomeButton,
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SelectDare()));

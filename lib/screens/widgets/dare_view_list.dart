@@ -4,6 +4,7 @@ import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/screens/dare_details_screen.dart';
 import 'package:flutter/material.dart';
 
+///@Author Timothy Timrin
 ///DareViewList is the list of card widgets of the user's dares.
 /// The list is displayed on the home screen.
 class DareViewList extends StatefulWidget {

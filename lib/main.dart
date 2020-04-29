@@ -1,4 +1,6 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
+import 'package:dare_n_share_app/screens/login_user.dart';
+import 'package:dare_n_share_app/screens/register_user.dart';
 import 'package:flutter/material.dart';
 import 'package:dare_n_share_app/screens/home.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.teal,
 
         ),
-        home: Home(), //TODO: if the user is not logged in show the authenticate screen
+        home: LoginUser(), //TODO: if the user is not logged in show the authenticate screen
       ), value: DareLogic(),
     );
   }
