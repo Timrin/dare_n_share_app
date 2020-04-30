@@ -1,9 +1,10 @@
 import 'dart:convert';
 
+import 'package:dare_n_share_app/models/active_user.dart';
 import 'package:dare_n_share_app/services/auth_service.dart';
 
 class UserLogic {
-  int uid = 1; //TODO: Change, temporary hardcoded uid for the logged in user
+  String uid = ActiveUser.loggedInUserId; //TODO: Change, temporary hardcoded uid for the logged in user
 
   ///Get the logged in user's friends list as a map
   /// where the key is the uid of that user and the value is the name of the user

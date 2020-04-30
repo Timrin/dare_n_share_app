@@ -1,14 +1,17 @@
 import 'dart:convert';
 
+import 'package:dare_n_share_app/controllers/auth_logic.dart';
 import 'package:dare_n_share_app/dare_configurations/enums/objective_goals.dart';
 import 'package:dare_n_share_app/dare_configurations/enums/objective_types.dart';
 import 'package:dare_n_share_app/dare_configurations/enums/scope_types.dart';
+import 'package:dare_n_share_app/models/active_user.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/services/auth_service.dart';
 import 'package:dare_n_share_app/services/dare_service.dart';
 
 class DareLogic {
-  int uid = 1; //TODO: Change, temporary hardcoded uid for the logged in user
+  String uid = ActiveUser
+      .loggedInUserId; //TODO: Change, temporary hardcoded uid for the logged in user
   DareService dareService = DareService();
   Map loadedDares = Map(); //TODO: refactor, remove
 
@@ -22,23 +25,25 @@ class DareLogic {
     final response = await AuthService().fetchUser(uid);
     final Map userData = jsonDecode(response);
 
-    //Create a list of all the dare ids
-    final List dareIdList = List();
-    userData["dares"].forEach((v) => dareIdList.add(v["id"]));
+    if (userData.containsKey("dares")) {
+      //Create a list of all the dare ids
+      final List dareIdList = List();
+      userData["dares"].forEach((v) => dareIdList.add(v["id"]));
 
-    //Fetch all the dares from the server
-    //Build the return list
-    for (int i = 0; i < dareIdList.length; i++) {
-      //Id in the JSON payload is a number with a leading "d", remove the d and parse to int
-      int id = int.parse(dareIdList[i].substring(1));
-      Dare fetchedDare = await dareService.fetchDare(id);
+      //Fetch all the dares from the server
+      //Build the return list
+      for (int i = 0; i < dareIdList.length; i++) {
+        //Id in the JSON payload is a number with a leading "d", remove the d and parse to int
+        int id = int.parse(dareIdList[i].substring(1));
+        Dare fetchedDare = await dareService.fetchDare(id);
 
-      dareMap[dareIdList[i]] = fetchedDare;
-      dareList.add(fetchedDare);
+        dareMap[dareIdList[i]] = fetchedDare;
+        dareList.add(fetchedDare);
+      }
+
+      //Set loaded dares to the retrieved dares
+      loadedDares = dareMap; //TODO: refactor, remove
     }
-
-    //Set loaded dares to the retrieved dares
-    loadedDares = dareMap; //TODO: refactor, remove
 
     //return dareMap;
     return dareList;
@@ -53,7 +58,10 @@ class DareLogic {
 
     //build the objective map
     var objective = {};
-    objective["type"] = objectiveType.toString().split('.').last; //calling split since enums are prefixed with their class
+    objective["type"] = objectiveType
+        .toString()
+        .split('.')
+        .last; //calling split since enums are prefixed with their class
     objective["goal"] = objectiveGoal.toString().split('.').last;
     dareMap["objective"] = objective;
 
@@ -67,7 +75,8 @@ class DareLogic {
     List participantsList = List();
     //Instigator
     var instigator = {};
-    instigator["uid"] = uid; //TODO: Change, temporary hardcoded uid for the logged in user
+    instigator["uid"] =
+        uid; //TODO: Change, temporary hardcoded uid for the logged in user
     participantsList.add(instigator);
 
     //Opponent
@@ -85,7 +94,7 @@ class DareLogic {
 
   ///Report score to the server
   ///Given the appropriate parameters compiles a score request body and sends it to the server
-  bool reportScore(String dareId, dynamic scorePoint) {
+  bool reportScore(String dareId, ObjectiveTypes scoreType, dynamic scorePoint) {
     //TODO: check if the user should be able to score, should this validation be here?
 
     //Build meta data
@@ -95,9 +104,9 @@ class DareLogic {
 
     //Build score object
     var score = {};
-    score["type"] = loadedDares["d1"]
-        .objectiveType; //Server needs to know what type of score it is
-    score["point"] = scorePoint; //TODO: validate that the score is of the correct type
+    score["type"] = scoreType; //Server needs to know what type of score it is
+    score["point"] =
+        scorePoint; //TODO: validate that the score is of the correct type
 
     body["score"] = score; //add score object to the body
 

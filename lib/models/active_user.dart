@@ -4,7 +4,7 @@
 /// and friends of the user
 class ActiveUser {
 
-  static final loggedInUserId = 1;
+  static final String loggedInUserId = "pUgUV4by6HYWpeRhqLbTG763NWI3";
 
    ActiveUser._();
 

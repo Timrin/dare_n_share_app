@@ -1,4 +1,5 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
+import 'package:dare_n_share_app/models/active_user.dart';
 import 'package:dare_n_share_app/models/colors.dart';
 import 'package:dare_n_share_app/screens/select_dare_config_screen.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_view_list.dart';
@@ -44,14 +45,15 @@ class Home extends StatelessWidget {
             //The profile page has temporarily become an avatar showcase page
             Column(
               children: <Widget>[
-                UserAvatar(0),
-                UserAvatar(1),
-                UserAvatar(2),
-                UserAvatar(3),
-                UserAvatar(4),
-                UserAvatar(5),
-                UserAvatar(6),
-                UserAvatar(7),
+                _buildUserInfoCard(),
+                UserAvatar("0"),
+                UserAvatar("1"),
+                UserAvatar("2"),
+                UserAvatar("3"),
+                UserAvatar("4"),
+                UserAvatar("5"),
+                UserAvatar("6"),
+                UserAvatar("7"),
               ],
             )
           ]),
@@ -66,4 +68,29 @@ class Home extends StatelessWidget {
           )),
     );
   }
+
+  Widget _buildUserInfoCard() {
+    return Container(
+      child: Card(
+        margin: EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+              child: Text(
+                "Username", //TODO display actual username
+                style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+              child: UserAvatar(ActiveUser.loggedInUserId),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
 }
