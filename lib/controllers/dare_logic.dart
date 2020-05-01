@@ -7,6 +7,8 @@ import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/services/auth_service.dart';
 import 'package:dare_n_share_app/services/dare_service.dart';
 
+///@author Timothy Timrin
+
 class DareLogic {
   int uid = 1; //TODO: Change, temporary hardcoded uid for the logged in user
   DareService dareService = DareService();
