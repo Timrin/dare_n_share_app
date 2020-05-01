@@ -1,5 +1,7 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/controllers/user_logic.dart';
+import 'package:dare_n_share_app/error_handling/error_feedback.dart';
+import 'package:dare_n_share_app/error_handling/error_types.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/screens/dare_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +26,8 @@ class _DareViewListState extends State<DareViewList> {
   initState() {
     super.initState();
 
-    _futureDareList =
-        widget.dareLogic.getDares(); //Load the friends list on init
+    //Load the friends list on init
+    _futureDareList = widget.dareLogic.getDares();
   }
 
   ///Build the DareViewList widget
@@ -33,11 +35,14 @@ class _DareViewListState extends State<DareViewList> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       child: FutureBuilder(
-        //FIXME: This doesn't really work when there is an exception(No internet).
         future: _futureDareList,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
+              //If the user does not have any dares, display message
+              if(snapshot.data.length == 0) {
+                return errorFeedbackPage(ErrorTypes.user_has_no_dares);
+              }
               //Build the dare list
               return ListView(
                 children: snapshot.data.map<Widget>((dare) {
@@ -46,31 +51,7 @@ class _DareViewListState extends State<DareViewList> {
               );
             } else {
               //if there was an error loading the the dares, tell the user
-              return ListView(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Icon(
-                        Icons.signal_wifi_off,
-                        color: Colors.grey,
-                        size: 48,
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(32, 8, 32, 8),
-                      child: Text(
-                        "${snapshot.error.toString()}",
-                        style: TextStyle(
-                            color: Colors.grey, fontWeight: FontWeight.w500),
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                  ),
-                ],
-              );
+              return errorFeedbackPage(ErrorTypes.no_connection);
             }
           } else {
             //return loading indicator
@@ -171,6 +152,40 @@ class _DareViewListState extends State<DareViewList> {
                   builder: (context) => DetailsOfDare(dare: dare)));
         },
       ),
+    );
+  }
+
+  Widget errorFeedbackPage(ErrorTypes errorType) {
+
+    //Determine type of feedback
+    IconData feedBackIcon = ErrorFeedback.errorData[errorType]["icon"];
+    String feedBackMessage = ErrorFeedback.errorData[errorType]["message"];
+
+    //Build and return the widget
+    return ListView(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Icon(
+              feedBackIcon,
+              color: Colors.grey,
+              size: 48,
+            ),
+          ),
+        ),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(32, 8, 32, 8),
+            child: Text(
+              feedBackMessage,
+              style: TextStyle(
+                  color: Colors.grey, fontWeight: FontWeight.w500),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

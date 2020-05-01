@@ -7,23 +7,26 @@ import 'package:flutter/material.dart';
 /// user id (uid).
 
 class UserAvatar extends StatelessWidget {
-  final int uid;
+  final String uid;
 
   UserAvatar(this.uid);
 
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
-      child: Container(
+    return Container(
+        decoration: BoxDecoration(
+          color: calcAvatarColor(),
+          shape: BoxShape.circle
+        ),
+        width: 40,
+        height: 40,
         padding: EdgeInsets.all(8),
         child: Image(
           width: 32,
           height: 32,
           image: AssetImage(getAvatarImage()),
         ),
-        color: calcAvatarColor(),
-      ),
-    );
+      );
   }
 
   //TODO: This is a dumb way to do this, do it better
@@ -31,7 +34,7 @@ class UserAvatar extends StatelessWidget {
   /// based on their user id
   Color calcAvatarColor() {
     Color calculatedColor;
-    int colorId = uid % 11;
+    int colorId = uid.codeUnitAt(0) % 11;
     switch (colorId) {
       case 0:
         calculatedColor = Colors.amberAccent;
@@ -75,7 +78,8 @@ class UserAvatar extends StatelessWidget {
 
   ///Get the avatar image path based on a users id
   String getAvatarImage() {
-    int imageId = uid % AvatarImages.image.length;
+    int imageId = uid.codeUnitAt(0) % AvatarImages.image.length;
+
 
     return AvatarImages.image[imageId];
   }

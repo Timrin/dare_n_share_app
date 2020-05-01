@@ -21,9 +21,9 @@ class AuthService {
 
   ///Fetches a user from the server
   ///[userId] is the id of the user in the database
-  Future<String> fetchUser(int userId) async {
+  Future<String> fetchUser(String userId) async {
     //Construct URL
-    final url = "http://" + Config.IP + "/user/" + userId.toString();
+    final url = "http://" + Config.IP + "/user/" + userId;
 
     //Send request
     final response = await client.get(url);
