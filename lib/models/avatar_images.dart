@@ -1,7 +1,7 @@
 //TODO: Add attribution to the images in the app
 //https://www.flaticon.com/packs/animals-and-nature/
 
-///Author Timothy Timrin
+///@author Timothy Timrin
 class AvatarImages {
   AvatarImages._();
 
