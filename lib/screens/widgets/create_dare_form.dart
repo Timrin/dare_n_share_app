@@ -1,6 +1,7 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/controllers/user_logic.dart';
 import 'package:dare_n_share_app/dare_configurations/i_dare.dart';
+import 'package:dare_n_share_app/models/colors.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_info_card.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,7 @@ class CreateDareForm extends StatefulWidget {
 }
 
 class _CreateDareFormState extends State<CreateDareForm> {
+  //TODO: validate form
   final _formKey = GlobalKey<FormState>();
 
   //State variables
@@ -94,7 +96,7 @@ class _CreateDareFormState extends State<CreateDareForm> {
   ///if successful the user is returned to the home screen
   Widget okButton() {
     return RaisedButton(
-      color: Colors.teal,
+      color: ColorDesign.colorAppbar,
       textColor: Colors.white,
       child: Text(
         'Ok - Start Dare',

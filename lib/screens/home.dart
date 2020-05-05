@@ -14,26 +14,29 @@ import 'package:provider/provider.dart';
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final DareLogic dareLogic = Provider.of<DareLogic>(
-        context); //TODO Not supposed to be a DareLogic, this is just for testing
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-            title: Center(child: Text("Dare n Share",)
-            ),
+            title: Center(
+                child: Text(
+              "Dare n Share",
+            )),
             backgroundColor: ColorDesign.colorAppbar,
             bottom: TabBar(
               tabs: [
                 Tab(
-                  icon: Icon(Icons.home,
-                  color: ColorDesign.colorProfile,),
+                  icon: Icon(
+                    Icons.home,
+                    color: ColorDesign.colorProfile,
+                  ),
                   text: "home",
                 ),
                 Tab(
-                  icon: Icon(Icons.face,
-                    color: ColorDesign.colorProfile,),
+                  icon: Icon(
+                    Icons.face,
+                    color: ColorDesign.colorProfile,
+                  ),
                   text: "profile",
                 ),
               ],
@@ -43,17 +46,27 @@ class Home extends StatelessWidget {
             DareViewList(),
             //TODO: implement profile page
             //The profile page has temporarily become an avatar showcase page
-            Column(
+            ListView(
+              padding: EdgeInsets.all(12.0),
               children: <Widget>[
                 _buildUserInfoCard(),
-                UserAvatar("0"),
-                UserAvatar("1"),
-                UserAvatar("2"),
-                UserAvatar("3"),
+                UserAvatar("txVGzDSYztQoQuFlessXlgNtmmw1"),
+                UserAvatar("B9izBstBTeOg305FSxklLDx4Ly72"),
+                UserAvatar("pUgUV4by6HYWpeRhqLbTG763NWI3"),
+                UserAvatar("pf5ft00Dcic5iojgwfc7sMc3miu2"),
                 UserAvatar("4"),
                 UserAvatar("5"),
                 UserAvatar("6"),
                 UserAvatar("7"),
+                UserAvatar("8"),
+                RaisedButton(
+                  child: Center(
+                    child: Text("Logout"),
+                  ),
+                  onPressed: () {
+                    //TODO: Logout user
+                  },
+                ),
               ],
             )
           ]),
@@ -72,7 +85,6 @@ class Home extends StatelessWidget {
   Widget _buildUserInfoCard() {
     return Container(
       child: Card(
-        margin: EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -92,5 +104,4 @@ class Home extends StatelessWidget {
       ),
     );
   }
-
 }
