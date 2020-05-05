@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-///@Author Karolina Hammar
+///@author Karolina Hammar
 ///This class will provide all colors that will be implemented to the design of the product.
 ///Read the MaterialColor class documentation to understand how to create colors
 ///and why the colors are created the way they are in this class.

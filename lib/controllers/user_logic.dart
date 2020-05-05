@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:dare_n_share_app/models/active_user.dart';
 import 'package:dare_n_share_app/services/auth_service.dart';
 
+///@author Timothy Timrin
+
 class UserLogic {
   String uid = ActiveUser.loggedInUserId; //TODO: Change, temporary hardcoded uid for the logged in user
 
