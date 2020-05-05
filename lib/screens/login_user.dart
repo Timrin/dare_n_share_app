@@ -4,7 +4,7 @@ import 'package:dare_n_share_app/screens/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-///Author Karolina Hammar
+///@author Karolina Hammar
 ///Class to login existing user
 
 //todo add logic to check username and password
@@ -99,11 +99,13 @@ class _LoginUserState extends State<LoginUser> {
             child: Text("Login"),
           ),
         ),
+
         onTap: () {
           print("$_email $_password");
 
           //TODO: Error handling
           AuthLogic().handleSignIn(_email, _password);
+
           /*Navigator.push(context,
               MaterialPageRoute(
                 builder: (context) => Home()));*/

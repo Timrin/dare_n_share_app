@@ -3,7 +3,7 @@ import 'package:dare_n_share_app/models/participant.dart';
 import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
-///Author Karolina Hammar, Timothy?
+///@author Karolina Hammar, Timothy?
 ///Class to se details and progress of active dare
 
 class DetailsOfDare extends StatefulWidget {
