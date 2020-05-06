@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 ///This class will provide all colors that will be implemented to the design of the product.
 ///Read the MaterialColor class documentation to understand how to create colors
 ///and why the colors are created the way they are in this class.
+///Or use this tool to generate color swatches:
+///http://mcg.mbitson.com/#!?mcgpalette0=%233f51b5
 
 class ColorDesign {
   ///Will prevent instance variable from this class
