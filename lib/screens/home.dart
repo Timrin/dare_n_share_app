@@ -4,6 +4,7 @@ import 'package:dare_n_share_app/models/colors.dart';
 import 'package:dare_n_share_app/screens/select_dare_config_screen.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_view_list.dart';
 import 'package:dare_n_share_app/screens/widgets/user_avatar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -64,7 +65,7 @@ class Home extends StatelessWidget {
                     child: Text("Logout"),
                   ),
                   onPressed: () {
-                    //TODO: Logout user
+                    FirebaseAuth.instance.signOut();
                   },
                 ),
               ],
