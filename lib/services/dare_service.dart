@@ -11,7 +11,7 @@ class DareService {
 
   ///Fetches a dare from the server
   ///[dareId] is the id of the dare in the database
-  Future<Dare> fetchDare(int dareId) async {
+  Future<Dare> fetchDare(String dareId) async {
     //Construct URL
     final url = "http://" + Config.IP + "/dare/" + dareId.toString();
 

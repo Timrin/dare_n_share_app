@@ -14,6 +14,7 @@ class Wrapper extends StatelessWidget {
     return StreamBuilder<FirebaseUser>(
       stream: FirebaseAuth.instance.onAuthStateChanged,
       builder: (BuildContext context, snapshot) {
+        print("Wrapper stream rebuild");
         if (snapshot.hasData) {
           if (snapshot.data.providerData.length ==
               1) { // logged in using email and password
