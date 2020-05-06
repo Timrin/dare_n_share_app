@@ -50,7 +50,7 @@ class Dare {
     //TODO: refactor, objectiveType should be an enum type, if case should be a switch case
     for (int i = 0; i < dare["participants"].length; i++) {
       String userName = dare["participants"][i]["name"];
-      int uid = dare["participants"][i]["uid"];
+      String uid = dare["participants"][i]["uid"];
 
       if (dareConfig.getObjectiveType() == ObjectiveTypes.yes_no) {
         List score = dare["participants"][i]["score"];
