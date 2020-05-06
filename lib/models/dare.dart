@@ -8,7 +8,6 @@ import 'package:dare_n_share_app/models/participant.dart';
 import 'package:dare_n_share_app/models/user.dart';
 
 class Dare {
-
   //Timestamps
   final DateTime start;
   final DateTime end;
@@ -22,6 +21,7 @@ class Dare {
   final Participant participantUser;
   final Participant participantOpponent;
 
+  //Constructor
   Dare(
       {this.start,
       this.end,
@@ -46,28 +46,32 @@ class Dare {
       //TODO: handle error
     }
 
-    //Create the participant objects
-    //TODO: refactor, objectiveType should be an enum type, if case should be a switch case
-    for (int i = 0; i < dare["participants"].length; i++) {
-      String userName = dare["participants"][i]["name"];
-      String uid = dare["participants"][i]["uid"];
+    //The JSON body has to have 2 or more participants
+    if (dare["participants"].length >= 2) {
+      //Create the participant objects
+      for (int i = 0; i < dare["participants"].length; i++) {
+        String userName = dare["participants"][i]["name"];
+        String uid = dare["participants"][i]["uid"];
 
-      if (dareConfig.getObjectiveType() == ObjectiveTypes.yes_no) {
-        List score = dare["participants"][i]["score"];
-        if (ActiveUser.loggedInUserId == uid) {
-          participants.insert(0,
-              Participant(user: User(uid: uid, name: userName), score: score));
+        if (dareConfig.getObjectiveType() == ObjectiveTypes.yes_no) {
+          List score = dare["participants"][i]["score"];
+          if (ActiveUser.loggedInUserId == uid) {
+            participants.insert(
+                0,
+                Participant(
+                    user: User(uid: uid, name: userName), score: score));
+          } else {
+            participants.add(Participant(
+                user: User(uid: uid, name: userName), score: score));
+          }
         } else {
-          participants.add(
-              Participant(user: User(uid: uid, name: userName), score: score));
-        }
-        } else {
-          //TODO: Error occurred, abort
-          print("Error: parseDareFromJSON, unknown objective type");
+          throw Exception("Malformed Dare, unknown objective type");
         }
 
-
-      print("Created: ${participants[i].toString()}");
+        print("Created: ${participants[i].toString()}");
+      }
+    } else {
+      throw Exception("Malformed Dare, missing participants");
     }
 
     //Configure scope
@@ -80,8 +84,7 @@ class Dare {
       start = DateTime.tryParse(dare["start"]);
       end = DateTime.tryParse(dare["end"]);
     } else {
-      //TODO: Error occurred, abort
-      print("Error: parseDareFromJSON, unknown scope type");
+      throw ("Malformed Dare, unknown scope type");
     }
 
     return Dare(
@@ -92,13 +95,14 @@ class Dare {
         participantUser: participants[0],
         participantOpponent: participants[1]);
   }
+
   ///This method returns the ceiling of number of days that have passed
   ///since the dares start date. If 25 hours have passed since the start of a
   ///dare, two days will be returned by this method.
   int getDaysPassed() {
-      int hoursPassed = DateTime.now().difference(start).inHours;
-      int nbrOfDaysPassed = (hoursPassed/ 24).ceil();
-      return nbrOfDaysPassed;
+    int hoursPassed = DateTime.now().difference(start).inHours;
+    int nbrOfDaysPassed = (hoursPassed / 24).ceil();
+    return nbrOfDaysPassed;
   }
 
   ///This method checks if the the current time is before or passed the end
