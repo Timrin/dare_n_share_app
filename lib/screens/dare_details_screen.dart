@@ -115,7 +115,11 @@ class _DetailsOfDareState extends State<DetailsOfDare> {
           child: Center(child: Text("Yes")),
         ),
         onTap: () {
-          //TODO add navigation or right output score
+          if(isScoringAvailable()) {
+            print("Score yes sent");
+          } else {
+            print("Scoring not possible");
+          }
         },
       ),
     );

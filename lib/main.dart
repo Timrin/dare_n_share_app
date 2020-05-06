@@ -1,5 +1,6 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/models/colors.dart';
+import 'package:dare_n_share_app/screens/dare_details_screen.dart';
 import 'package:dare_n_share_app/screens/login_user.dart';
 import 'package:dare_n_share_app/screens/register_user.dart';
 import 'package:dare_n_share_app/screens/wrapper.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
 
 
         ),
-        home: Wrapper(), //TODO: if the user is not logged in show the authenticate screen
+        home: Home(), //TODO: if the user is not logged in show the authenticate screen
       ), value: Controller(),
     );
   }
