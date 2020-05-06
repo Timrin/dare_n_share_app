@@ -7,26 +7,28 @@ import 'package:flutter/material.dart';
 /// user id (uid).
 
 class UserAvatar extends StatelessWidget {
-  final String uid;
+  String _uid;
 
-  UserAvatar(this.uid);
+  UserAvatar(String uid) {
+    //The uid string has to be 2 characters in order to generate an avatar
+    //uid string shorter than 2 is pre-padded with characters
+    this._uid = uid.length == 0 ? "??" : uid.length == 1 ? ("$uid$uid") : uid;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-          color: calcAvatarColor(),
-          shape: BoxShape.circle
-        ),
-        width: 40,
-        height: 40,
-        padding: EdgeInsets.all(8),
-        child: Image(
-          width: 32,
-          height: 32,
-          image: AssetImage(getAvatarImage()),
-        ),
-      );
+      decoration:
+          BoxDecoration(color: calcAvatarColor(), shape: BoxShape.circle),
+      width: 50,
+      height: 50,
+      padding: EdgeInsets.all(8),
+      child: Image(
+        width: 42,
+        height: 42,
+        image: AssetImage(getAvatarImage()),
+      ),
+    );
   }
 
   //TODO: This is a dumb way to do this, do it better
@@ -34,7 +36,7 @@ class UserAvatar extends StatelessWidget {
   /// based on their user id
   Color calcAvatarColor() {
     Color calculatedColor;
-    int colorId = uid.codeUnitAt(0) % 11;
+    int colorId = _uid.codeUnitAt(0) % 11;
     switch (colorId) {
       case 0:
         calculatedColor = Colors.amberAccent;
@@ -55,7 +57,7 @@ class UserAvatar extends StatelessWidget {
         calculatedColor = Colors.tealAccent;
         break;
       case 6:
-        calculatedColor = Colors.lightBlueAccent;
+        calculatedColor = Colors.greenAccent;
         break;
       case 7:
         calculatedColor = Colors.deepOrangeAccent;
@@ -67,7 +69,7 @@ class UserAvatar extends StatelessWidget {
         calculatedColor = Colors.orangeAccent;
         break;
       case 10:
-        calculatedColor = Colors.greenAccent;
+        calculatedColor = Colors.lightBlueAccent;
         break;
       default:
         calculatedColor = Colors.black45;
@@ -78,8 +80,7 @@ class UserAvatar extends StatelessWidget {
 
   ///Get the avatar image path based on a users id
   String getAvatarImage() {
-    int imageId = uid.codeUnitAt(0) % AvatarImages.image.length;
-
+    int imageId = _uid.codeUnitAt(1) % AvatarImages.image.length;
 
     return AvatarImages.image[imageId];
   }
