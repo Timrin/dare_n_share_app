@@ -100,7 +100,8 @@ class _LoginUserState extends State<LoginUser> {
           ),
         ),
 
-        onTap: () {
+        onTap: (
+            ) {
           print("$_email $_password");
 
           //TODO: Error handling
