@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 
 
         ),
-        home: Home(), //TODO: if the user is not logged in show the authenticate screen
+        home: Wrapper(), //TODO: if the user is not logged in show the authenticate screen
       ), value: Controller(),
     );
   }

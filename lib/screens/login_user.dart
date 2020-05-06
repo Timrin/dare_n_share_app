@@ -1,6 +1,7 @@
 import 'package:dare_n_share_app/controllers/auth_logic.dart';
 import 'package:dare_n_share_app/models/colors.dart';
 import 'package:dare_n_share_app/screens/home.dart';
+import 'package:dare_n_share_app/screens/wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -28,48 +29,48 @@ class _LoginUserState extends State<LoginUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text("Dare n share"),
-        ),
+        title: Text("Dare n share"),
         backgroundColor: ColorDesign.colorAppbar,
       ),
-      body: ListView(
-        children: <Widget>[
-          SizedBox(
-            height: 30,
-          ),
-          Center(
-            child: Text(
-              "Login",
-              style: TextStyle(fontSize: 30),
+      body: Padding(
+        padding: EdgeInsets.all(12.0),
+        child: ListView(
+          children: <Widget>[
+            SizedBox(
+              height: 30,
             ),
-          ),
-          enterExistingEmail(),
-          enterExistingPassword(),
-          buttonLogin(context)
-        ],
+            Center(
+              child: Text(
+                "Login",
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
+            enterExistingEmail(),
+            enterExistingPassword(),
+            SizedBox(
+              height: 30,
+            ),
+            buttonLogin(context)
+          ],
+        ),
       ),
     );
   }
 
   Widget enterExistingEmail() {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: TextFormField(
+    return TextFormField(
+        keyboardType: TextInputType.emailAddress,
         decoration: new InputDecoration(hintText: 'Email'),
         onChanged: (value) {
           setState(() {
             _email = value;
           });
         },
-      ),
-    );
+      );
   }
 
   Widget enterExistingPassword() {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: TextFormField(
+    return TextFormField(
         decoration: new InputDecoration(hintText: 'Password'),
         onChanged: (value) {
           setState(() {
@@ -77,21 +78,18 @@ class _LoginUserState extends State<LoginUser> {
           });
         },
         obscureText: true,
-      ),
-    );
+      );
   }
 
   Widget buttonLogin(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(10),
-      child: InkWell(
+    return RaisedButton(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
           child: Center(
             child: Text("Login"),
           ),
         ),
-        onTap: () {
+        onPressed: () {
           print("$_email $_password");
 
           AuthLogic().handleSignIn(_email, _password).then((user) {
@@ -99,7 +97,7 @@ class _LoginUserState extends State<LoginUser> {
             if (_valid == true){
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => Home()),
+              MaterialPageRoute(builder: (context) => Wrapper()),
               (Route<dynamic> route) => false,
             ); }
           }).catchError((error) {
@@ -107,8 +105,7 @@ class _LoginUserState extends State<LoginUser> {
             print(error);
           });
         },
-      ),
-    );
+      );
   }
 
   ///Method to validate if entered password or email are correct
@@ -127,7 +124,7 @@ class _LoginUserState extends State<LoginUser> {
 
     if(isValid == true) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Home()));
+          context, MaterialPageRoute(builder: (context) => Wrapper()));
     }
     this._valid = isValid;
     //return isValid;
