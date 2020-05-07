@@ -149,7 +149,7 @@ class _DareViewListState extends State<DareViewList> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => DetailsOfDare(dare: dare)));
+                  builder: (context) => DareDetails(dare: dare)));
         },
       ),
     );

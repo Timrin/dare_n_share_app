@@ -89,7 +89,7 @@ class DareLogic {
     dareMap["participants"] = participantsList;
 
     //TODO: Send the dare to the server
-    //dareService.postDare(jsonEncode(dareMap));
+    dareService.postDare(jsonEncode(dareMap));
     print(jsonEncode(dareMap));
     return true; //Temporary
   }

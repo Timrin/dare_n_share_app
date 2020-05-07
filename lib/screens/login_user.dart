@@ -124,11 +124,6 @@ class _LoginUserState extends State<LoginUser> {
     } else{
       isValid = true;
     }
-
-    if(isValid == true) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Home()));
-    }
     this._valid = isValid;
     //return isValid;
   }
