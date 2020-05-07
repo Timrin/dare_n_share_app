@@ -13,7 +13,8 @@ Future<void> main() async {
   print(dareList);
 
   //Test create dare
-  dareLogic.createDare(ObjectiveTypes.yes_no, ObjectiveGoals.vegan, ScopeTypes.timed, 3, 2);
+  String opponentId = "1";
+  dareLogic.createDare(ObjectiveTypes.yes_no, ObjectiveGoals.vegan, ScopeTypes.timed, 3, opponentId);
 
   //Test scoring
   dareLogic.reportScore("d1", ObjectiveTypes.yes_no, true);

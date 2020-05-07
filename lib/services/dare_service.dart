@@ -41,7 +41,7 @@ class DareService {
     final response = await client.post(url, body: dareAsJson, headers: {'Content-type': 'application/json'});
 
     //Check response TODO: handle more status codes than 200
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       //If the request was successful, return response
       return true;
     } else {

@@ -61,7 +61,7 @@ class DareLogic {
   ///Take in all the required data to create a new dare as parameters.
   ///Builds the create request payload and sends the request via DareService
   Future<bool> createDare(ObjectiveTypes objectiveType, ObjectiveGoals objectiveGoal,
-      ScopeTypes scopeType, int scopeLength, int opponentId) async{
+      ScopeTypes scopeType, int scopeLength, String opponentId) async{
     Map dareMap = Map();
 
     //Get the uid of the current user
@@ -99,9 +99,9 @@ class DareLogic {
     dareMap["participants"] = participantsList;
 
     //TODO: Send the dare to the server
-    //dareService.postDare(jsonEncode(dareMap));
+    dareService.postDare(jsonEncode(dareMap));
     print(jsonEncode(dareMap));
-    return true; //Temporary
+    return true;
   }
 
   ///Report score to the server

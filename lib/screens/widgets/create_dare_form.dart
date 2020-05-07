@@ -27,7 +27,7 @@ class _CreateDareFormState extends State<CreateDareForm> {
   final _formKey = GlobalKey<FormState>();
 
   //State variables
-  int _selectedFriend;
+  String _selectedFriend;
   int _selectedDareLength;
 
   //This variable holds the future of the friends list
@@ -148,8 +148,8 @@ class _CreateDareFormState extends State<CreateDareForm> {
   }
 
   ///Create the drop down list entries for the logged in users friends list
-  List<DropdownMenuItem<int>> dropdownFriendList(friendListData) {
-    List<DropdownMenuItem<int>> friendListDropdownItems = [];
+  List<DropdownMenuItem<String>> dropdownFriendList(friendListData) {
+    List<DropdownMenuItem<String>> friendListDropdownItems = [];
 
     friendListData.forEach((friend) {
       friendListDropdownItems.add(DropdownMenuItem(

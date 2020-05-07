@@ -39,7 +39,8 @@ class Dare {
     IDare dareConfig;
     String objectiveGoal = dare["objective"]["goal"];
 
-    if (objectiveGoal == "NO_MEAT") {
+    //FIXME: Old dares still use old enum values
+    if (objectiveGoal == "NO_MEAT" || objectiveGoal == "vegan") {
       dareConfig = VeganDare();
     } else if (objectiveGoal == "exercise") {
       //TODO: handle exercise dare
@@ -81,7 +82,8 @@ class Dare {
     DateTime start;
     DateTime end;
 
-    if (scopeType == "TIMED") {
+    //FIXME: Old dares still use old enum values
+    if (scopeType == "TIMED" || scopeType == "timed") {
       start = DateTime.tryParse(dare["start"]);
       end = DateTime.tryParse(dare["end"]);
     } else {
