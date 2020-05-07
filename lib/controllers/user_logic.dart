@@ -1,18 +1,22 @@
 import 'dart:convert';
 
-import 'package:dare_n_share_app/models/active_user.dart';
+import 'package:dare_n_share_app/models/user.dart';
 import 'package:dare_n_share_app/services/auth_service.dart';
+
+import 'auth_logic.dart';
 
 ///@author Timothy Timrin
 
 class UserLogic {
-  String uid = ActiveUser.loggedInUserId; //TODO: Change, temporary hardcoded uid for the logged in user
-
   ///Get the logged in user's friends list as a map
   /// where the key is the uid of that user and the value is the name of the user
   Future<List> getFriends() async {
     //Get user from server (user contains the friends list)
     try {
+      //Get the uid of the current user
+      final String uid = await AuthLogic().currentUserId;
+      assert(uid != null);
+
       final response = await AuthService().fetchUser(uid);
       final userData = jsonDecode(response);
 
@@ -25,9 +29,20 @@ class UserLogic {
     }
   }
 
+  Future<User> getCurrentUser() async {
+    //Get the uid of the current user
+    final String uid = await AuthLogic().currentUserId;
+    assert(uid != null);
+
+    final response = await AuthService().fetchUser(uid);
+    final userData = jsonDecode(response);
+
+    return User.fromJson(userData);
+  }
+
   ///Method for adding a friend
-  ///[identifier] uid or name of the user that will be added, maybe email TODO: determine identifier
-  addFriend(String identifier) {
-    //TODO Implement
+  ///
+  Future<bool> addFriend(String friendEmail) async {
+
   }
 }

@@ -38,7 +38,8 @@ class _CreateDareFormState extends State<CreateDareForm> {
   initState() {
     super.initState();
 
-    _futureFriendList = widget.userLogic.getFriends(); //Load the friends list on init
+    _futureFriendList =
+        widget.userLogic.getFriends(); //Load the friends list on init
   }
 
   ///This is the widget of the class
@@ -50,7 +51,9 @@ class _CreateDareFormState extends State<CreateDareForm> {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: <Widget>[
-            DareInfoCard(dare: widget.dare,),
+            DareInfoCard(
+              dare: widget.dare,
+            ),
             SizedBox(
               height: 20,
             ),
@@ -103,25 +106,28 @@ class _CreateDareFormState extends State<CreateDareForm> {
       ),
       onPressed: () {
         //TODO validate form before calling createDare
-        bool success = widget.dareLogic.createDare(
-            widget.dare.getObjectiveType(),
-            widget.dare.getObjectiveGoal(),
-            widget.dare.getScopeType(),
-            _selectedDareLength,
-            _selectedFriend);
-        if (success) {
-          //Navigate to home
-          // TODO: This seems like a bad way to do this
-          // TODO: Dare list should be re-fetched
-          Navigator.pop(context);
-          Navigator.pop(context);
-        } else {
-          //Show error message
-          final errorSnackBar = SnackBar(
-            content: Text("Dare could not be created, try again!"),
-          );
-          Scaffold.of(context).showSnackBar(errorSnackBar);
-        }
+        widget.dareLogic
+            .createDare(
+                widget.dare.getObjectiveType(),
+                widget.dare.getObjectiveGoal(),
+                widget.dare.getScopeType(),
+                _selectedDareLength,
+                _selectedFriend)
+            .then((success) {
+          if (success) {
+            //Navigate to home
+            // TODO: This seems like a bad way to do this
+            // TODO: Dare list should be re-fetched
+            Navigator.pop(context);
+            Navigator.pop(context);
+          } else {
+            //Show error message
+            final errorSnackBar = SnackBar(
+              content: Text("Dare could not be created, try again!"),
+            );
+            Scaffold.of(context).showSnackBar(errorSnackBar);
+          }
+        });
       },
     );
   }

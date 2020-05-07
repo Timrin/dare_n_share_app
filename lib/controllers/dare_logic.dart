@@ -12,8 +12,6 @@ import 'package:dare_n_share_app/services/dare_service.dart';
 ///@author Timothy Timrin
 
 class DareLogic {
-  String uid = ActiveUser
-      .loggedInUserId; //TODO: Change, temporary hardcoded uid for the logged in user
   DareService dareService = DareService();
   Map loadedDares = Map(); //TODO: refactor, remove
 
@@ -22,6 +20,10 @@ class DareLogic {
   Future<List> getDares() async {
     Map<String, Dare> dareMap = Map(); //TODO: refactor, remove
     List dareList = List();
+
+    //Get the uid of the current user
+    final String uid = await AuthLogic().currentUserId;
+    assert(uid != null);
 
     //Get all dare ids of the active user
     final response = await AuthService().fetchUser(uid);
@@ -38,7 +40,7 @@ class DareLogic {
         //Id in the JSON payload is a number with a leading "d", remove the d and parse to int
         String id = dareIdList[i];
         try {
-          Dare fetchedDare = await dareService.fetchDare(id);
+          Dare fetchedDare = await dareService.fetchDare(id, uid);
 
           dareMap[dareIdList[i]] = fetchedDare;
           dareList.add(fetchedDare);
@@ -58,9 +60,13 @@ class DareLogic {
   ///Create a dare and send it to the server
   ///Take in all the required data to create a new dare as parameters.
   ///Builds the create request payload and sends the request via DareService
-  bool createDare(ObjectiveTypes objectiveType, ObjectiveGoals objectiveGoal,
-      ScopeTypes scopeType, int scopeLength, int opponentId) {
+  Future<bool> createDare(ObjectiveTypes objectiveType, ObjectiveGoals objectiveGoal,
+      ScopeTypes scopeType, int scopeLength, int opponentId) async{
     Map dareMap = Map();
+
+    //Get the uid of the current user
+    final String uid = await AuthLogic().currentUserId;
+    assert(uid != null);
 
     //build the objective map
     var objective = {};
@@ -100,8 +106,10 @@ class DareLogic {
 
   ///Report score to the server
   ///Given the appropriate parameters compiles a score request body and sends it to the server
-  bool reportScore(String dareId, ObjectiveTypes scoreType, dynamic scorePoint) {
-    //TODO: check if the user should be able to score, should this validation be here?
+  Future<bool> reportScore(String dareId, ObjectiveTypes scoreType, dynamic scorePoint) async {
+    //Get the uid of the current user
+    final String uid = await AuthLogic().currentUserId;
+    assert(uid != null);
 
     //Build meta data
     var body = {};

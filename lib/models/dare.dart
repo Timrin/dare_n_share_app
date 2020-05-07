@@ -30,8 +30,9 @@ class Dare {
       this.participantUser,
       this.participantOpponent});
 
-  factory Dare.fromJson(jsonData) {
+  factory Dare.fromJson(jsonData, String currentUserId) {
     Map<String, dynamic> dare = jsonDecode(jsonData);
+
     var participants = new List();
 
     //Determine dare config
@@ -55,7 +56,7 @@ class Dare {
 
         if (dareConfig.getObjectiveType() == ObjectiveTypes.yes_no) {
           List score = dare["participants"][i]["score"];
-          if (ActiveUser.loggedInUserId == uid) {
+          if (currentUserId == uid) {
             participants.insert(
                 0,
                 Participant(
