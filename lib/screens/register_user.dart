@@ -32,76 +32,36 @@ class _RegisterUserState extends State<RegisterUser> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 2,
-        child: Scaffold(
+    return Scaffold(
           appBar: AppBar(
-            title: Center(
-              child: Text("Dare n share"),
-            ),
+            title: Text("Dare n share"),
             backgroundColor: ColorDesign.colorAppbar,
-            bottom: TabBar(
-              tabs: [
-                Tab(
-                  icon: Icon(
-                    Icons.home,
-                    color: ColorDesign.colorProfile,
-                  ),
-                  text: "home",
+          ),
+          body: Padding(
+            padding: EdgeInsets.all(12.0),
+            child: ListView(
+              children: <Widget>[
+                SizedBox(
+                  height: 30,
                 ),
-                Tab(
-                  icon: Icon(
-                    Icons.face,
-                    color: ColorDesign.colorProfile,
+                Center(
+                  child: Text(
+                    "Register",
+                    style: TextStyle(fontSize: 30),
                   ),
-                  text: "profile",
                 ),
+                enterUsername(),
+                enterEmail(),
+                enterPassword(),
+                confirmPassword(),
+                SizedBox(
+                  height: 30,
+                ),
+                buttonCreateUser(context),
               ],
             ),
           ),
-          body: ListView(
-            children: <Widget>[
-              SizedBox(
-                height: 50,
-              ),
-              Text("Enter username"),
-              SizedBox(
-                height: 10,
-              ),
-              enterUsername(),
-              SizedBox(
-                height: 30,
-              ),
-              Text("Enter email"),
-              SizedBox(
-                height: 10,
-              ),
-              enterEmail(),
-              SizedBox(
-                height: 30,
-              ),
-              Text("Enter password"),
-              SizedBox(
-                height: 10,
-              ),
-              enterPassword(),
-              SizedBox(
-                height: 30,
-              ),
-              Text("Confirm password"),
-              SizedBox(
-                height: 10,
-              ),
-              confirmPassword(),
-              SizedBox(
-                height: 50,
-              ),
-              Center(
-                child: buttonCreateUser(context),
-              )
-            ],
-          ),
-        ));
+        );
   }
 
   Widget enterUsername() {
@@ -181,7 +141,7 @@ class _RegisterUserState extends State<RegisterUser> {
           });
         },
       ),
-    );
+    )
   }
 
   ///Method to validate that:
