@@ -1,6 +1,7 @@
 import 'package:dare_n_share_app/controllers/auth_logic.dart';
 import 'package:dare_n_share_app/models/colors.dart';
 import 'package:dare_n_share_app/screens/home.dart';
+import 'package:dare_n_share_app/screens/wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -141,7 +141,7 @@ class _RegisterUserState extends State<RegisterUser> {
           });
         },
       ),
-    )
+    );
   }
 
   ///Method to validate that:
