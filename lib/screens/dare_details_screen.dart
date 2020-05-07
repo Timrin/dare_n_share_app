@@ -6,16 +6,16 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 ///@author Timothy Timrin & Karolina Hammar
 ///Class to se details and progress of active dare
 
-class DetailsOfDare extends StatefulWidget {
+class DareDetails extends StatefulWidget {
   final Dare dare;
 
-  DetailsOfDare({Key key, this.dare}) : super(key: key);
+  DareDetails({Key key, this.dare}) : super(key: key);
 
   @override
-  _DetailsOfDareState createState() => _DetailsOfDareState();
+  _DareDetailsState createState() => _DareDetailsState();
 }
 
-class _DetailsOfDareState extends State<DetailsOfDare> {
+class _DareDetailsState extends State<DareDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,6 +117,10 @@ class _DetailsOfDareState extends State<DetailsOfDare> {
         onTap: () {
           if(isScoringAvailable()) {
             print("Score yes sent");
+            widget.dare.participantUser.score.add(true);
+            widget.dare.participantUser.score.add(false);
+            setState(() {
+            });
           } else {
             print("Scoring not possible");
           }
@@ -136,7 +140,14 @@ class _DetailsOfDareState extends State<DetailsOfDare> {
           child: Center(child: Text("No")),
         ),
         onTap: () {
-          //TODO add navigation or right output
+          if(isScoringAvailable()) {
+            print("Score no sent");
+            widget.dare.participantUser.score.add(false);
+            setState(() {
+            });
+          } else {
+            print("Scoring not possible");
+          }
         },
       ),
     );
@@ -153,5 +164,6 @@ class _DetailsOfDareState extends State<DetailsOfDare> {
 
       isScoringAvailable = true;
     }
+    return isScoringAvailable;
   }
 }

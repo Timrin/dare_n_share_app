@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-///Author Karolina Hammar
+///@author Karolina Hammar
 ///Class to register user with all new information of username, password, and
 ///email
 
@@ -15,6 +15,8 @@ import 'package:flutter/services.dart';
 class RegisterUser extends StatefulWidget {
   @override
   _RegisterUserState createState() => _RegisterUserState();
+
+
 }
 
 class _RegisterUserState extends State<RegisterUser> {
@@ -23,6 +25,10 @@ class _RegisterUserState extends State<RegisterUser> {
   String _password;
   String _confirmPassword;
   bool _isValid = false;
+
+  Pattern _pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|'
+      r'(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(('
+      r'[a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +78,6 @@ class _RegisterUserState extends State<RegisterUser> {
 
   Widget enterEmail() {
     return TextFormField(
-      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(labelText: "Enter email"),
       onChanged: (value) {
         setState(() {
@@ -110,44 +115,60 @@ class _RegisterUserState extends State<RegisterUser> {
   }
 
   Widget buttonCreateUser(BuildContext context) {
-    return RaisedButton(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-        child: Center(
-          child: Text("Register!"),
+    return Card(
+      margin: EdgeInsets.all(10),
+      child: InkWell(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+          child: Center(
+            child: Text("Login"),
+          ),
         ),
-      ),
-      onPressed: () {
-        if (_isValid) {
-          print(_userName);
-          print(_email);
-          print(_password);
-          print(_confirmPassword);
+        onTap: () {
+          print("$_email $_password");
 
-          //TODO: Error handling
-          AuthLogic().handleRegistration(_email, _password);
-        } else {
-          return null;
-        }
-      },
+          AuthLogic().handleSignIn(_email, _password).then((user) {
+            _validate();
+            if (_isValid == true){
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => Home()),
+                    (Route<dynamic> route) => false,
+              ); }
+          }).catchError((error) {
+            //TODO: Error handling
+            print(error);
+          });
+        },
+      ),
     );
   }
 
   ///Method to validate that:
   ///1. Password is 8 characters or more
   ///2. Password and confirm password match
+  ///3. Validates that email is or right characters
+  ///Check that email is a "real" email is done by firebase
 
   void _validate() {
-    //Validate that password and confirm password match
-    //Validate that email is an email
     bool isValid = true;
     if (_password.length < 8) {
       isValid = false;
       print("Enter 8 characters");
     } else if (_password.compareTo(_confirmPassword) != 0) {
       isValid = false;
+    } else if(_validateEmail(_email) == false) {
+      isValid = false;
+    } else {
+      isValid = true;
     }
 
     this._isValid = isValid;
   }
+
+  bool _validateEmail(String email) {
+    RegExp reg = new RegExp(_pattern);
+    return (!reg.hasMatch(email)) ? false : true;
+  }
+
 }

@@ -122,7 +122,7 @@ class _LoginUserState extends State<LoginUser> {
     } else {
       isValid = true;
     }
-//FIXME: This method should not handle navigation?
+    //FIXME: Should this method handle navigation?
     if (isValid == true) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => Wrapper()));
