@@ -1,3 +1,4 @@
+import 'package:dare_n_share_app/controllers/auth_logic.dart';
 import 'package:dare_n_share_app/controllers/controller.dart';
 import 'package:dare_n_share_app/screens/authenticate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,24 +11,17 @@ import 'login_user.dart';
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //return Provider.of<Controller>(context).userId == null ? Authenticate():Home();
-    return StreamBuilder<FirebaseUser>(
-      stream: FirebaseAuth.instance.onAuthStateChanged,
-      builder: (BuildContext context, snapshot) {
+    AuthLogic _authLogic = Provider.of<Controller>(context).authLogic;
+    return StreamBuilder<String>(
+      stream: _authLogic.onAuthStateChanged,
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
         print("Wrapper stream rebuild");
-        if (snapshot.hasData) {
-          if (snapshot.data.providerData.length ==
-              1) { // logged in using email and password
-            return Home();
-          } else { // logged in using other providers
-            return Home();
-          }
+        if (snapshot.connectionState == ConnectionState.active) {
+          return snapshot.hasData ? Home(userId: snapshot.data,) : Authenticate();
         } else {
           return Authenticate();
         }
       },
     );
   }
-
-
 }

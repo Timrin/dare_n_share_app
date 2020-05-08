@@ -6,9 +6,10 @@ Future<void> main() async {
 
   DareService dareService = new DareService();
 
-  Dare dare = Dare.fromJson(DB.dares[1]);
-  print(dare);
-  Future<Dare> serverDare = dareService.fetchDare("1");
+  String dareId = "1";
+  String userId = "pUgUV4by6HYWpeRhqLbTG763NWI3";
+
+  Future<Dare> serverDare = dareService.fetchDare(dareId, userId);
   print(await serverDare);
 
 }

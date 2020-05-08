@@ -30,15 +30,17 @@ class Dare {
       this.participantUser,
       this.participantOpponent});
 
-  factory Dare.fromJson(jsonData) {
+  factory Dare.fromJson(jsonData, String currentUserId) {
     Map<String, dynamic> dare = jsonDecode(jsonData);
+
     var participants = new List();
 
     //Determine dare config
     IDare dareConfig;
     String objectiveGoal = dare["objective"]["goal"];
 
-    if (objectiveGoal == "NO_MEAT") {
+    //FIXME: Old dares still use old enum values
+    if (objectiveGoal == "NO_MEAT" || objectiveGoal == "vegan") {
       dareConfig = VeganDare();
     } else if (objectiveGoal == "exercise") {
       //TODO: handle exercise dare
@@ -55,7 +57,7 @@ class Dare {
 
         if (dareConfig.getObjectiveType() == ObjectiveTypes.yes_no) {
           List score = dare["participants"][i]["score"];
-          if (ActiveUser.loggedInUserId == uid) {
+          if (currentUserId == uid) {
             participants.insert(
                 0,
                 Participant(
@@ -80,7 +82,8 @@ class Dare {
     DateTime start;
     DateTime end;
 
-    if (scopeType == "TIMED") {
+    //FIXME: Old dares still use old enum values
+    if (scopeType == "TIMED" || scopeType == "timed") {
       start = DateTime.tryParse(dare["start"]);
       end = DateTime.tryParse(dare["end"]);
     } else {

@@ -1,18 +1,21 @@
-import 'package:dare_n_share_app/controllers/dare_logic.dart';
-import 'package:dare_n_share_app/models/active_user.dart';
 import 'package:dare_n_share_app/models/colors.dart';
+import 'package:dare_n_share_app/models/user.dart';
 import 'package:dare_n_share_app/screens/select_dare_config_screen.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_view_list.dart';
 import 'package:dare_n_share_app/screens/widgets/user_avatar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
 
 ///Author Timothy Timrin
 ///This class is the home screen widget for the application
 ///After login users are directed here
 class Home extends StatelessWidget {
+
+  final String userId;
+
+  Home({Key key, this.userId}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -50,7 +53,7 @@ class Home extends StatelessWidget {
             ListView(
               padding: EdgeInsets.all(12.0),
               children: <Widget>[
-                _buildUserInfoCard(),
+                _buildUserInfoCard(this.userId),
                 UserAvatar("txVGzDSYztQoQuFlessXlgNtmmw1"),
                 UserAvatar("B9izBstBTeOg305FSxklLDx4Ly72"),
                 UserAvatar("pUgUV4by6HYWpeRhqLbTG763NWI3"),
@@ -83,7 +86,7 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget _buildUserInfoCard() {
+  Widget _buildUserInfoCard(String userId) {
     return Container(
       child: Card(
         child: Column(
@@ -98,7 +101,7 @@ class Home extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-              child: UserAvatar(ActiveUser.loggedInUserId),
+              child: UserAvatar(userId),
             )
           ],
         ),

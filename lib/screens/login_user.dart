@@ -59,53 +59,54 @@ class _LoginUserState extends State<LoginUser> {
 
   Widget enterExistingEmail() {
     return TextFormField(
-        keyboardType: TextInputType.emailAddress,
-        decoration: new InputDecoration(hintText: 'Email'),
-        onChanged: (value) {
-          setState(() {
-            _email = value;
-          });
-        },
-      );
+      keyboardType: TextInputType.emailAddress,
+      decoration: new InputDecoration(hintText: 'Email'),
+      onChanged: (value) {
+        setState(() {
+          _email = value;
+        });
+      },
+    );
   }
 
   Widget enterExistingPassword() {
     return TextFormField(
-        decoration: new InputDecoration(hintText: 'Password'),
-        onChanged: (value) {
-          setState(() {
-            _password = value;
-          });
-        },
-        obscureText: true,
-      );
+      decoration: new InputDecoration(hintText: 'Password'),
+      onChanged: (value) {
+        setState(() {
+          _password = value;
+        });
+      },
+      obscureText: true,
+    );
   }
 
   Widget buttonLogin(BuildContext context) {
     return RaisedButton(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-          child: Center(
-            child: Text("Login"),
-          ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+        child: Center(
+          child: Text("Login"),
         ),
-        onPressed: () {
-          print("$_email $_password");
+      ),
+      onPressed: () {
+        print("$_email $_password");
 
+        _validate();
+        if (_valid == true) {
           AuthLogic().handleSignIn(_email, _password).then((user) {
-            _validate();
-            if (_valid == true){
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => Wrapper()),
               (Route<dynamic> route) => false,
-            ); }
+            );
           }).catchError((error) {
             //TODO: Error handling
             print(error);
           });
-        },
-      );
+        }
+      },
+    );
   }
 
   ///Method to validate if entered password or email are correct
@@ -118,8 +119,13 @@ class _LoginUserState extends State<LoginUser> {
     } else if (_validateEmail(_email) == false) {
       isValid = false;
       _errorMessageDialog();
-    } else{
+    } else {
       isValid = true;
+    }
+    //FIXME: Should this method handle navigation?
+    if (isValid == true) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => Wrapper()));
     }
     this._valid = isValid;
     //return isValid;

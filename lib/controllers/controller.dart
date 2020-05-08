@@ -10,9 +10,6 @@ class Controller {
   String _userId;
 
   Controller() {
-
-    //TODO: check for persisted user
-
     dareLogic = DareLogic();
     userLogic = UserLogic();
     authLogic = AuthLogic();
