@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 ///@author Karolina Hammar & Timothy Timrin
 ///Class to login existing user
 
-//todo add logic to check username and password
+
 
 class LoginUser extends StatefulWidget {
   @override
