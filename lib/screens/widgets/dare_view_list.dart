@@ -4,14 +4,14 @@ import 'package:dare_n_share_app/error_handling/error_feedback.dart';
 import 'package:dare_n_share_app/error_handling/error_types.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/screens/dare_details_screen.dart';
+import 'package:dare_n_share_app/screens/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 
 ///@Author Timothy Timrin
 ///DareViewList is the list of card widgets of the user's dares.
 /// The list is displayed on the home screen.
 class DareViewList extends StatefulWidget {
-  DareLogic dareLogic =
-      DareLogic(); //TODO: this should be created further up the widget tree
+  DareLogic dareLogic = DareLogic.instance;
   UserLogic userLogic =
       UserLogic(); //TODO: this should be created further up the widget tree
 
@@ -96,13 +96,15 @@ class _DareViewListState extends State<DareViewList> {
                 children: <Widget>[
                   Column(
                     children: <Widget>[
+                      UserAvatar(dare.participantUser.user.uid),
                       Text(
-                        "You: ${dare.participantUser.user.name}",
+                        "You",
                         style: TextStyle(
-                          fontSize: 12.0,
+                          fontSize: 16.0,
                           color: Colors.grey[700],
                         ),
                       ),
+                      SizedBox(height: 10.0,),
                       Text(
                         "Score: ${dare.participantUser.score}",
                         style: TextStyle(
@@ -114,13 +116,15 @@ class _DareViewListState extends State<DareViewList> {
                   ),
                   Column(
                     children: <Widget>[
+                      UserAvatar(dare.participantOpponent.user.uid),
                       Text(
-                        "Opponent: ${dare.participantOpponent.user.name}",
+                        "${dare.participantOpponent.user.name}",
                         style: TextStyle(
-                          fontSize: 12.0,
+                          fontSize: 16.0,
                           color: Colors.grey[700],
                         ),
                       ),
+                      SizedBox(height: 10.0,),
                       Text(
                         "Score: ${dare.participantOpponent.score}",
                         style: TextStyle(

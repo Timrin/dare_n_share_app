@@ -11,8 +11,7 @@ import 'package:flutter/material.dart';
 /// a dare, and pick opponent.
 class CreateDareForm extends StatefulWidget {
   final IDare dare;
-  DareLogic dareLogic =
-      DareLogic(); //TODO: this should be created further up the widget tree
+  DareLogic dareLogic = DareLogic.instance;
   UserLogic userLogic =
       UserLogic(); //TODO: this should be created further up the widget tree
 

@@ -5,7 +5,7 @@ import 'package:dare_n_share_app/dare_configurations/enums/scope_types.dart';
 
 Future<void> main() async {
 
-  DareLogic dareLogic = new DareLogic();
+  DareLogic dareLogic = DareLogic.instance;
 
   //Test getting a list of a user's dares
   List dareList = await dareLogic.getDares();
