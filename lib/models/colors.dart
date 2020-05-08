@@ -30,7 +30,8 @@ class ColorDesign {
 
   ///Right now colorBlue for home and profilePicture
   static const MaterialColor colorProfile = const MaterialColor(
-    0xFF7EFFDB,
+   // 0xffff9de2,
+    0xffb9fedb,
     const <int, Color>{
       50: Color(0xFFF0FFFB),
       100: Color(0xFFD8FFF4),
@@ -55,8 +56,8 @@ class ColorDesign {
 
   ///Color for appbar
   static const MaterialColor colorAppbar = const MaterialColor(
-    //0xff92B473
-    0xFFFF9DB2,
+   // Cool color:0xFF978189 ,
+    0xffff9de2,
     const <int, Color>{
       50: Color(0xFFFFF3F6),
       100: Color(0xFFFFE2E8),
@@ -82,8 +83,11 @@ class ColorDesign {
 
   ///Color for big plus button
   static const MaterialColor colorHomeButton = const MaterialColor(
-    //0xffD576E3
-    0xFFFF9DB2,
+    //0xffD576E3 0xFFFF9DB2
+    //Color Pastel green: 0xffb9fedb
+    //0xFFFF9CDA
+    //0xFFCCFFCC,
+    0xffb9fedb,
     const <int, Color>{
       50: Color(0xFFFFF3F6),
       100: Color(0xFFFFE2E8),

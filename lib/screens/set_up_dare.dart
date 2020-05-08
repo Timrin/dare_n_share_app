@@ -12,13 +12,34 @@ class SetUpDare extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
       appBar: AppBar(
         title: Text("Create the Dare"),
+        backgroundColor: ColorDesign.colorAppbar,
+        bottom: TabBar(
+          tabs: [
+            Tab(
+              icon: Icon(
+                Icons.home,
+                color: ColorDesign.colorProfile,
+              ),
+              text: "home",
+            ),
+            Tab(
+              icon: Icon(
+                Icons.face,
+                color: ColorDesign.colorProfile,
+              ),
+              text: "profile",
+            ),
+          ],
+        ),
       ),
       body: Center(
         child: CreateDareForm(dare: dare),
       ),
-    );
+      ));
   }
 }

@@ -21,6 +21,24 @@ class SelectDare extends StatelessWidget {
           appBar: AppBar(
             title: Text("Select a Dare"),
             backgroundColor: ColorDesign.colorAppbar,
+            bottom: TabBar(
+              tabs: [
+                Tab(
+                  icon: Icon(
+                    Icons.home,
+                    color: ColorDesign.colorProfile,
+                  ),
+                  text: "home",
+                ),
+                Tab(
+                  icon: Icon(
+                    Icons.face,
+                    color: ColorDesign.colorProfile,
+                  ),
+                  text: "profile",
+                ),
+              ],
+            ),
           ),
           body: ListView(
             children: <Widget>[

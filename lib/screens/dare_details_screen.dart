@@ -1,3 +1,4 @@
+import 'package:dare_n_share_app/models/colors.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/models/participant.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +19,31 @@ class DareDetails extends StatefulWidget {
 class _DareDetailsState extends State<DareDetails> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
       appBar: AppBar(
         title: Text(
             "Vegan dare with ${widget.dare.participantOpponent.user.name}"),
-        backgroundColor: Colors.teal,
+        backgroundColor: ColorDesign.colorAppbar,
+        bottom: TabBar(
+          tabs: [
+            Tab(
+              icon: Icon(
+                Icons.home,
+                color: ColorDesign.colorProfile,
+              ),
+              text: "home",
+            ),
+            Tab(
+              icon: Icon(
+                Icons.face,
+                color: ColorDesign.colorProfile,
+              ),
+              text: "profile",
+            ),
+          ],
+        ),
       ),
       body: ListView(
         children: <Widget>[
@@ -67,7 +88,7 @@ class _DareDetailsState extends State<DareDetails> {
           )
         ],
       ),
-    );
+      ));
   }
 
   Widget scopeProgressIndicator(Participant participant) {
