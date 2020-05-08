@@ -10,7 +10,6 @@ class Controller {
   String _userId;
 
   Controller() {
-    dareLogic = DareLogic();
     userLogic = UserLogic();
     authLogic = AuthLogic();
   }

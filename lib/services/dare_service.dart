@@ -21,7 +21,7 @@ class DareService {
     //Check response TODO: handle more status codes than 200
     if (response.statusCode == 200) {
       //If the request was successful, return response
-      return Dare.fromJson(response.body, currentUserId);
+      return Dare.fromJson(response.body, dareId, currentUserId);
     } else {
       //If the request was not successful, generate exception
       throw Exception("Could not reach the server");
@@ -62,7 +62,7 @@ class DareService {
     final response = await client.post(url, body: scoreAsJson, headers: {'Content-type': 'application/json'});
 
     //Check response TODO: handle more status codes than 200
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       //If the request was successful, return response
       return true;
     } else {

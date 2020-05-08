@@ -1,7 +1,9 @@
+import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/models/colors.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/models/participant.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 ///@author Timothy Timrin & Karolina Hammar
@@ -9,6 +11,7 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class DareDetails extends StatefulWidget {
   final Dare dare;
+  final DareLogic darelogic = DareLogic.instance;
 
   DareDetails({Key key, this.dare}) : super(key: key);
 
@@ -20,75 +23,74 @@ class _DareDetailsState extends State<DareDetails> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-      appBar: AppBar(
-        title: Text(
-            "Vegan dare with ${widget.dare.participantOpponent.user.name}"),
-        backgroundColor: ColorDesign.colorAppbar,
-        bottom: TabBar(
-          tabs: [
-            Tab(
-              icon: Icon(
-                Icons.home,
-                color: ColorDesign.colorProfile,
-              ),
-              text: "home",
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+                "Vegan dare with ${widget.dare.participantOpponent.user.name}"),
+            backgroundColor: ColorDesign.colorAppbar,
+            bottom: TabBar(
+              tabs: [
+                Tab(
+                  icon: Icon(
+                    Icons.home,
+                    color: ColorDesign.colorProfile,
+                  ),
+                  text: "home",
+                ),
+                Tab(
+                  icon: Icon(
+                    Icons.face,
+                    color: ColorDesign.colorProfile,
+                  ),
+                  text: "profile",
+                ),
+              ],
             ),
-            Tab(
-              icon: Icon(
-                Icons.face,
-                color: ColorDesign.colorProfile,
+          ),
+          body: ListView(
+            children: <Widget>[
+              SizedBox(
+                height: 60,
               ),
-              text: "profile",
-            ),
-          ],
-        ),
-      ),
-      body: ListView(
-        children: <Widget>[
-          SizedBox(
-            height: 60,
+              Center(
+                child: Text(widget.dare.dareConfig.getTitle()),
+              ),
+              Center(
+                child: Text("vs"),
+              ),
+              Center(
+                child: Text(widget.dare.participantOpponent.user.name),
+              ),
+              SizedBox(
+                height: 60,
+              ),
+              Text("You"),
+              SizedBox(
+                height: 20,
+              ),
+              scopeProgressIndicator(widget.dare.participantUser),
+              SizedBox(
+                height: 30,
+              ),
+              Text(widget.dare.participantOpponent.user.name),
+              SizedBox(
+                height: 20,
+              ),
+              scopeProgressIndicator(widget.dare.participantOpponent),
+              SizedBox(
+                height: 100,
+              ),
+              Center(
+                child: Text("Have you succeded today?"),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[boxCheckYes(), boxCheckNo()],
+              )
+            ],
           ),
-          Center(
-            child: Text(widget.dare.dareConfig.getTitle()),
-          ),
-          Center(
-            child: Text("vs"),
-          ),
-          Center(
-            child: Text(widget.dare.participantOpponent.user
-                .name), //TODO refactor, participant2 might not be the opponent, check during init
-          ),
-          SizedBox(
-            height: 60,
-          ),
-          Text("You"),
-          SizedBox(
-            height: 20,
-          ),
-          scopeProgressIndicator(widget.dare.participantUser),
-          SizedBox(
-            height: 30,
-          ),
-          Text(widget.dare.participantOpponent.user.name),
-          SizedBox(
-            height: 20,
-          ),
-          scopeProgressIndicator(widget.dare.participantOpponent),
-          SizedBox(
-            height: 100,
-          ),
-          Center(
-            child: Text("Have you succeded today?"),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[boxCheckYes(), boxCheckNo()],
-          )
-        ],
-      ),
-      ));
+        ));
   }
 
   Widget scopeProgressIndicator(Participant participant) {
@@ -136,12 +138,25 @@ class _DareDetailsState extends State<DareDetails> {
           child: Center(child: Text("Yes")),
         ),
         onTap: () {
-          if(isScoringAvailable()) {
+          if (isScoringAvailable()) {
             print("Score yes sent");
-            widget.dare.participantUser.score.add(true);
-            widget.dare.participantUser.score.add(false);
-            setState(() {
-            });
+
+              widget.darelogic
+                  .reportScore(widget.dare.dareId,
+                      widget.dare.dareConfig.getObjectiveType(), true)
+                  .then((success) {
+                    print(success);
+                if (success) {
+                  widget.dare.participantUser.score.add(true);
+                  setState(() {});
+                } else {
+                  //Could now score tell user why
+                }
+              }).catchError((error) {
+                //Could now score tell user why
+                print(error);
+              });
+
           } else {
             print("Scoring not possible");
           }
@@ -161,10 +176,21 @@ class _DareDetailsState extends State<DareDetails> {
           child: Center(child: Text("No")),
         ),
         onTap: () {
-          if(isScoringAvailable()) {
+          if (isScoringAvailable()) {
             print("Score no sent");
-            widget.dare.participantUser.score.add(false);
             setState(() {
+              widget.darelogic
+                  .reportScore(widget.dare.dareId,
+                  widget.dare.dareConfig.getObjectiveType(), false)
+                  .then((success) {
+                if (success) {
+                  widget.dare.participantUser.score.add(false);
+                } else {
+                  //Could now score tell user why
+                }
+              }).catchError((error) {
+                //Could now score tell user why
+              });
             });
           } else {
             print("Scoring not possible");
@@ -182,7 +208,6 @@ class _DareDetailsState extends State<DareDetails> {
 
     if ((scoreArray.length < daysPassed) &&
         (scoreArray.length < widget.dare.scopeLength)) {
-
       isScoringAvailable = true;
     }
     return isScoringAvailable;

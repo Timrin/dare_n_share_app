@@ -8,6 +8,8 @@ import 'package:dare_n_share_app/models/participant.dart';
 import 'package:dare_n_share_app/models/user.dart';
 
 class Dare {
+  final String dareId;
+
   //Timestamps
   final DateTime start;
   final DateTime end;
@@ -23,14 +25,15 @@ class Dare {
 
   //Constructor
   Dare(
-      {this.start,
+      {this.dareId,
+      this.start,
       this.end,
       this.dareConfig,
       this.scopeLength,
       this.participantUser,
       this.participantOpponent});
 
-  factory Dare.fromJson(jsonData, String currentUserId) {
+  factory Dare.fromJson(jsonData, String dareId, String currentUserId) {
     Map<String, dynamic> dare = jsonDecode(jsonData);
 
     var participants = new List();
@@ -42,10 +45,8 @@ class Dare {
     //FIXME: Old dares still use old enum values
     if (objectiveGoal == "NO_MEAT" || objectiveGoal == "vegan") {
       dareConfig = VeganDare();
-    } else if (objectiveGoal == "exercise") {
-      //TODO: handle exercise dare
     } else {
-      //TODO: handle error
+      throw Exception("Malformed Dare, unknown objective goal");
     }
 
     //The JSON body has to have 2 or more participants
@@ -91,6 +92,7 @@ class Dare {
     }
 
     return Dare(
+        dareId: dareId,
         start: start,
         end: end,
         dareConfig: dareConfig,

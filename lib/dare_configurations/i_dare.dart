@@ -41,4 +41,10 @@ class IDare {
   ///This description may be visible on the create screen and the dare
   /// details screen
   getDescription() {}
+
+  /// Returns the color associated with the dare
+  ///
+  /// This is the primary color associated with the dare
+  /// This color may be used as a background
+  //getPrimaryDareColor() {} //TODO: implement this feature
 }

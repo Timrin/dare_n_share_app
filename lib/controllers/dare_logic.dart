@@ -12,6 +12,11 @@ import 'package:dare_n_share_app/services/dare_service.dart';
 ///@author Timothy Timrin
 
 class DareLogic {
+
+  static final DareLogic instance = DareLogic._();
+
+  DareLogic._();
+
   DareService dareService = DareService();
   Map loadedDares = Map(); //TODO: refactor, remove
 
@@ -118,15 +123,14 @@ class DareLogic {
 
     //Build score object
     var score = {};
-    score["type"] = scoreType; //Server needs to know what type of score it is
+    score["type"] = scoreType.toString().split('.').last; //Server needs to know what type of score it is
     score["point"] =
         scorePoint; //TODO: validate that the score is of the correct type
 
     body["score"] = score; //add score object to the body
 
     //TODO: Send the score to the server
-    //dareService.postScore(jsonEncode(body));
     print(jsonEncode(body));
-    return true;
+    return dareService.postScore(jsonEncode(body));
   }
 }
