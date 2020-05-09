@@ -8,13 +8,19 @@ import 'auth_logic.dart';
 ///@author Timothy Timrin
 
 class UserLogic {
+
+  ///Provide an instance of the class
+  static final UserLogic instance = UserLogic._();
+
+  UserLogic._(); //Private constructor
+
   ///Get the logged in user's friends list as a map
   /// where the key is the uid of that user and the value is the name of the user
   Future<List> getFriends() async {
     //Get user from server (user contains the friends list)
     try {
       //Get the uid of the current user
-      final String uid = await AuthLogic().currentUserId;
+      final String uid = await AuthLogic.instance.currentUserId;
       assert(uid != null);
 
       final response = await AuthService().fetchUser(uid);
@@ -31,7 +37,7 @@ class UserLogic {
 
   Future<User> getCurrentUser() async {
     //Get the uid of the current user
-    final String uid = await AuthLogic().currentUserId;
+    final String uid = await AuthLogic.instance.currentUserId;
     assert(uid != null);
 
     final response = await AuthService().fetchUser(uid);

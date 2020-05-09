@@ -4,7 +4,6 @@ import 'package:dare_n_share_app/controllers/auth_logic.dart';
 import 'package:dare_n_share_app/dare_configurations/enums/objective_goals.dart';
 import 'package:dare_n_share_app/dare_configurations/enums/objective_types.dart';
 import 'package:dare_n_share_app/dare_configurations/enums/scope_types.dart';
-import 'package:dare_n_share_app/models/active_user.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/services/auth_service.dart';
 import 'package:dare_n_share_app/services/dare_service.dart';
@@ -13,9 +12,15 @@ import 'package:dare_n_share_app/services/dare_service.dart';
 
 class DareLogic {
 
+  //Not sure if this class should be more of a static helper class or
+  // if it needs to hold data.
+  //For now it will be a singleton class, since there shouldn't be any
+  // reason to have multiple instances of the class.
+
+  ///Provide an instance of the class
   static final DareLogic instance = DareLogic._();
 
-  DareLogic._();
+  DareLogic._(); //Private constructor
 
   DareService dareService = DareService();
   Map loadedDares = Map(); //TODO: refactor, remove
@@ -27,7 +32,7 @@ class DareLogic {
     List dareList = List();
 
     //Get the uid of the current user
-    final String uid = await AuthLogic().currentUserId;
+    final String uid = await AuthLogic.instance.currentUserId;
     assert(uid != null);
 
     //Get all dare ids of the active user
@@ -35,6 +40,7 @@ class DareLogic {
     final Map userData = jsonDecode(response);
 
     if (userData.containsKey("dares")) {
+
       //Create a list of all the dare ids
       final List dareIdList = List();
       userData["dares"].forEach((v) => dareIdList.add(v["id"]));
@@ -70,7 +76,7 @@ class DareLogic {
     Map dareMap = Map();
 
     //Get the uid of the current user
-    final String uid = await AuthLogic().currentUserId;
+    final String uid = await AuthLogic.instance.currentUserId;
     assert(uid != null);
 
     //build the objective map
@@ -92,8 +98,7 @@ class DareLogic {
     List participantsList = List();
     //Instigator
     var instigator = {};
-    instigator["uid"] =
-        uid; //TODO: Change, temporary hardcoded uid for the logged in user
+    instigator["uid"] = uid;
     participantsList.add(instigator);
 
     //Opponent
@@ -103,17 +108,15 @@ class DareLogic {
 
     dareMap["participants"] = participantsList;
 
-    //TODO: Send the dare to the server
-    dareService.postDare(jsonEncode(dareMap));
-    print(jsonEncode(dareMap));
-    return true;
+    print(jsonEncode(dareMap)); //TODO: remove
+    return dareService.postDare(jsonEncode(dareMap));
   }
 
   ///Report score to the server
   ///Given the appropriate parameters compiles a score request body and sends it to the server
   Future<bool> reportScore(String dareId, ObjectiveTypes scoreType, dynamic scorePoint) async {
     //Get the uid of the current user
-    final String uid = await AuthLogic().currentUserId;
+    final String uid = await AuthLogic.instance.currentUserId;
     assert(uid != null);
 
     //Build meta data
@@ -129,7 +132,6 @@ class DareLogic {
 
     body["score"] = score; //add score object to the body
 
-    //TODO: Send the score to the server
     print(jsonEncode(body));
     return dareService.postScore(jsonEncode(body));
   }
