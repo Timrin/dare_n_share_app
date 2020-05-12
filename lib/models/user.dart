@@ -2,9 +2,10 @@
 class User {
   final String uid;
   final String name;
+  String email = "";
 
   //Constructor
-  User({this.uid, this.name});
+  User({this.uid, this.name, this.email});
 
   //Factory constructor
   //Constructs User objects from json
@@ -16,8 +17,14 @@ class User {
     return User(uid: uid, name: name);
   }
 
+  //Returns the user object as a json formatted String
+  //TODO: there are way better ways to convet an object to json
+  String toJson() {
+    return "{\"uid\": \"$uid\", \"name\": \"$name\", \"email\": \"$email\"}";
+  }
+
   @override
   String toString() {
-    return 'User{uid: $uid, name: $name}';
+    return 'User{uid: $uid, name: $name, email: $email}';
   }
 }

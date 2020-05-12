@@ -49,7 +49,7 @@ class AuthService {
     final response = await client.post(url, body: userAsJson, headers: {'Content-type': 'application/json'});
 
     //Check response
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       //If the request was successful, return response
       return response.body;
     } else {
