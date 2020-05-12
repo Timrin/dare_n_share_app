@@ -67,8 +67,6 @@ class Authenticate extends StatelessWidget {
           ),
         ),
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => RegisterUser()));
         },
       ),
     );
