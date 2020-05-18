@@ -1,8 +1,11 @@
 import 'package:dare_n_share_app/controllers/auth_logic.dart';
 import 'package:flutter/material.dart';
 
-import '../wrapper.dart';
-
+///@author Karolina Hammar & Timothy Timrin
+///LoginForm is responsible for building and validating the login
+/// form that users may use to login to the app.
+/// The form also includes the button which executes the login call
+/// to the authService
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -10,8 +13,6 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-
-  bool _valid;
 
   String _email;
   String _password;
@@ -50,16 +51,19 @@ class _LoginFormState extends State<LoginForm> {
                   AuthLogic.instance
                       .handleSignIn(_email, _password)
                       .then((user) {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => Wrapper()),
-                      (Route<dynamic> route) => false,
-                    );
+
+                    //The login page should be the page on top of
+                    // Wrapper in the Navigator stack. Therefor pop should
+                    // bring the user back to Wrapper, which should update
+                    // from the AuthStateChange.
+                    Navigator.pop(context);
+
                   }).catchError((error) {
                     String errorMessage;
                     switch (error.code) {
                       case "ERROR_INVALID_EMAIL":
-                        errorMessage = "Your email address appears to be malformed.";
+                        errorMessage =
+                            "Your email address appears to be malformed.";
                         break;
                       case "ERROR_WRONG_PASSWORD":
                         errorMessage = "Your password is wrong.";
@@ -68,19 +72,21 @@ class _LoginFormState extends State<LoginForm> {
                         errorMessage = "User with this email doesn't exist.";
                         break;
                       case "ERROR_USER_DISABLED":
-                        errorMessage = "User with this email has been disabled.";
+                        errorMessage =
+                            "User with this email has been disabled.";
                         break;
                       case "ERROR_TOO_MANY_REQUESTS":
                         errorMessage = "Too many requests. Try again later.";
                         break;
                       case "ERROR_OPERATION_NOT_ALLOWED":
-                        errorMessage = "Signing in with Email and Password is not enabled.";
+                        errorMessage =
+                            "Signing in with Email and Password is not enabled.";
                         break;
                       default:
                         errorMessage = "An undefined Error happened.";
                     }
-                    Scaffold
-                        .of(context)
+                    //The error message is displayed to the user in a snackbar
+                    Scaffold.of(context)
                         .showSnackBar(SnackBar(content: Text(errorMessage)));
                   });
                 }
@@ -93,6 +99,7 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
+  ///Method for building the email TextFormField
   Widget enterExistingEmail() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
@@ -111,6 +118,7 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
+  ///Method for building the password TextFormField
   Widget enterExistingPassword() {
     return TextFormField(
       decoration: new InputDecoration(hintText: 'Password'),
@@ -123,56 +131,9 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  ///Method to validate if entered password or email are correct
-
-  void _validate() {
-    bool isValid;
-    if (_password.length < 8) {
-      isValid = false;
-      _errorMessageDialog();
-    } else if (_validateEmail(_email) == false) {
-      isValid = false;
-      _errorMessageDialog();
-    } else {
-      isValid = true;
-    }
-    //FIXME: Should this method handle navigation?
-    if (isValid == true) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Wrapper()));
-    }
-    this._valid = isValid;
-    //return isValid;
-  }
-
-  ///Method to validate use of characters in email
-
+  ///Validator method for the email TextFormField
   bool _validateEmail(String email) {
     RegExp reg = new RegExp(_pattern);
     return (!reg.hasMatch(email)) ? false : true;
-  }
-
-  ///Method to display message dialog if entered email or password is incorrect
-
-  Future<void> _errorMessageDialog() async {
-    return showDialog<void>(
-        context: context,
-        barrierDismissible: false,
-
-        ///User must tap button to dismiss message
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("You´ve entered a wrong password or email, "
-                "\n Password must be more than 7 characters"),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Ok"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        });
   }
 }
