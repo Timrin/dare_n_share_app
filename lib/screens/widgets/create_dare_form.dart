@@ -150,6 +150,7 @@ class _CreateDareFormState extends State<CreateDareForm> {
     List<DropdownMenuItem<String>> friendListDropdownItems = [];
 
     friendListData.forEach((friend) {
+      print(friend);
       friendListDropdownItems.add(DropdownMenuItem(
         child: new Text(friend["name"]),
         value: friend["uid"],
