@@ -1,6 +1,7 @@
 import 'package:dare_n_share_app/controllers/auth_logic.dart';
 import 'package:dare_n_share_app/models/colors.dart';
 import 'package:dare_n_share_app/screens/home.dart';
+import 'package:dare_n_share_app/screens/wrapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _RegisterUserState extends State<RegisterUser> {
   String _confirmPassword;
   bool _isValid = false;
 
-  Pattern _pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|'
+  Pattern _emailPattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|'
       r'(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(('
       r'[a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
@@ -78,6 +79,7 @@ class _RegisterUserState extends State<RegisterUser> {
 
   Widget enterEmail() {
     return TextFormField(
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(labelText: "Enter email"),
       onChanged: (value) {
         setState(() {
@@ -127,18 +129,19 @@ class _RegisterUserState extends State<RegisterUser> {
         onTap: () {
           print("$_email $_password");
 
-          AuthLogic.instance.handleSignIn(_email, _password).then((user) {
-            _validate();
-            if (_isValid == true){
+          _validate();
+          if(_isValid) {
+            AuthLogic.instance.handleRegistration(_email, _userName, _password).then((user) {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => Home()),
+                MaterialPageRoute(builder: (context) => Wrapper()),
                     (Route<dynamic> route) => false,
-              ); }
-          }).catchError((error) {
-            //TODO: Error handling
-            print(error);
-          });
+              );
+            }).catchError((error) {
+              //TODO: Error handling
+              print("Error: $error");
+            }); 
+          }
         },
       ),
     );
@@ -167,7 +170,7 @@ class _RegisterUserState extends State<RegisterUser> {
   }
 
   bool _validateEmail(String email) {
-    RegExp reg = new RegExp(_pattern);
+    RegExp reg = new RegExp(_emailPattern);
     return (!reg.hasMatch(email)) ? false : true;
   }
 
