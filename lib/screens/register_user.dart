@@ -127,7 +127,7 @@ class _RegisterUserState extends State<RegisterUser> {
         onTap: () {
           print("$_email $_password");
 
-          AuthLogic().handleSignIn(_email, _password).then((user) {
+          AuthLogic.instance.handleSignIn(_email, _password).then((user) {
             _validate();
             if (_isValid == true){
               Navigator.pushAndRemoveUntil(

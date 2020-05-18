@@ -67,6 +67,7 @@ class Authenticate extends StatelessWidget {
           ),
         ),
         onTap: () {
+
         },
       ),
     );

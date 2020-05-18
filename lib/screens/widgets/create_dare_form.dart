@@ -12,8 +12,7 @@ import 'package:flutter/material.dart';
 class CreateDareForm extends StatefulWidget {
   final IDare dare;
   DareLogic dareLogic = DareLogic.instance;
-  UserLogic userLogic =
-      UserLogic(); //TODO: this should be created further up the widget tree
+  UserLogic userLogic = UserLogic.instance;
 
   CreateDareForm({Key key, this.dare}) : super(key: key);
 

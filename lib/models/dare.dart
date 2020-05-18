@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:dare_n_share_app/dare_configurations/enums/objective_types.dart';
 import 'package:dare_n_share_app/dare_configurations/i_dare.dart';
 import 'package:dare_n_share_app/dare_configurations/vegan_dare.dart';
-import 'package:dare_n_share_app/models/active_user.dart';
 import 'package:dare_n_share_app/models/participant.dart';
 import 'package:dare_n_share_app/models/user.dart';
 
+///Entity class representing a Dare in the app
 class Dare {
   final String dareId;
 
@@ -33,6 +33,8 @@ class Dare {
       this.participantUser,
       this.participantOpponent});
 
+  //Factory Constructor
+  //Construct a dare from json
   factory Dare.fromJson(jsonData, String dareId, String currentUserId) {
     Map<String, dynamic> dare = jsonDecode(jsonData);
 
@@ -43,6 +45,8 @@ class Dare {
     String objectiveGoal = dare["objective"]["goal"];
 
     //FIXME: Old dares still use old enum values
+    //New types of dares should be added here. Just add an if-else, and set the
+    //dareConfig to that of the new type of dare.
     if (objectiveGoal == "NO_MEAT" || objectiveGoal == "vegan") {
       dareConfig = VeganDare();
     } else {
@@ -91,6 +95,7 @@ class Dare {
       throw ("Malformed Dare, unknown scope type");
     }
 
+    //Construct and return the Dare object
     return Dare(
         dareId: dareId,
         start: start,
@@ -105,8 +110,12 @@ class Dare {
   ///since the dares start date. If 25 hours have passed since the start of a
   ///dare, two days will be returned by this method.
   int getDaysPassed() {
+    //Calculate the age of the dare in hours
     int hoursPassed = DateTime.now().difference(start).inHours;
+    //Using the age in hours, calculate how many days the dare has been active
+    //rounding up.
     int nbrOfDaysPassed = (hoursPassed / 24).ceil();
+
     return nbrOfDaysPassed;
   }
 

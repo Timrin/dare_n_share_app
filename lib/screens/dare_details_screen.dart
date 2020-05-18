@@ -178,20 +178,21 @@ class _DareDetailsState extends State<DareDetails> {
         onTap: () {
           if (isScoringAvailable()) {
             print("Score no sent");
-            setState(() {
+
               widget.darelogic
                   .reportScore(widget.dare.dareId,
                   widget.dare.dareConfig.getObjectiveType(), false)
                   .then((success) {
                 if (success) {
                   widget.dare.participantUser.score.add(false);
+                  setState(() {});
                 } else {
                   //Could now score tell user why
                 }
               }).catchError((error) {
                 //Could now score tell user why
               });
-            });
+
           } else {
             print("Scoring not possible");
           }

@@ -4,6 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 //TODO: comment
 class AuthLogic {
 
+  ///Provide an instance of the class
+  static final AuthLogic instance = AuthLogic._();
+
+  AuthLogic._(); //Private constructor
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Stream<String> get onAuthStateChanged {

@@ -2,17 +2,13 @@ import 'package:dare_n_share_app/controllers/auth_logic.dart';
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/controllers/user_logic.dart';
 
+
+//TODO: remove, this class is most likely not used anymore.
 class Controller {
-  DareLogic dareLogic;
-  UserLogic userLogic;
-  AuthLogic authLogic;
 
   String _userId;
 
-  Controller() {
-    userLogic = UserLogic();
-    authLogic = AuthLogic();
-  }
+  Controller();
 
   loginUser(String userId) {
     this._userId = userId;

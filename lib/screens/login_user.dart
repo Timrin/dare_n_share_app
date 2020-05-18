@@ -94,7 +94,7 @@ class _LoginUserState extends State<LoginUser> {
 
         _validate();
         if (_valid == true) {
-          AuthLogic().handleSignIn(_email, _password).then((user) {
+          AuthLogic.instance.handleSignIn(_email, _password).then((user) {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => Wrapper()),

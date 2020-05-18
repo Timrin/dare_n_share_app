@@ -11,7 +11,7 @@ import 'login_user.dart';
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    AuthLogic _authLogic = Provider.of<Controller>(context).authLogic;
+    AuthLogic _authLogic = AuthLogic.instance;
     return StreamBuilder<String>(
       stream: _authLogic.onAuthStateChanged,
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {

@@ -12,8 +12,7 @@ import 'package:flutter/material.dart';
 /// The list is displayed on the home screen.
 class DareViewList extends StatefulWidget {
   DareLogic dareLogic = DareLogic.instance;
-  UserLogic userLogic =
-      UserLogic(); //TODO: this should be created further up the widget tree
+  UserLogic userLogic = UserLogic.instance;
 
   @override
   _DareViewListState createState() => _DareViewListState();
