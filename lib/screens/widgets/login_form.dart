@@ -17,7 +17,8 @@ class _LoginFormState extends State<LoginForm> {
   String _email;
   String _password;
 
-  Pattern _pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|'
+  //Regex pattern for validating email format
+  Pattern _emailPattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|'
       r'(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(('
       r'[a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
@@ -133,7 +134,7 @@ class _LoginFormState extends State<LoginForm> {
 
   ///Validator method for the email TextFormField
   bool _validateEmail(String email) {
-    RegExp reg = new RegExp(_pattern);
+    RegExp reg = new RegExp(_emailPattern);
     return (!reg.hasMatch(email)) ? false : true;
   }
 }
