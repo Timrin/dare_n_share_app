@@ -1,6 +1,7 @@
 import 'package:dare_n_share_app/controllers/auth_logic.dart';
 import 'package:dare_n_share_app/models/colors.dart';
 import 'package:dare_n_share_app/screens/home.dart';
+import 'package:dare_n_share_app/screens/widgets/login_form.dart';
 import 'package:dare_n_share_app/screens/wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,28 +33,8 @@ class _LoginUserState extends State<LoginUser> {
         title: Text("Dare n share"),
         backgroundColor: ColorDesign.colorAppbar,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(12.0),
-        child: ListView(
-          children: <Widget>[
-            SizedBox(
-              height: 30,
-            ),
-            Center(
-              child: Text(
-                "Login",
-                style: TextStyle(fontSize: 30),
-              ),
-            ),
-            enterExistingEmail(),
-            enterExistingPassword(),
-            SizedBox(
-              height: 30,
-            ),
-            buttonLogin(context)
-          ],
-        ),
-      ),
+      body: LoginForm(
+      )
     );
   }
 

@@ -54,7 +54,7 @@ class AuthLogic {
 
       _authService.registerUser(userAsJson).catchError((error) {
         //Could not register the user in dare db, Remove the user from firebase
-        print("could not register deleting user");
+        print("${error.toString()}");
         user.user.delete();
       });
       return user;
