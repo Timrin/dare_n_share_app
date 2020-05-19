@@ -8,10 +8,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-///@Authors Timothy Timrin & Karolina Hammar
+///@authors Timothy Timrin & Karolina Hammar
 ///First class and screen that eventually will display all options of dare objectives.
 
 class SelectDare extends StatelessWidget {
+
   SetUpDare setUpDare;
 
 
@@ -86,6 +87,8 @@ Widget selectDareCard(BuildContext context, IDare dare) {
       },
     ),
   );
+
+
 }
 
 

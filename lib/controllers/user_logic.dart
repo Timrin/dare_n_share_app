@@ -12,6 +12,8 @@ class UserLogic {
   ///Provide an instance of the class
   static final UserLogic instance = UserLogic._();
 
+  List _friendsList;
+
   UserLogic._(); //Private constructor
 
   ///Get the logged in user's friends list as a map

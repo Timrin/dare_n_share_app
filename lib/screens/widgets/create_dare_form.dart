@@ -5,7 +5,7 @@ import 'package:dare_n_share_app/models/colors.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_info_card.dart';
 import 'package:flutter/material.dart';
 
-///@Authors Timothy Timrin & Karolina Hammar
+///@authors Timothy Timrin & Karolina Hammar
 ///CreateDareForm is the widget class for the dare creation form on the
 /// creation screen. This is where a user can configure the settings of
 /// a dare, and pick opponent.
@@ -38,6 +38,7 @@ class _CreateDareFormState extends State<CreateDareForm> {
 
     _futureFriendList =
         widget.userLogic.getFriends(); //Load the friends list on init
+
   }
 
   ///This is the widget of the class
