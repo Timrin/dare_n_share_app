@@ -20,14 +20,17 @@ class DareDetails extends StatefulWidget {
 }
 
 class _DareDetailsState extends State<DareDetails> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 2,
         child: Scaffold(
+          key: _scaffoldKey,
           appBar: AppBar(
             title: Text(
                 "Vegan dare with ${widget.dare.participantOpponent.user.name}"),
+            centerTitle: true,
             backgroundColor: ColorDesign.colorAppbar,
             bottom: TabBar(
               tabs: [
@@ -158,7 +161,8 @@ class _DareDetailsState extends State<DareDetails> {
               });
 
           } else {
-            print("Scoring not possible");
+            _scaffoldKey.currentState.
+            showSnackBar(SnackBar(content: Text("Wait until tomorrow to report score")));
           }
         },
       ),
@@ -194,7 +198,8 @@ class _DareDetailsState extends State<DareDetails> {
               });
 
           } else {
-            print("Scoring not possible");
+            _scaffoldKey.currentState.
+            showSnackBar(SnackBar(content: Text("Wait until tomorrow to report score")));
           }
         },
       ),

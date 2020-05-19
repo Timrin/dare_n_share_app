@@ -112,10 +112,12 @@ class Dare {
   int getDaysPassed() {
     //Calculate the age of the dare in hours
     int hoursPassed = DateTime.now().difference(start).inHours;
+    if (hoursPassed <= 0) {
+      hoursPassed = 1;
+    }
     //Using the age in hours, calculate how many days the dare has been active
     //rounding up.
     int nbrOfDaysPassed = (hoursPassed / 24).ceil();
-
     return nbrOfDaysPassed;
   }
 
