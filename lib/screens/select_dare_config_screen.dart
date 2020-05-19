@@ -11,10 +11,14 @@ import 'package:flutter/widgets.dart';
 ///@authors Timothy Timrin & Karolina Hammar
 ///First class and screen that eventually will display all options of dare objectives.
 
-class SelectDare extends StatelessWidget {
+class SelectDare extends StatefulWidget {
+  @override
+  _SelectDareState createState() => _SelectDareState();
 
-  SetUpDare setUpDare;
+ }
 
+class _SelectDareState extends State<SelectDare> {
+SetUpDare setUpDare;
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +47,13 @@ class SelectDare extends StatelessWidget {
               ],
             ),
           ),
-          body: ListView(
-            children: <Widget>[
-              selectDareCard(context, VeganDare()),
-              selectDareCard(context, ExerciseDare())
-            ],
-          ),
+           body : ListView(
+              children: <Widget>[
+                selectDareCard(context, VeganDare()),
+                selectDareCard(context, ExerciseDare())
+              ],
+            ),
+
           floatingActionButtonLocation: FloatingActionButtonLocation
               .centerFloat,
           floatingActionButton: FloatingActionButton.extended(
