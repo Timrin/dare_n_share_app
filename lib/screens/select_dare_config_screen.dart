@@ -92,9 +92,8 @@ Widget selectDareCard(BuildContext context, IDare dare) {
       },
     ),
   );
-
-
 }
+
 
 
 

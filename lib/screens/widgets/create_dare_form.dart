@@ -22,6 +22,7 @@ class CreateDareForm extends StatefulWidget {
 
 class _CreateDareFormState extends State<CreateDareForm> {
   //TODO: validate form
+  bool validOk = false;
   final _formKey = GlobalKey<FormState>();
 
   //State variables
@@ -104,15 +105,16 @@ class _CreateDareFormState extends State<CreateDareForm> {
         'Ok - Start Dare',
       ),
       onPressed: () {
-        //TODO validate form before calling createDare
-        widget.dareLogic
-            .createDare(
-                widget.dare.getObjectiveType(),
-                widget.dare.getObjectiveGoal(),
-                widget.dare.getScopeType(),
-                _selectedDareLength,
-                _selectedFriend)
-            .then((success) {
+          //TODO validate form before calling createDare
+          widget.dareLogic
+              .createDare(
+              widget.dare.getObjectiveType(),
+              widget.dare.getObjectiveGoal(),
+              widget.dare.getScopeType(),
+              _selectedDareLength,
+              _selectedFriend)
+            .then((success)
+          {
           if (success) {
             //Navigate to home
             // TODO: This seems like a bad way to do this
@@ -129,6 +131,17 @@ class _CreateDareFormState extends State<CreateDareForm> {
         });
       },
     );
+  }
+
+  void validateOk() {
+    if (_selectedDareLength != null && _selectedFriend != null) {
+      validOk = true;
+    } else {
+      validOk = false;
+      final errorSnackBar = SnackBar(
+        content: Text("Dare could not be created, try again!"),
+      );
+    }
   }
 
   ///Build the drop down list for selecting opponent
