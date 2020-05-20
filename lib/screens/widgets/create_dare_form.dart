@@ -21,8 +21,7 @@ class CreateDareForm extends StatefulWidget {
 }
 
 class _CreateDareFormState extends State<CreateDareForm> {
-  //TODO: validate form
-  bool validOk = false;
+  //TODO: validate radio buttons
   final _formKey = GlobalKey<FormState>();
 
   //State variables
@@ -105,48 +104,41 @@ class _CreateDareFormState extends State<CreateDareForm> {
         'Ok - Start Dare',
       ),
       onPressed: () {
-          //TODO validate form before calling createDare
+        if (_formKey.currentState.validate() && _selectedDareLength != null) {
+          print("Form valid");
+
           widget.dareLogic
               .createDare(
-              widget.dare.getObjectiveType(),
-              widget.dare.getObjectiveGoal(),
-              widget.dare.getScopeType(),
-              _selectedDareLength,
-              _selectedFriend)
-            .then((success)
-          {
-          if (success) {
-            //Navigate to home
-            // TODO: This seems like a bad way to do this
-            // TODO: Dare list should be re-fetched
-            Navigator.pop(context);
-            Navigator.pop(context);
-          } else {
-            //Show error message
-            final errorSnackBar = SnackBar(
-              content: Text("Dare could not be created, try again!"),
-            );
-            Scaffold.of(context).showSnackBar(errorSnackBar);
-          }
-        });
+                  widget.dare.getObjectiveType(),
+                  widget.dare.getObjectiveGoal(),
+                  widget.dare.getScopeType(),
+                  _selectedDareLength,
+                  _selectedFriend)
+              .then((success) {
+            if (success) {
+              //Navigate to home
+              // TODO: This seems like a bad way to do this
+              // TODO: Dare list should be re-fetched
+              Navigator.pop(context);
+              Navigator.pop(context);
+            } else {
+              //Show error message
+              Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text("Dare could not be created, try again!")));
+            }
+          }).catchError((error) {
+            print(error);
+            Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text("Dare could not be created, try again!")));
+          });
+        } //End if
       },
     );
   }
 
-  void validateOk() {
-    if (_selectedDareLength != null && _selectedFriend != null) {
-      validOk = true;
-    } else {
-      validOk = false;
-      final errorSnackBar = SnackBar(
-        content: Text("Dare could not be created, try again!"),
-      );
-    }
-  }
-
   ///Build the drop down list for selecting opponent
   Widget friendDropdown(friendListData) {
-    return DropdownButton(
+    return DropdownButtonFormField(
       hint: new Text('Select the friend you want to dare'),
       items: dropdownFriendList(friendListData),
       value: _selectedFriend,
@@ -154,6 +146,12 @@ class _CreateDareFormState extends State<CreateDareForm> {
         setState(() {
           _selectedFriend = value;
         });
+      },
+      validator: (value) {
+        if (value == null) {
+          return "Please select a friend to challenge";
+        }
+        return null;
       },
       isExpanded: true,
     );
