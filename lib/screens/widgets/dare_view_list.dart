@@ -4,6 +4,7 @@ import 'package:dare_n_share_app/error_handling/error_feedback.dart';
 import 'package:dare_n_share_app/error_handling/error_types.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/screens/dare_details_screen.dart';
+import 'package:dare_n_share_app/screens/widgets/dare_timer.dart';
 import 'package:dare_n_share_app/screens/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -139,12 +140,13 @@ class _DareViewListState extends State<DareViewList> {
                 height: 6.0,
               ),
               Text(
-                "End: ${dare.end.toString()}",
+                "Timeleft",
                 style: TextStyle(
                   fontSize: 12.0,
                   color: Colors.grey[700],
                 ),
-              )
+              ),
+              DareTimer(endTime: dare.end,),
             ],
           ),
         ),
