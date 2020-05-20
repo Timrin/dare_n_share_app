@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
         title: 'Dare n Share',
         theme: ThemeData(
           primarySwatch: ColorDesign.colorAppbar,
-          buttonColor: ColorDesign.colorAppbar
+          buttonColor: ColorDesign.colorAppbar,
+          accentColor: ColorDesign.colorHomeButton
         ),
         home: Wrapper(),
     );

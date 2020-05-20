@@ -15,6 +15,7 @@ class _RegisterUserState extends State<RegisterUser> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Dare n share"),
+          centerTitle: true,
           backgroundColor: ColorDesign.colorAppbar,
         ),
         body: RegisterForm() //The content body is a RegisterForm

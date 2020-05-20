@@ -50,6 +50,7 @@ class _SelectDareState extends State<SelectDare> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text("Select a Dare"),
+        centerTitle: true,
         backgroundColor: ColorDesign.colorAppbar,
       ),
       body: ListView(
@@ -66,7 +67,6 @@ class _SelectDareState extends State<SelectDare> {
         },
         label: Text('Add friend'),
         icon: Icon(Icons.person_add),
-        backgroundColor: Colors.blue,
       ),
     );
   }

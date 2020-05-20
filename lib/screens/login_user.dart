@@ -16,6 +16,7 @@ class _LoginUserState extends State<LoginUser> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Dare n share"),
+        centerTitle: true,
         backgroundColor: ColorDesign.colorAppbar,
       ),
       body: LoginForm() //The content body is a LoginForm

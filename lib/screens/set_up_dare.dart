@@ -17,6 +17,7 @@ class SetUpDare extends StatelessWidget {
       child: Scaffold(
       appBar: AppBar(
         title: Text("Create the Dare"),
+        centerTitle: true,
         backgroundColor: ColorDesign.colorAppbar,
         bottom: TabBar(
           tabs: [

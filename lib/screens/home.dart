@@ -22,10 +22,8 @@ class Home extends StatelessWidget {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-            title: Center(
-                child: Text(
-              "Dare n Share",
-            )),
+            title: Text("Dare n Share"),
+            centerTitle: true,
             backgroundColor: ColorDesign.colorAppbar,
             bottom: TabBar(
               tabs: [
@@ -68,7 +66,6 @@ class Home extends StatelessWidget {
             )
           ]),
           floatingActionButton: FloatingActionButton(
-            backgroundColor: ColorDesign.colorHomeButton,
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SelectDare()));
