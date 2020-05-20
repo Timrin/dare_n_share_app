@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dare_n_share_app/models/user.dart';
 import 'package:dare_n_share_app/services/auth_service.dart';
+import 'package:dare_n_share_app/services/user_service.dart';
 
 import 'auth_logic.dart';
 
@@ -12,7 +13,7 @@ class UserLogic {
   ///Provide an instance of the class
   static final UserLogic instance = UserLogic._();
 
-  List _friendsList;
+  UserService _userService = UserService();
 
   UserLogic._(); //Private constructor
 
@@ -49,8 +50,16 @@ class UserLogic {
   }
 
   ///Method for adding a friend
-  ///
   Future<bool> addFriend(String friendEmail) async {
+    //Get the uid of the current user
+    final String uid = await AuthLogic.instance.currentUserId;
 
+    //Build the request body
+    var body = {};
+    body["senderID"] = uid;
+    body["friendEmail"] = friendEmail;
+
+    print(jsonEncode(body));
+    return _userService.postFriend(jsonEncode(body));
   }
 }

@@ -1,5 +1,4 @@
-
-
+import 'package:dare_n_share_app/controllers/user_logic.dart';
 import 'package:flutter/material.dart';
 
 class AddFriendForm extends StatefulWidget {
@@ -21,20 +20,37 @@ class _AddFriendFormState extends State<AddFriendForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: ListView(
-          children: <Widget>[SizedBox(height: 30,),
-            enterEmail(),
-            RaisedButton(
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  //Todo addfriend
-                }
-              },
-              child: Text('Ok- Add friend'),
-            )
-          ],
+      child: Container(
+        height: 200,
+        width: 400,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: ListView(
+            children: <Widget>[
+              enterEmail(),
+              SizedBox(
+                height: 20,
+              ),
+              RaisedButton(
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
+                    UserLogic.instance
+                        .addFriend(_email)
+                        .then((success) {
+                      Navigator.pop(context);
+                    })
+                        .catchError((error) {
+                      //TODO: Add proper error messages, which details what went wrong
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                          content:
+                              Text("Friend could not be added, try again!")));
+                    });
+                  }
+                },
+                child: Text('Add friend'),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -57,8 +73,6 @@ class _AddFriendFormState extends State<AddFriendForm> {
       },
     );
   }
-
-
 
   bool _validateEmail(String email) {
     RegExp reg = new RegExp(_emailPattern);
