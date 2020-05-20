@@ -206,6 +206,7 @@ class _DareDetailsState extends State<DareDetails> {
     );
   }
 
+
   ///Method will either be active and allow a user to add score, or reject
   bool isScoringAvailable() {
     bool isScoringAvailable = false;
