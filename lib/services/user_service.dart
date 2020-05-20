@@ -16,6 +16,12 @@ class UserService {
     if (response.statusCode == 201) {
       //If the request was successful, return response
       return true;
+    } else if (response.statusCode == 404) {
+      //404 is the code for when a user with the provided email does not exist
+      throw Exception("User doesn't exist");
+    } else if (response.statusCode == 409) {
+      //409 is the code for when the friend already exists
+      throw Exception("Already a friend");
     } else {
       //If the request was not successful, generate exception
       throw Exception("Could not reach the server");
