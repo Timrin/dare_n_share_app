@@ -57,6 +57,7 @@ class Home extends StatelessWidget {
                   child: Center(
                     child: Text("Logout"),
                   ),
+                  color: Colors.grey[400],
                   onPressed: () {
                     FirebaseAuth.instance.signOut();
                   },
