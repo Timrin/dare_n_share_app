@@ -20,37 +20,30 @@ class _AddFriendFormState extends State<AddFriendForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Container(
-        height: 200,
-        width: 400,
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: ListView(
-            children: <Widget>[
-              enterEmail(),
-              SizedBox(
-                height: 20,
-              ),
-              RaisedButton(
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {
-                    UserLogic.instance
-                        .addFriend(_email)
-                        .then((success) {
-                      Navigator.pop(context);
-                    })
-                        .catchError((error) {
-                      //TODO: Add proper error messages, which details what went wrong
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                          content:
-                              Text("Friend could not be added, try again!")));
-                    });
-                  }
-                },
-                child: Text('Add friend'),
-              )
-            ],
-          ),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: ListView(
+          children: <Widget>[
+            enterEmail(),
+            SizedBox(
+              height: 20,
+            ),
+            RaisedButton(
+              onPressed: () {
+                if (_formKey.currentState.validate()) {
+                  UserLogic.instance.addFriend(_email).then((success) {
+                    Navigator.pop(context);
+                  }).catchError((error) {
+                    //TODO: Add proper error messages, which details what went wrong
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text("Friend could not be added, try again!")));
+                  });
+                }
+              },
+              child: Text('Add friend'),
+            )
+          ],
         ),
       ),
     );

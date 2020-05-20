@@ -36,14 +36,18 @@ class _SelectDareState extends State<SelectDare> {
         _friendList = friendList;
       });
     }).catchError((error) {
-        print(error);
+      print(error);
     });
   }
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     //TODO: Add home and profile navigation
+
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text("Select a Dare"),
         backgroundColor: ColorDesign.colorAppbar,
@@ -82,8 +86,13 @@ class _SelectDareState extends State<SelectDare> {
           ),
         ),
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => SetUpDare(dare: dare)));
+          if (_friendList.isEmpty) {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => SetUpDare(dare: dare)));
+          } else {
+            _scaffoldKey.currentState.showSnackBar(SnackBar(
+                content: Text("Try adding a friend before starting a dare")));
+          }
         },
       ),
     );
