@@ -2,6 +2,7 @@ import 'package:dare_n_share_app/models/colors.dart';
 import 'package:dare_n_share_app/models/user.dart';
 import 'package:dare_n_share_app/screens/select_dare_config_screen.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_view_list.dart';
+import 'package:dare_n_share_app/screens/widgets/friend_list.dart';
 import 'package:dare_n_share_app/screens/widgets/user_avatar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,7 @@ class Home extends StatelessWidget {
               padding: EdgeInsets.all(12.0),
               children: <Widget>[
                 _buildUserInfoCard(this.userId),
+                FriendList(),
                 RaisedButton(
                   child: Center(
                     child: Text("Logout"),
