@@ -86,7 +86,7 @@ class _SelectDareState extends State<SelectDare> {
           ),
         ),
         onTap: () {
-          if (_friendList.isEmpty) {
+          if (_friendList.isNotEmpty) {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => SetUpDare(dare: dare)));
           } else {
