@@ -23,33 +23,12 @@ class _DareDetailsState extends State<DareDetails> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 2,
-        child: Scaffold(
+    return Scaffold(
           key: _scaffoldKey,
           appBar: AppBar(
             title: Text(
                 "Vegan dare with ${widget.dare.participantOpponent.user.name}"),
             centerTitle: true,
-            backgroundColor: ColorDesign.colorAppbar,
-            bottom: TabBar(
-              tabs: [
-                Tab(
-                  icon: Icon(
-                    Icons.home,
-                    color: ColorDesign.colorProfile,
-                  ),
-                  text: "home",
-                ),
-                Tab(
-                  icon: Icon(
-                    Icons.face,
-                    color: ColorDesign.colorProfile,
-                  ),
-                  text: "profile",
-                ),
-              ],
-            ),
           ),
           body: ListView(
             children: <Widget>[
@@ -87,13 +66,16 @@ class _DareDetailsState extends State<DareDetails> {
               Center(
                 child: Text("Have you succeded today?"),
               ),
+              SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[boxCheckYes(), boxCheckNo()],
               )
             ],
           ),
-        ));
+        );
   }
 
   Widget scopeProgressIndicator(Participant participant) {
@@ -133,14 +115,9 @@ class _DareDetailsState extends State<DareDetails> {
 
   Widget boxCheckYes() {
     //Should only be editable once a day
-    return Card(
-      margin: EdgeInsets.all(10.0),
-      child: InkWell(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-          child: Center(child: Text("Yes")),
-        ),
-        onTap: () {
+    return RaisedButton(
+        child: Text("Yes"),
+        onPressed: () {
           if (isScoringAvailable()) {
             print("Score yes sent");
 
@@ -165,21 +142,15 @@ class _DareDetailsState extends State<DareDetails> {
             showSnackBar(SnackBar(content: Text("Wait until tomorrow to report score")));
           }
         },
-      ),
-    );
+      );
   }
 
   Widget boxCheckNo() {
     //Should only be editable once a day
 
-    return Card(
-      margin: EdgeInsets.all(10.0),
-      child: InkWell(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-          child: Center(child: Text("No")),
-        ),
-        onTap: () {
+    return RaisedButton(
+        child: Text("No"),
+        onPressed: () {
           if (isScoringAvailable()) {
             print("Score no sent");
 
@@ -202,8 +173,7 @@ class _DareDetailsState extends State<DareDetails> {
             showSnackBar(SnackBar(content: Text("Wait until tomorrow to report score")));
           }
         },
-      ),
-    );
+      );
   }
 
 

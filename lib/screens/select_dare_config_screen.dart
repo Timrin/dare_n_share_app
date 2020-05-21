@@ -51,7 +51,7 @@ class _SelectDareState extends State<SelectDare> {
       appBar: AppBar(
         title: Text("Select a Dare"),
         centerTitle: true,
-        backgroundColor: ColorDesign.colorAppbar,
+        backgroundColor: ColorDesign.colorPrimary,
       ),
       body: ListView(
         children: <Widget>[
@@ -86,7 +86,8 @@ class _SelectDareState extends State<SelectDare> {
           ),
         ),
         onTap: () {
-          if (_friendList.isEmpty) {
+          print(_friendList);
+          if (_friendList.isNotEmpty) {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => SetUpDare(dare: dare)));
           } else {

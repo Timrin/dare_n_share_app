@@ -12,65 +12,62 @@ import 'package:flutter/material.dart';
 class Authenticate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorDesign.colorAppbar[200],
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          SizedBox(
-            height: 10,
+    return Theme(
+      data: ThemeData(
+          buttonTheme: ButtonThemeData(
+            buttonColor: ColorDesign.colorPrimary,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+        height: 64,
+      )),
+      child: Scaffold(
+        backgroundColor: ColorDesign.colorSecondary,
+        body: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              SizedBox(
+                height: 10,
+              ),
+              _loginWidget(context),
+              SizedBox(
+                height: 16,
+              ),
+              _registerWidget(context),
+              SizedBox(
+                height: 10,
+              ),
+            ],
           ),
-          _loginWidget(context),
-          _registerWidget(context),
-          SizedBox(
-            height: 10,
-          ),
-        ],
+        ),
       ),
     );
   }
 
   Widget _loginWidget(BuildContext context) {
-    return Card(
-      color: ColorDesign.colorProfile[200],
-      margin: EdgeInsets.all(12.0),
-      child: InkWell(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-          child: Center(
-            child: Text(
-              'Login',
-              style: TextStyle(fontSize: 24),
-            ),
-          ),
-        ),
-        onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => LoginUser()));
-        },
+    return RaisedButton(
+      child: Text(
+        'Login',
+        style: TextStyle(fontSize: 24),
       ),
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginUser()));
+      },
     );
   }
 
   Widget _registerWidget(BuildContext context) {
-    return Card(
-      color: ColorDesign.colorProfile[200],
-      margin: EdgeInsets.all(10.0),
-      child: InkWell(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-          child: Center(
-            child: Text(
-              'Register',
-              style: TextStyle(fontSize: 24),
-            ),
-          ),
-        ),
-        onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => RegisterUser()));
-        },
+    return RaisedButton(
+      child: Text(
+        'Register',
+        style: TextStyle(fontSize: 24),
       ),
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => RegisterUser()));
+      },
     );
   }
 }

@@ -17,7 +17,7 @@ class _LoginUserState extends State<LoginUser> {
       appBar: AppBar(
         title: Text("Dare n share"),
         centerTitle: true,
-        backgroundColor: ColorDesign.colorAppbar,
+        backgroundColor: ColorDesign.colorPrimary,
       ),
       body: LoginForm() //The content body is a LoginForm
     );

@@ -16,7 +16,7 @@ class _RegisterUserState extends State<RegisterUser> {
         appBar: AppBar(
           title: Text("Dare n share"),
           centerTitle: true,
-          backgroundColor: ColorDesign.colorAppbar,
+          backgroundColor: ColorDesign.colorPrimary,
         ),
         body: RegisterForm() //The content body is a RegisterForm
     );

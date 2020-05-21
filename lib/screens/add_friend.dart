@@ -9,7 +9,7 @@ class AddFriend extends StatelessWidget {
       appBar: AppBar(
         title: Text("Add friend"),
         centerTitle: true,
-        backgroundColor: ColorDesign.colorAppbar,
+        backgroundColor: ColorDesign.colorPrimary,
       ),
       body: AddFriendForm(),
     );

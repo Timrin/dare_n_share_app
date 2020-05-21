@@ -36,7 +36,6 @@ class _FriendListState extends State<FriendList> {
                 ),
               ),
               trailing: CircleAvatar(
-                backgroundColor: Colors.blue,
                 child: IconButton(
                   onPressed: () {
                     Navigator.push(context,

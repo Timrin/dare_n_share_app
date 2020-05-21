@@ -69,13 +69,10 @@ class _DareTimerState extends State<DareTimer> {
       //More than 24h left
       //return number of days
       return "${timeLeft.inDays} days";
-    } else if (minutesLeft > 60) {
+    } else if (minutesLeft > 0) {
       //More than 1H left
       //return xxH xxM
       return "${timeLeft.inHours}h ${timeLeft.inMinutes.remainder(60)}m";
-    } else if (minutesLeft > 0) {
-      //More than 0S left
-      return "seconds";
     } else if (minutesLeft > -1440) {
       //If end was less than 24hours ago, over time is active
       return "Overtime ${timeLeft.inHours*-1}h ${timeLeft.inMinutes.remainder(60)*-1}m";

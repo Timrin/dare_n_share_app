@@ -22,22 +22,25 @@ class Home extends StatelessWidget {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-            title: Text("Dare n Share"),
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: Text(
+              "Dare n Share",
+              style: TextStyle(
+                  color: ColorDesign.colorPrimary, fontFamily: 'Pacifico'),
+            ),
             centerTitle: true,
-            backgroundColor: ColorDesign.colorAppbar,
             bottom: TabBar(
               tabs: [
                 Tab(
                   icon: Icon(
                     Icons.home,
-                    color: ColorDesign.colorProfile,
                   ),
                   text: "home",
                 ),
                 Tab(
                   icon: Icon(
                     Icons.face,
-                    color: ColorDesign.colorProfile,
                   ),
                   text: "profile",
                 ),
@@ -53,11 +56,12 @@ class Home extends StatelessWidget {
               children: <Widget>[
                 _buildUserInfoCard(this.userId),
                 FriendList(),
+                SizedBox(
+                  height: 10,
+                ),
                 RaisedButton(
-                  child: Center(
-                    child: Text("Logout"),
-                  ),
-                  color: Colors.grey[400],
+                  child: Text("Logout"),
+                  color: Colors.grey[50],
                   onPressed: () {
                     FirebaseAuth.instance.signOut();
                   },

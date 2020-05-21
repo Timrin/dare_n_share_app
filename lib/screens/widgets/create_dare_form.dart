@@ -98,8 +98,6 @@ class _CreateDareFormState extends State<CreateDareForm> {
   ///if successful the user is returned to the home screen
   Widget okButton() {
     return RaisedButton(
-      color: ColorDesign.colorAppbar,
-      textColor: Colors.white,
       child: Text(
         'Ok - Start Dare',
       ),
