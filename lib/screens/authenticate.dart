@@ -20,7 +20,6 @@ class Authenticate extends StatelessWidget {
         height: 64,
       )),
       child: Scaffold(
-        backgroundColor: ColorDesign.colorSecondary,
         body: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
