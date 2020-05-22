@@ -9,19 +9,13 @@ class OnboardingData {
     "assets/onboarding_graphics/VectorArtWin.png"
   ];
 
-  static const List<double> imageHeightConstraint = [
-    150,
-    110,
-    180
-  ];
-
 //List of the onboarding page titles
   static const List<String> titles = ["Challenge", "Compete", "Win"];
 
 //List of the onboarding page body text
   static const List<String> textBodies = [
-    "I think my strongest asset maybe by far is my temperament. I have a placeholding temperament. I know words. I have the best words. I think the only card she has is the Lorem card.",
-    "Bacon ipsum dolor amet tail landjaeger corned beef, biltong ribeye beef pork sausage short loin bacon cow ground round pork chop capicola tenderloin.",
-    "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps."
+    "Dare n share is the place to challenge your friends to break your bad habits and build good ones. We call these challenges Dares.",
+    "A Dare is a fun and friendly, yet competitive way for you and your friends to improve your habits. For example, you can challenge a friend to go vegan with you. The app will help you keep track of how you're doing and how your co-competitor is doing.",
+    "Dares are limited in scope and don't go on forever, when a dares is over or finished a winner is determined! Although winning is fun, the main objective is to improve yourself and your habits, if you succeed in this you are winner no matter what!"
   ];
 }

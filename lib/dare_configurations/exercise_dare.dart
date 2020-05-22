@@ -36,4 +36,11 @@ class ExerciseDare implements IDare{
     return "Exercise dare: Steps";
   }
 
+  @override
+  getSuccessQuestion() {
+    return "How many steps are you up to?";
+  }
+
+
+
 }

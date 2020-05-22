@@ -36,4 +36,11 @@ class VeganDare implements IDare {
     return "Vegan dare";
   }
 
+  @override
+  getSuccessQuestion() {
+    return "Did you stay vegan today?";
+  }
+
+
+
 }

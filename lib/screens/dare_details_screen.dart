@@ -2,6 +2,8 @@ import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/models/colors.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/models/participant.dart';
+import 'package:dare_n_share_app/screens/widgets/dare_info_card.dart';
+import 'package:dare_n_share_app/screens/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
@@ -29,51 +31,63 @@ class _DareDetailsState extends State<DareDetails> {
             title: Text(
                 "Vegan dare with ${widget.dare.participantOpponent.user.name}"),
             centerTitle: true,
-          ),
-          body: ListView(
-            children: <Widget>[
-              SizedBox(
-                height: 60,
-              ),
-              Center(
-                child: Text(widget.dare.dareConfig.getTitle()),
-              ),
-              Center(
-                child: Text("vs"),
-              ),
-              Center(
-                child: Text(widget.dare.participantOpponent.user.name),
-              ),
-              SizedBox(
-                height: 60,
-              ),
-              Text("You"),
-              SizedBox(
-                height: 20,
-              ),
-              scopeProgressIndicator(widget.dare.participantUser),
-              SizedBox(
-                height: 30,
-              ),
-              Text(widget.dare.participantOpponent.user.name),
-              SizedBox(
-                height: 20,
-              ),
-              scopeProgressIndicator(widget.dare.participantOpponent),
-              SizedBox(
-                height: 100,
-              ),
-              Center(
-                child: Text("Have you succeded today?"),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[boxCheckYes(), boxCheckNo()],
-              )
+            actions: <Widget>[
+
             ],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: ListView(
+              children: <Widget>[
+                DareInfoCard(dareConfig: widget.dare.dareConfig,),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: <Widget>[
+                        ListTile(
+                          title: Text(
+                            "Score",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        ListTile(
+                          leading: UserAvatar(widget.dare.participantUser.user.uid),
+                          title: Text("You"),
+                        ),
+                        scopeProgressIndicator(widget.dare.participantUser),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        ListTile(
+                          leading: UserAvatar(widget.dare.participantOpponent.user.uid),
+                          title: Text(widget.dare.participantOpponent.user.name),
+                        ),
+                        scopeProgressIndicator(widget.dare.participantOpponent),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(widget.dare.dareConfig.getSuccessQuestion()),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[boxCheckYes(), boxCheckNo()],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
           ),
         );
   }
@@ -116,7 +130,7 @@ class _DareDetailsState extends State<DareDetails> {
   Widget boxCheckYes() {
     //Should only be editable once a day
     return RaisedButton(
-        child: Text("Yes"),
+        child: Text("Yes 😎"),
         onPressed: () {
           if (isScoringAvailable()) {
             print("Score yes sent");
@@ -149,7 +163,7 @@ class _DareDetailsState extends State<DareDetails> {
     //Should only be editable once a day
 
     return RaisedButton(
-        child: Text("No"),
+        child: Text("No 🙈"),
         onPressed: () {
           if (isScoringAvailable()) {
             print("Score no sent");

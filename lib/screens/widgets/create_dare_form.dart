@@ -51,7 +51,7 @@ class _CreateDareFormState extends State<CreateDareForm> {
         child: Column(
           children: <Widget>[
             DareInfoCard(
-              dare: widget.dare,
+              dareConfig: widget.dare,
             ),
             SizedBox(
               height: 20,

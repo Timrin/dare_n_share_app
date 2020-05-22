@@ -6,31 +6,31 @@ import 'package:flutter/material.dart';
 /// the dare are displayed. Color and an image should also be part
 /// of the info card. This data should be part of the IDare object.
 class DareInfoCard extends StatelessWidget {
-  final IDare dare;
+  final IDare dareConfig;
 
-  DareInfoCard({@required this.dare});
+  DareInfoCard({@required this.dareConfig});
 
   ///Build a dare info card
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Card(
-        margin: EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-              child: Text(
-                dare.getTitle(),
-                //Could insert typeOfdare instead, so that this could be reused
-                style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+            ListTile(
+              title: Text(
+                dareConfig.getTitle(),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
               child: RichText(
-                  text: TextSpan(text: dare.getDescription(),
+                  text: TextSpan(text: dareConfig.getDescription(),
                     style: DefaultTextStyle.of(context).style,
                     children: <TextSpan>[
                     ]

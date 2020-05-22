@@ -16,11 +16,14 @@ class Home extends StatelessWidget {
 
   Home({Key key, this.userId}) : super(key: key);
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+          key: _scaffoldKey,
           appBar: AppBar(
             backgroundColor: Colors.white,
             elevation: 0,
@@ -60,8 +63,13 @@ class Home extends StatelessWidget {
                   height: 10,
                 ),
                 RaisedButton(
-                  child: Text("Logout"),
-                  color: Colors.grey[50],
+                  child: Text(
+                    "Logout",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  color: Colors.black,
                   onPressed: () {
                     FirebaseAuth.instance.signOut();
                   },
@@ -83,20 +91,26 @@ class Home extends StatelessWidget {
   Widget _buildUserInfoCard(String userId) {
     return Container(
       child: Card(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              UserAvatar(userId),
-              Center(
-                child: Text(
-                  "Username", //TODO display actual username
-                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+        child: InkWell(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                UserAvatar(userId),
+                Center(
+                  child: Text(
+                    "Username", //TODO display actual username
+                    style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
+          onTap: () {
+            _scaffoldKey.currentState
+                .showSnackBar(SnackBar(content: Center(heightFactor: 1,child: Text("Made with 🍻 & 🍷 at MAU"))));
+          },
         ),
       ),
     );
