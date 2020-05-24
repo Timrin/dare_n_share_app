@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 ///and why the colors are created the way they are in this class.
 ///Or use this tool to generate color swatches:
 ///http://mcg.mbitson.com/#!?mcgpalette0=%233f51b5
-
+//TODO: Refactor
 class ColorDesign {
-  ///Will prevent instance variable from this class
+  ///Private constructor, will prevent instance of this class
   ColorDesign._();
 
   ///To create map of color with different illuminate levels

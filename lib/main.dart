@@ -1,4 +1,4 @@
-import 'package:dare_n_share_app/models/colors.dart';
+import 'package:dare_n_share_app/constants/colors.dart';
 import 'package:dare_n_share_app/screens/wrapper.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +17,9 @@ class MyApp extends StatelessWidget {
           buttonColor: ColorDesign.colorPrimary,
           accentColor: ColorDesign.colorPrimary,
           scaffoldBackgroundColor: Colors.white,
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+            foregroundColor: Colors.white
+          ),
           cardTheme: CardTheme(
             color: Colors.grey[200],
             elevation: 0,
@@ -26,8 +29,8 @@ class MyApp extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
             height: 48,
-
           )),
+
       home: Wrapper(),
     );
   }

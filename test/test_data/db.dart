@@ -11,11 +11,11 @@ class DB {
     "type": "TIMED",
     "length": 3
   },
-  "start": "2012-01-23T18:25:43.511Z",
-  "end": "2012-04-23T18:25:43.511Z",
+  "start": "2020-05-23T18:25:43.511Z",
+  "end": "2020-05-23T18:25:43.511Z",
   "participants": [
     {
-      "uid": 1,
+      "uid": "1",
       "name": "Timothy",
       "profile_img": "/profile-picture/1",
       "score": [
@@ -24,7 +24,7 @@ class DB {
       ]
     },
     {
-      "uid": 2,
+      "uid": "2",
       "name": "Steven",
       "profile_img": "/profile-picture/2",
       "score": [

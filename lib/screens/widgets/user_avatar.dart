@@ -1,4 +1,4 @@
-import 'package:dare_n_share_app/models/avatar_images.dart';
+import 'package:dare_n_share_app/constants/avatar_images.dart';
 import 'package:flutter/material.dart';
 
 ///@author Timothy Timrin

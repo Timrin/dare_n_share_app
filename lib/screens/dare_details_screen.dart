@@ -1,5 +1,5 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
-import 'package:dare_n_share_app/models/colors.dart';
+import 'package:dare_n_share_app/constants/colors.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/models/participant.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_info_card.dart';
@@ -94,7 +94,7 @@ class _DareDetailsState extends State<DareDetails> {
 
   Widget scopeProgressIndicator(Participant participant) {
     return StepProgressIndicator(
-        size: 36,
+        size: 40,
         totalSteps: widget.dare.scopeLength, //TODO Should be scope length
         customColor: (index) {
           if (index >= participant.score.length) {

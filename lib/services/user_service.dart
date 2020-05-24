@@ -1,6 +1,6 @@
 import 'package:http/http.dart';
 
-import '../config.dart';
+import '../constants/config.dart';
 
 class UserService {
   Client client = Client();

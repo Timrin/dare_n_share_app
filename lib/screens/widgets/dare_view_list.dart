@@ -1,7 +1,7 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/controllers/user_logic.dart';
-import 'package:dare_n_share_app/error_handling/error_feedback.dart';
-import 'package:dare_n_share_app/error_handling/error_types.dart';
+import 'package:dare_n_share_app/constants/error_handling/error_feedback.dart';
+import 'package:dare_n_share_app/constants/error_handling/error_types.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/screens/dare_details_screen.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_timer.dart';

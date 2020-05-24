@@ -1,8 +1,7 @@
-import 'package:dare_n_share_app/mockdata/db.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:http/http.dart';
 
-import '../config.dart';
+import '../constants/config.dart';
 
 ///Service class for dares
 ///handles server communication

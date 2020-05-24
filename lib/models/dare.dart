@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dare_n_share_app/dare_configurations/enums/objective_types.dart';
 import 'package:dare_n_share_app/dare_configurations/i_dare.dart';
 import 'package:dare_n_share_app/dare_configurations/vegan_dare.dart';
+import 'package:dare_n_share_app/constants/days_of_week.dart';
 import 'package:dare_n_share_app/models/participant.dart';
 import 'package:dare_n_share_app/models/user.dart';
 
@@ -119,6 +120,22 @@ class Dare {
     //rounding up.
     int nbrOfDaysPassed = (hoursPassed / 24).ceil();
     return nbrOfDaysPassed;
+  }
+
+  List<DateTime> getDateList() {
+    List<DateTime> dates = List();
+
+    for (int i = 0; i < this.scopeLength; i++) {
+      dates.add(start.add(Duration(days: i)));
+    }
+
+    return dates;
+  }
+
+  List<String> getWeekdaysList() {
+    return getDateList()
+        .map((date) => DaysOfWeek.daysOfWeek[date.weekday - 1])
+        .toList();
   }
 
   ///This method checks if the the current time is before or passed the end

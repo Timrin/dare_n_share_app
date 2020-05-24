@@ -2,7 +2,7 @@ import 'package:dare_n_share_app/controllers/user_logic.dart';
 import 'package:dare_n_share_app/dare_configurations/exercise_dare.dart';
 import 'package:dare_n_share_app/dare_configurations/i_dare.dart';
 import 'package:dare_n_share_app/dare_configurations/vegan_dare.dart';
-import 'package:dare_n_share_app/models/colors.dart';
+import 'package:dare_n_share_app/constants/colors.dart';
 import 'package:dare_n_share_app/screens/add_friend.dart';
 import 'package:dare_n_share_app/screens/set_up_dare.dart';
 import 'package:flutter/cupertino.dart';

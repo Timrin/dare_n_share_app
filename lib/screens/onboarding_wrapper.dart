@@ -1,5 +1,5 @@
-import 'package:dare_n_share_app/models/colors.dart';
-import 'package:dare_n_share_app/models/onboarding_data.dart';
+import 'package:dare_n_share_app/constants/colors.dart';
+import 'package:dare_n_share_app/constants/onboarding_data.dart';
 import 'package:dare_n_share_app/screens/login_user.dart';
 import 'package:dare_n_share_app/screens/register_user.dart';
 import 'package:flutter/material.dart';

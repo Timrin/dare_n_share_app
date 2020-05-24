@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 
-import '../config.dart';
+import '../constants/config.dart';
 
 ///Service class for login and registration
 ///handles server communication

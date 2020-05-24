@@ -1,5 +1,5 @@
 import 'package:dare_n_share_app/dare_configurations/i_dare.dart';
-import 'package:dare_n_share_app/models/colors.dart';
+import 'package:dare_n_share_app/constants/colors.dart';
 import 'package:dare_n_share_app/screens/widgets/create_dare_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

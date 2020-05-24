@@ -1,4 +1,4 @@
-import 'package:dare_n_share_app/error_handling/error_types.dart';
+import 'package:dare_n_share_app/constants/error_handling/error_types.dart';
 import 'package:flutter/material.dart';
 
 class ErrorFeedback {

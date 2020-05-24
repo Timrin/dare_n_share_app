@@ -1,4 +1,3 @@
-import 'package:dare_n_share_app/mockdata/db.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/services/dare_service.dart';
 
