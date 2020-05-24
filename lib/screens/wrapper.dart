@@ -1,5 +1,4 @@
 import 'package:dare_n_share_app/controllers/auth_logic.dart';
-import 'package:dare_n_share_app/controllers/controller.dart';
 import 'package:dare_n_share_app/screens/authenticate.dart';
 import 'package:dare_n_share_app/screens/onboarding_wrapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
