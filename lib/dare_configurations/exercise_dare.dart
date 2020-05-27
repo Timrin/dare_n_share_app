@@ -4,7 +4,7 @@ import 'enums/scope_types.dart';
 import 'i_dare.dart';
 
 ///Author Timothy Timrin
-
+//
 class ExerciseDare implements IDare{
   @override
   getDescription() {

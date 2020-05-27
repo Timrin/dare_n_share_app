@@ -4,6 +4,7 @@ import 'package:dare_n_share_app/dare_configurations/enums/objective_types.dart'
 import 'package:dare_n_share_app/dare_configurations/i_dare.dart';
 import 'package:dare_n_share_app/dare_configurations/vegan_dare.dart';
 import 'package:dare_n_share_app/constants/days_of_week.dart';
+import 'package:dare_n_share_app/dare_configurations/workout_dare.dart';
 import 'package:dare_n_share_app/models/participant.dart';
 import 'package:dare_n_share_app/models/user.dart';
 
@@ -50,6 +51,8 @@ class Dare {
     //dareConfig to that of the new type of dare.
     if (objectiveGoal == "NO_MEAT" || objectiveGoal == "vegan") {
       dareConfig = VeganDare();
+    } else if (objectiveGoal == "workout") {
+      dareConfig = WorkoutDare();
     } else {
       throw Exception("Malformed Dare, unknown objective goal");
     }

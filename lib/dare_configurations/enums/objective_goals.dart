@@ -1,5 +1,6 @@
 enum ObjectiveGoals{
   vegan,
   exercise,
-  commute
+  commute,
+  workout
 }
