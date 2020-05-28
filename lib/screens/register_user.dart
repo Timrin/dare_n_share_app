@@ -1,4 +1,4 @@
-import 'package:dare_n_share_app/models/colors.dart';
+import 'package:dare_n_share_app/constants/colors.dart';
 import 'package:dare_n_share_app/screens/widgets/register_form.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class _RegisterUserState extends State<RegisterUser> {
         appBar: AppBar(
           title: Text("Dare n share"),
           centerTitle: true,
-          backgroundColor: ColorDesign.colorAppbar,
+          backgroundColor: ColorDesign.colorPrimary,
         ),
         body: RegisterForm() //The content body is a RegisterForm
     );

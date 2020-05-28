@@ -3,7 +3,6 @@
 ///An interface that should be implemented by all dare configuration classes
 ///The interface details the method api the configuration classes should have.
 class IDare {
-
   ///Returns the ObjectiveTypes enum value indicating the objective type
   /// of the dare
   getObjectiveType() {}
@@ -47,4 +46,10 @@ class IDare {
   /// This is the primary color associated with the dare
   /// This color may be used as a background
   //getPrimaryDareColor() {} //TODO: implement this feature
+
+  /// Returns the success question string
+  ///
+  /// This is the success question displayed on the dare details screen
+  /// when a user is asked to input score.
+  getSuccessQuestion() {}
 }

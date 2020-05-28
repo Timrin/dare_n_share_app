@@ -1,7 +1,9 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
-import 'package:dare_n_share_app/models/colors.dart';
+import 'package:dare_n_share_app/constants/colors.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/models/participant.dart';
+import 'package:dare_n_share_app/screens/widgets/dare_info_card.dart';
+import 'package:dare_n_share_app/screens/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
@@ -23,82 +25,78 @@ class _DareDetailsState extends State<DareDetails> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 2,
-        child: Scaffold(
+    return Scaffold(
           key: _scaffoldKey,
           appBar: AppBar(
             title: Text(
                 "Vegan dare with ${widget.dare.participantOpponent.user.name}"),
             centerTitle: true,
-            backgroundColor: ColorDesign.colorAppbar,
-            bottom: TabBar(
-              tabs: [
-                Tab(
-                  icon: Icon(
-                    Icons.home,
-                    color: ColorDesign.colorProfile,
+            actions: <Widget>[
+
+            ],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: ListView(
+              children: <Widget>[
+                DareInfoCard(dareConfig: widget.dare.dareConfig,),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: <Widget>[
+                        ListTile(
+                          title: Text(
+                            "Score",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        ListTile(
+                          leading: UserAvatar(widget.dare.participantUser.user.uid),
+                          title: Text("You"),
+                        ),
+                        scopeProgressIndicator(widget.dare.participantUser),
+                        scopeDatesIndicator(),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        ListTile(
+                          leading: UserAvatar(widget.dare.participantOpponent.user.uid),
+                          title: Text(widget.dare.participantOpponent.user.name),
+                        ),
+                        scopeProgressIndicator(widget.dare.participantOpponent),
+                        scopeDatesIndicator(),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(widget.dare.dareConfig.getSuccessQuestion()),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[boxCheckYes(), boxCheckNo()],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
                   ),
-                  text: "home",
                 ),
-                Tab(
-                  icon: Icon(
-                    Icons.face,
-                    color: ColorDesign.colorProfile,
-                  ),
-                  text: "profile",
-                ),
+
               ],
             ),
           ),
-          body: ListView(
-            children: <Widget>[
-              SizedBox(
-                height: 60,
-              ),
-              Center(
-                child: Text(widget.dare.dareConfig.getTitle()),
-              ),
-              Center(
-                child: Text("vs"),
-              ),
-              Center(
-                child: Text(widget.dare.participantOpponent.user.name),
-              ),
-              SizedBox(
-                height: 60,
-              ),
-              Text("You"),
-              SizedBox(
-                height: 20,
-              ),
-              scopeProgressIndicator(widget.dare.participantUser),
-              SizedBox(
-                height: 30,
-              ),
-              Text(widget.dare.participantOpponent.user.name),
-              SizedBox(
-                height: 20,
-              ),
-              scopeProgressIndicator(widget.dare.participantOpponent),
-              SizedBox(
-                height: 100,
-              ),
-              Center(
-                child: Text("Have you succeded today?"),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[boxCheckYes(), boxCheckNo()],
-              )
-            ],
-          ),
-        ));
+        );
   }
 
   Widget scopeProgressIndicator(Participant participant) {
     return StepProgressIndicator(
-        size: 36,
+        size: 40,
         totalSteps: widget.dare.scopeLength, //TODO Should be scope length
         customColor: (index) {
           if (index >= participant.score.length) {
@@ -131,16 +129,20 @@ class _DareDetailsState extends State<DareDetails> {
                   ));
   }
 
+  Widget scopeDatesIndicator() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        for (String date in widget.dare.getWeekdaysList()) Text(date)
+      ],
+    );
+  }
+
   Widget boxCheckYes() {
     //Should only be editable once a day
-    return Card(
-      margin: EdgeInsets.all(10.0),
-      child: InkWell(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-          child: Center(child: Text("Yes")),
-        ),
-        onTap: () {
+    return RaisedButton(
+        child: Text("Yes 😎"),
+        onPressed: () {
           if (isScoringAvailable()) {
             print("Score yes sent");
 
@@ -165,21 +167,15 @@ class _DareDetailsState extends State<DareDetails> {
             showSnackBar(SnackBar(content: Text("Wait until tomorrow to report score")));
           }
         },
-      ),
-    );
+      );
   }
 
   Widget boxCheckNo() {
     //Should only be editable once a day
 
-    return Card(
-      margin: EdgeInsets.all(10.0),
-      child: InkWell(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-          child: Center(child: Text("No")),
-        ),
-        onTap: () {
+    return RaisedButton(
+        child: Text("No 🙈"),
+        onPressed: () {
           if (isScoringAvailable()) {
             print("Score no sent");
 
@@ -202,12 +198,14 @@ class _DareDetailsState extends State<DareDetails> {
             showSnackBar(SnackBar(content: Text("Wait until tomorrow to report score")));
           }
         },
-      ),
-    );
+      );
   }
 
-
   ///Method will either be active and allow a user to add score, or reject
+  ///TODO: move this method to the Dare class.
+  ///TODO: Fix semantics of how the days and days passed are calculated.
+  ///TODO: The return type should be changed, bool is to limited, the method -
+  ///TODO: - return can't include info about why the user can't score.
   bool isScoringAvailable() {
     bool isScoringAvailable = false;
     List scoreArray = widget.dare.participantUser.score;

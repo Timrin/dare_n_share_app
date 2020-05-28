@@ -1,7 +1,7 @@
 import 'package:dare_n_share_app/controllers/dare_logic.dart';
 import 'package:dare_n_share_app/controllers/user_logic.dart';
-import 'package:dare_n_share_app/error_handling/error_feedback.dart';
-import 'package:dare_n_share_app/error_handling/error_types.dart';
+import 'package:dare_n_share_app/constants/error_handling/error_feedback.dart';
+import 'package:dare_n_share_app/constants/error_handling/error_types.dart';
 import 'package:dare_n_share_app/models/dare.dart';
 import 'package:dare_n_share_app/screens/dare_details_screen.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_timer.dart';
@@ -40,7 +40,7 @@ class _DareViewListState extends State<DareViewList> {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
               //If the user does not have any dares, display message
-              if(snapshot.data.length == 0) {
+              if (snapshot.data.length == 0) {
                 return errorFeedbackPage(ErrorTypes.user_has_no_dares);
               }
               //Build the dare list
@@ -75,6 +75,7 @@ class _DareViewListState extends State<DareViewList> {
   /// TODO: restructure widgets. style!
   Widget dareTemplate(Dare dare, BuildContext context) {
     return Card(
+      elevation: 1,
       margin: EdgeInsets.all(10.0),
       child: InkWell(
         child: Padding(
@@ -92,7 +93,7 @@ class _DareViewListState extends State<DareViewList> {
                 height: 6.0,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Column(
                     children: <Widget>[
@@ -104,11 +105,13 @@ class _DareViewListState extends State<DareViewList> {
                           color: Colors.grey[700],
                         ),
                       ),
-                      SizedBox(height: 10.0,),
+                      SizedBox(
+                        height: 10.0,
+                      ),
                       Text(
-                        "Score: ${dare.participantUser.score}",
+                        "Score: ${dare.participantUser.score.map((score) => score ? "😎" : "🙈").join(" ")}",
                         style: TextStyle(
-                          fontSize: 12.0,
+                          fontSize: 14.0,
                           color: Colors.grey[700],
                         ),
                       ),
@@ -124,9 +127,11 @@ class _DareViewListState extends State<DareViewList> {
                           color: Colors.grey[700],
                         ),
                       ),
-                      SizedBox(height: 10.0,),
+                      SizedBox(
+                        height: 10.0,
+                      ),
                       Text(
-                        "Score: ${dare.participantOpponent.score}",
+                        "Score: ${dare.participantOpponent.score.map((score) => score ? "😎" : "🙈").join(" ")}",
                         style: TextStyle(
                           fontSize: 12.0,
                           color: Colors.grey[700],
@@ -146,22 +151,21 @@ class _DareViewListState extends State<DareViewList> {
                   color: Colors.grey[700],
                 ),
               ),
-              DareTimer(endTime: dare.end,),
+              DareTimer(
+                endTime: dare.end,
+              ),
             ],
           ),
         ),
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DareDetails(dare: dare)));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => DareDetails(dare: dare)));
         },
       ),
     );
   }
 
   Widget errorFeedbackPage(ErrorTypes errorType) {
-
     //Determine type of feedback
     IconData feedBackIcon = ErrorFeedback.errorData[errorType]["icon"];
     String feedBackMessage = ErrorFeedback.errorData[errorType]["message"];
@@ -184,8 +188,7 @@ class _DareViewListState extends State<DareViewList> {
             padding: const EdgeInsets.fromLTRB(32, 8, 32, 8),
             child: Text(
               feedBackMessage,
-              style: TextStyle(
-                  color: Colors.grey, fontWeight: FontWeight.w500),
+              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
               textAlign: TextAlign.center,
             ),
           ),

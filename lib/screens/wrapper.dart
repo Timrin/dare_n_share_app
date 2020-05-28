@@ -1,6 +1,6 @@
 import 'package:dare_n_share_app/controllers/auth_logic.dart';
-import 'package:dare_n_share_app/controllers/controller.dart';
 import 'package:dare_n_share_app/screens/authenticate.dart';
+import 'package:dare_n_share_app/screens/onboarding_wrapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,9 +17,9 @@ class Wrapper extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
         print("Wrapper stream rebuild");
         if (snapshot.connectionState == ConnectionState.active) {
-          return snapshot.hasData ? Home(userId: snapshot.data,) : Authenticate();
+          return snapshot.hasData ? Home(userId: snapshot.data,) : OnboardingWrapper();
         } else {
-          return Authenticate();
+          return OnboardingWrapper();
         }
       },
     );

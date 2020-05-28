@@ -4,7 +4,7 @@ import 'enums/scope_types.dart';
 import 'i_dare.dart';
 
 ///Author Timothy Timrin
-
+//
 class ExerciseDare implements IDare{
   @override
   getDescription() {
@@ -35,5 +35,12 @@ class ExerciseDare implements IDare{
   getTitle() {
     return "Exercise dare: Steps";
   }
+
+  @override
+  getSuccessQuestion() {
+    return "How many steps are you up to?";
+  }
+
+
 
 }

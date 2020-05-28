@@ -1,5 +1,6 @@
-import 'package:dare_n_share_app/models/colors.dart';
+import 'package:dare_n_share_app/constants/colors.dart';
 import 'package:dare_n_share_app/models/user.dart';
+import 'package:dare_n_share_app/screens/profile.dart';
 import 'package:dare_n_share_app/screens/select_dare_config_screen.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_view_list.dart';
 import 'package:dare_n_share_app/screens/widgets/friend_list.dart';
@@ -16,28 +17,34 @@ class Home extends StatelessWidget {
 
   Home({Key key, this.userId}) : super(key: key);
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+          key: _scaffoldKey,
           appBar: AppBar(
-            title: Text("Dare n Share"),
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: Text(
+              "Dare n Share",
+              style: TextStyle(
+                  color: ColorDesign.colorPrimary, fontFamily: 'Pacifico'),
+            ),
             centerTitle: true,
-            backgroundColor: ColorDesign.colorAppbar,
             bottom: TabBar(
               tabs: [
                 Tab(
                   icon: Icon(
                     Icons.home,
-                    color: ColorDesign.colorProfile,
                   ),
                   text: "home",
                 ),
                 Tab(
                   icon: Icon(
                     Icons.face,
-                    color: ColorDesign.colorProfile,
                   ),
                   text: "profile",
                 ),
@@ -48,22 +55,7 @@ class Home extends StatelessWidget {
             DareViewList(),
             //TODO: implement profile page
             //The profile page has temporarily become an avatar showcase page
-            ListView(
-              padding: EdgeInsets.all(12.0),
-              children: <Widget>[
-                _buildUserInfoCard(this.userId),
-                FriendList(),
-                RaisedButton(
-                  child: Center(
-                    child: Text("Logout"),
-                  ),
-                  color: Colors.grey[400],
-                  onPressed: () {
-                    FirebaseAuth.instance.signOut();
-                  },
-                ),
-              ],
-            )
+            Profile(userId: this.userId,),
           ]),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -73,28 +65,6 @@ class Home extends StatelessWidget {
             tooltip: 'Add Dare',
             child: Icon(Icons.add),
           )),
-    );
-  }
-
-  Widget _buildUserInfoCard(String userId) {
-    return Container(
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              UserAvatar(userId),
-              Center(
-                child: Text(
-                  "Username", //TODO display actual username
-                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

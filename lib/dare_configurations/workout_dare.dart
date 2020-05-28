@@ -5,15 +5,15 @@ import 'i_dare.dart';
 
 ///@Author Karolina Hammar & Timothy Timrin
 
-class VeganDare implements IDare {
+class WorkoutDare implements IDare {
   @override
   getDescription() {
-    return "Dare a friend to go vegan with you!";
+    return "Dare a friend to workout regularly for a couple of days!";
   }
 
   @override
   getObjectiveGoal() {
-    return ObjectiveGoals.vegan;
+    return ObjectiveGoals.workout;
   }
 
   @override
@@ -33,12 +33,12 @@ class VeganDare implements IDare {
 
   @override
   getTitle() {
-    return "Vegan dare";
+    return "Workout dare";
   }
 
   @override
   getSuccessQuestion() {
-    return "Did you stay vegan today?";
+    return "Did you workout today?";
   }
 
 

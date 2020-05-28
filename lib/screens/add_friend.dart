@@ -1,4 +1,4 @@
-import 'package:dare_n_share_app/models/colors.dart';
+import 'package:dare_n_share_app/constants/colors.dart';
 import 'package:dare_n_share_app/screens/widgets/add_friend_form.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,7 @@ class AddFriend extends StatelessWidget {
       appBar: AppBar(
         title: Text("Add friend"),
         centerTitle: true,
-        backgroundColor: ColorDesign.colorAppbar,
+        backgroundColor: ColorDesign.colorPrimary,
       ),
       body: AddFriendForm(),
     );

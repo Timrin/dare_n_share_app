@@ -62,4 +62,5 @@ class UserLogic {
     print(jsonEncode(body));
     return _userService.postFriend(jsonEncode(body));
   }
+
 }

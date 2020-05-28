@@ -2,7 +2,8 @@ import 'package:dare_n_share_app/controllers/user_logic.dart';
 import 'package:dare_n_share_app/dare_configurations/exercise_dare.dart';
 import 'package:dare_n_share_app/dare_configurations/i_dare.dart';
 import 'package:dare_n_share_app/dare_configurations/vegan_dare.dart';
-import 'package:dare_n_share_app/models/colors.dart';
+import 'package:dare_n_share_app/constants/colors.dart';
+import 'package:dare_n_share_app/dare_configurations/workout_dare.dart';
 import 'package:dare_n_share_app/screens/add_friend.dart';
 import 'package:dare_n_share_app/screens/set_up_dare.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,19 +52,31 @@ class _SelectDareState extends State<SelectDare> {
       appBar: AppBar(
         title: Text("Select a Dare"),
         centerTitle: true,
-        backgroundColor: ColorDesign.colorAppbar,
+        backgroundColor: ColorDesign.colorPrimary,
       ),
       body: ListView(
         children: <Widget>[
           selectDareCard(context, VeganDare()),
-          selectDareCard(context, ExerciseDare())
+          selectDareCard(context, WorkoutDare())
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddFriend()));
+                  context, MaterialPageRoute(builder: (context) => AddFriend()))
+              .then((_) {
+            //This then method re-fetches the friend list after a friend has been added.
+            //Without this the friend list isn't updated and the dare options are locked
+            // if the user didn't have any friends prior to adding one.
+            UserLogic.instance.getFriends().then((friendList) {
+              setState(() {
+                _friendList = friendList;
+              });
+            }).catchError((error) {
+              print(error);
+            });
+          });
         },
         label: Text('Add friend'),
         icon: Icon(Icons.person_add),
