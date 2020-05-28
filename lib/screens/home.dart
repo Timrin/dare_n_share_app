@@ -1,5 +1,6 @@
 import 'package:dare_n_share_app/constants/colors.dart';
 import 'package:dare_n_share_app/models/user.dart';
+import 'package:dare_n_share_app/screens/profile.dart';
 import 'package:dare_n_share_app/screens/select_dare_config_screen.dart';
 import 'package:dare_n_share_app/screens/widgets/dare_view_list.dart';
 import 'package:dare_n_share_app/screens/widgets/friend_list.dart';
@@ -54,28 +55,7 @@ class Home extends StatelessWidget {
             DareViewList(),
             //TODO: implement profile page
             //The profile page has temporarily become an avatar showcase page
-            ListView(
-              padding: EdgeInsets.all(12.0),
-              children: <Widget>[
-                _buildUserInfoCard(this.userId),
-                FriendList(),
-                SizedBox(
-                  height: 10,
-                ),
-                RaisedButton(
-                  child: Text(
-                    "Logout",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  color: Colors.black,
-                  onPressed: () {
-                    FirebaseAuth.instance.signOut();
-                  },
-                ),
-              ],
-            )
+            Profile(userId: this.userId,),
           ]),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -85,34 +65,6 @@ class Home extends StatelessWidget {
             tooltip: 'Add Dare',
             child: Icon(Icons.add),
           )),
-    );
-  }
-
-  Widget _buildUserInfoCard(String userId) {
-    return Container(
-      child: Card(
-        child: InkWell(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                UserAvatar(userId),
-                Center(
-                  child: Text(
-                    "Username", //TODO display actual username
-                    style: TextStyle(fontSize: 16, color: Colors.grey[700]),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          onTap: () {
-            _scaffoldKey.currentState
-                .showSnackBar(SnackBar(content: Center(heightFactor: 1,child: Text("Made with 🍻 & 🍷 at MAU"))));
-          },
-        ),
-      ),
     );
   }
 }

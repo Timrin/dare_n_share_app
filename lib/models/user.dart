@@ -10,8 +10,8 @@ class User {
   //Factory constructor
   //Constructs User objects from json
   factory User.fromJson(jsonData) {
-    String uid = jsonData["name"];
-    String name = jsonData["uid"];
+    String uid = jsonData["uid"];
+    String name = jsonData["name"];
 
     //Construct and return the User object
     return User(uid: uid, name: name);

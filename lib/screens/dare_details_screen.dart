@@ -59,6 +59,7 @@ class _DareDetailsState extends State<DareDetails> {
                           title: Text("You"),
                         ),
                         scopeProgressIndicator(widget.dare.participantUser),
+                        scopeDatesIndicator(),
                         SizedBox(
                           height: 10,
                         ),
@@ -67,8 +68,9 @@ class _DareDetailsState extends State<DareDetails> {
                           title: Text(widget.dare.participantOpponent.user.name),
                         ),
                         scopeProgressIndicator(widget.dare.participantOpponent),
+                        scopeDatesIndicator(),
                         SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
                         Text(widget.dare.dareConfig.getSuccessQuestion()),
                         SizedBox(
@@ -125,6 +127,15 @@ class _DareDetailsState extends State<DareDetails> {
                 : Container(
                     color: color,
                   ));
+  }
+
+  Widget scopeDatesIndicator() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        for (String date in widget.dare.getWeekdaysList()) Text(date)
+      ],
+    );
   }
 
   Widget boxCheckYes() {
@@ -190,8 +201,11 @@ class _DareDetailsState extends State<DareDetails> {
       );
   }
 
-
   ///Method will either be active and allow a user to add score, or reject
+  ///TODO: move this method to the Dare class.
+  ///TODO: Fix semantics of how the days and days passed are calculated.
+  ///TODO: The return type should be changed, bool is to limited, the method -
+  ///TODO: - return can't include info about why the user can't score.
   bool isScoringAvailable() {
     bool isScoringAvailable = false;
     List scoreArray = widget.dare.participantUser.score;

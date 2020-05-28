@@ -3,6 +3,7 @@ import 'package:dare_n_share_app/constants/onboarding_data.dart';
 import 'package:dare_n_share_app/screens/login_user.dart';
 import 'package:dare_n_share_app/screens/register_user.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingWrapper extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _OnboardingWrapperState extends State<OnboardingWrapper> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               SizedBox(
-                height: 400,
+                height: 350,
                 child: PageView(
                   controller: _pageController,
                   children: List.generate(
@@ -76,7 +77,7 @@ class _OnboardingWrapperState extends State<OnboardingWrapper> {
                                               OnboardingData.textBodies[index],
                                           style: TextStyle(
                                             color: Colors.grey[800],
-                                            fontSize: 14,
+                                            fontSize: 12,
                                           ),
                                           children: <TextSpan>[]),
                                     ),
@@ -86,6 +87,19 @@ class _OnboardingWrapperState extends State<OnboardingWrapper> {
                             ),
                           )),
                 ),
+              ),
+              SmoothPageIndicator(
+                controller: _pageController,  // PageController
+                count:  3,
+                effect:  ExpandingDotsEffect(
+                  activeDotColor: ColorDesign.colorSecondary.withOpacity(0.7),
+                  dotColor: ColorDesign.colorSecondary.withOpacity(0.4),
+                  dotHeight: 12,
+                  dotWidth: 12,
+                ),  // your preferred effect
+              ),
+              SizedBox(
+                height: 50,
               ),
               SizedBox(
                   width: double.infinity,
