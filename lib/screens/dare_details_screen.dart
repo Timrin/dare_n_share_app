@@ -205,7 +205,7 @@ class _DareDetailsState extends State<DareDetails> {
   ///TODO: move this method to the Dare class.
   ///TODO: Fix semantics of how the days and days passed are calculated.
   ///TODO: The return type should be changed, bool is to limited, the method -
-  ///TODO: - return can't include info about why the user can't score.
+  ///TODO: - return should include info about why the user can't score.
   bool isScoringAvailable() {
     bool isScoringAvailable = false;
     List scoreArray = widget.dare.participantUser.score;
