@@ -33,4 +33,4 @@ https://flutter.dev/docs/get-started/test-drive?tab=androidstudio
 
 Don't forget to start the server!
 
-**If you just want to try out the app, install the apk file in the top level folder on your device or emulator**
+**If you just want to try out the app, install the apk file in the top level folder on your device or emulator (Server is not necessary)**
