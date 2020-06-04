@@ -32,3 +32,5 @@ https://flutter.dev/docs/get-started/test-drive?tab=androidstudio
 >_Make sure the config selector is set to run the main.dart file_
 
 Don't forget to start the server!
+
+**If you just want to try out the app, install the apk file in the top level folder on your device or emulator**
