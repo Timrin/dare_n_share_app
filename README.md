@@ -21,9 +21,14 @@ Clone or download the files
 Import the project root folder as a project in Intellij (or Android studio)  
 >_When selecting sources for the project, only select the lib folder_
 
+Set the desired server IP for the app  
+In `lib>constants>config.dart` change the IP variable to one of the other constants.  
+**`TEST_IP`** Use when running code outside of the emulator  
+**`EMULATOR_IP`** This is the default IP that points to your computers localhost in the Android Studio Emulator  
+
 ## Run the app
-Follow this short guide, starting at the **Run the App** section  
+To start the app follow this short guide, starting at the **Run the App** section  
 https://flutter.dev/docs/get-started/test-drive?tab=androidstudio
 >_Make sure the config selector is set to run the main.dart file_
 
-Start the tomcat server
+Don't forget to start the server!
