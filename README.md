@@ -6,6 +6,8 @@
 
 ## Description
 Repository for the Dare n Share mobile app.  
+https://github.com/Timrin/dare_n_share_app
+
 Dare n Share is an app developed as part of a software projects course.  
 For the Backend see: https://github.com/Timrin/dare-n-share.  
 
